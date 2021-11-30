@@ -1,7 +1,36 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Box, Button, Stack, Typography } from "@mui/material";
+import {
+  red,
+  pink,
+  purple,
+  deepPurple,
+  indigo,
+  blue,
+  lightBlue,
+  cyan,
+  teal,
+  green,
+  lightGreen,
+  lime,
+  amber,
+  orange,
+  deepOrange,
+  brown,
+  grey,
+  blueGrey,
+  yellow,
+} from "@mui/material/colors";
+import { format } from "date-fns";
 
-const ModalComp = ({ style, handleDelete, handleClose, modalOpen, params }) => {
+const ModalComp = ({
+  del_row,
+  style,
+  handleDelete,
+  handleClose,
+  modalOpen,
+  params,
+}) => {
   // console.log("params:");
   // console.log(params);
 
@@ -24,6 +53,8 @@ const ModalComp = ({ style, handleDelete, handleClose, modalOpen, params }) => {
           value = `${parseFloat((value * 100).toFixed(2))} %`;
         } else if (key === "VAT") {
           value = `${value * 100} %`;
+        } else if (key === "use_by_date") {
+          value = format(new Date(value), "Y/MM/dd");
         }
         row.push([key, value]);
       }
@@ -47,25 +78,35 @@ const ModalComp = ({ style, handleDelete, handleClose, modalOpen, params }) => {
           id="modal-modal-title"
           variant="h6"
           component="h2"
-          sx={{ color: "warning.light", letterSpacing: 2, fontWeight: "bold" }}
+          sx={{
+            color: del_row ? "warning.light" : "lightpink",
+            // color: del_row ? "warning.light" : "burlywood",
+            letterSpacing: 2,
+            fontWeight: "bold",
+          }}
         >
-          WARNING!
+          {del_row ? "WARNING!" : "PRODUCT DETAILS"}
         </Typography>
         <Typography
-          variant="subtitle1"
+          variant="caption"
           component="div"
           id="modal-modal-description"
-          sx={{ mt: 2 }}
+          sx={{
+            mt: 2,
+            fontSize: "18px",
+            lineHeight: "120%",
+            color: "peachpuff",
+          }}
           // sx={{ mt: 2, color: "text.primary" }}
         >
-          Are you sure to delete the item from database?
+          {del_row ? "Are you sure to delete the item from database?" : ""}
           {params && params.row ? (
             <Box
               sx={{
                 textAlign: "left",
                 color: "palegoldenrod",
+                // color: "lemonchiffon",
                 mt: 1,
-                // overflow: "scroll",
               }}
             >
               {row_to_del &&
@@ -81,17 +122,6 @@ const ModalComp = ({ style, handleDelete, handleClose, modalOpen, params }) => {
                     </Typography>
                   </Typography>
                 ))}
-              {/* {row_to_del &&
-                row_to_del.map((el, ind) => (
-                  <Typography key={ind}>{el}</Typography>
-                ))} */}
-              {/* <Typography>ID: {params ? params.id : ""}</Typography>
-              <Typography>
-                First name: {params ? params.row.firstName : ""}
-              </Typography>
-              <Typography>
-                Last name: {params ? params.row.lastName : ""}
-              </Typography> */}
             </Box>
           ) : (
             ""
@@ -99,12 +129,31 @@ const ModalComp = ({ style, handleDelete, handleClose, modalOpen, params }) => {
         </Typography>
         {/* <Stack spacing={2} direction="row" alignContent="center" justifyContent="center"> */}
         <Stack spacing={2} direction="row" justifyContent="center" mt={2}>
-          <Button variant="contained" onClick={handleDelete} color="warning">
-            Yes
-          </Button>
-          <Button variant="contained" onClick={handleClose} color="info">
-            No
-          </Button>
+          {del_row ? (
+            <>
+              <Button
+                variant="contained"
+                onClick={handleDelete}
+                color="warning"
+              >
+                Yes
+              </Button>
+              <Button variant="contained" onClick={handleClose} color="info">
+                No
+              </Button>
+            </>
+          ) : (
+            <Button
+              variant="contained"
+              onClick={handleClose}
+              sx={{
+                bgcolor: cyan[700],
+                "&:hover": { bgcolor: cyan[800] },
+              }}
+            >
+              Close
+            </Button>
+          )}
         </Stack>
       </Box>
     </Modal>

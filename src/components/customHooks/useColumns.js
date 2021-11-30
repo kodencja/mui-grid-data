@@ -18,6 +18,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
+import PreviewIcon from '@mui/icons-material/Preview';
 import { format, parseISO, formatISO } from "date-fns";
 
 // const useColumns = (handleOpen, classes) => {
@@ -366,10 +367,17 @@ console.log(alterCols);
                 color="inherit"
               />
               <GridActionsCellItem
+                icon={<PreviewIcon />}
+                label="View"
+                className={classes.textPrimary}
+                onClick={(e) => handleOpen(params, 'view')}
+                color="inherit"
+              />
+              <GridActionsCellItem
                 icon={<DeleteIcon />}
                 label="Delete"
                 // onClick={(e) =>handleDeleteClick(e, params)}
-                onClick={() => handleOpen(params)}
+                onClick={() => handleOpen(params, 'del')}
                 color="inherit"
               />
             </>
