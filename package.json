@@ -3,11 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.7.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.0",
+    "@mui/material": "^5.2.1",
+    "@mui/styles": "^5.2.1",
+    "@mui/system": "^5.2.1",
+    "@mui/x-data-grid": "^5.0.1",
     "@testing-library/jest-dom": "^5.15.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.24.0",
+    "concurrently": "^6.4.0",
+    "date-fns": "^2.26.0",
+    "final-form": "^4.20.4",
+    "json-server": "^0.17.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-final-form": "^6.5.7",
+    "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },
@@ -15,7 +29,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "json-server": "json-server --watch data/db.json --port 8000",
+    "init": "concurrently \"npm start\" \"npm run json-server\""
   },
   "eslintConfig": {
     "extends": [
