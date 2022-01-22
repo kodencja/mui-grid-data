@@ -1,19 +1,31 @@
 import React, { useState, useCallback, useRef, useMemo } from "react";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
-import ModalComp from "../components/ModalComp";
+import ModalComp from "../../components/ModalComp";
 import { Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import useColumns from "../components/customHooks/useColumns";
-import useEditRow from "../components/customHooks/useEditRow";
-import { handleDeleteRow } from "../components/functions/modalFn";
-import { modalStyle } from "../components/styles/modalStyle";
+import useColumns from "../../components/customHooks/useColumns";
+import useEditRow from "../../components/customHooks/useEditRow";
+import { handleDeleteRow } from "../../functions/modalFn";
+import { modalStyle } from "../../styles/modalStyle";
 // import { dataTableStyle } from "../components/styles/dataTableStyle";
-import { useStylesData } from "../components/styles/useStylesData";
+import { useStylesData } from "../../styles/useStylesData";
+import {
+  api_method,
+  current_url,
+  post_data,
+  current_record_id,
+} from "../../reducer/types";
 
 // const defaultTheme = createTheme();
 
 const DataTable = ({ rows, dataTableProps }) => {
-  const { dispatch, finalTextResponse, baseURLtoDB } = dataTableProps;
+  const {
+    dispatch,
+    finalTextResponse,
+    baseURLtoDB,
+    currentURLtoDB,
+    apiMethod,
+  } = dataTableProps;
 
   const classes = useStylesData();
   // const classes = useStylesData();
@@ -26,8 +38,11 @@ const DataTable = ({ rows, dataTableProps }) => {
   const [row_params, set_row_params] = useState({});
   const [del_row, set_del_row] = useState(true);
 
+  console.log("DataTable Comp.");
+
   const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
-    useEditRow(dispatch, baseURLtoDB);
+    useEditRow(dispatch, baseURLtoDB, currentURLtoDB, apiMethod);
+  // useEditRow(dispatch, baseURLtoDB);
 
   const handleOpen = (params, flag) => {
     console.log("flag");
@@ -51,6 +66,8 @@ const DataTable = ({ rows, dataTableProps }) => {
   const handleDeleteClick = (e) => {
     e.stopPropagation();
     handleDeleteRow(row_params, set_row_params);
+    dispatch({ type: api_method, payload: "DELETE" });
+    dispatch({ type: current_url, payload: `${baseURLtoDB}/${row_params.id}` });
     handleClose();
   };
 
@@ -98,9 +115,9 @@ const DataTable = ({ rows, dataTableProps }) => {
           Toolbar: GridToolbar,
         }}
         getCellClassName={(params) =>
-          params.field === "Discount_netto"
+          params.field === "discount_netto"
             ? "netto"
-            : params.field === "Brutto"
+            : params.field === "brutto"
             ? "brutto"
             : params.field === "id"
             ? "id"

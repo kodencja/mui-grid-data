@@ -3,7 +3,6 @@ import { Form, Field } from "react-final-form";
 import { makeStyles } from "@mui/styles";
 import {
   Container,
-  Box,
   TextField,
   FormControlLabel,
   FormControl,
@@ -14,9 +13,9 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import TextFieldComp from "../components/FormComps/TextFieldComp";
-import RadioComp from "../components/FormComps/RadioComp";
-import SelectComp from "../components/FormComps/SelectComp";
+import TextFieldComp from "../FormComps/TextFieldComp";
+import RadioComp from "../FormComps/RadioComp";
+import SelectComp from "../FormComps/SelectComp";
 
 const useStyles = makeStyles({
   field: {
@@ -35,7 +34,7 @@ const onSubmit = async (values) => {
   window.alert(JSON.stringify(values, 0, 2));
 };
 
-const AddRecord = () => {
+const CreateRecord = () => {
   const classes = useStyles();
 
   let formData = {
@@ -87,13 +86,7 @@ const AddRecord = () => {
         validate={validate}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           // <form onSubmit={handleSubmit} className={styles.form}>
-          <Box component="form" onSubmit={handleSubmit}>
-            {/* <form
-              onSubmit={handleSubmit}
-              style={{ display: "flex", flexWrap: "wrap" }}
-            > */}
-            {/* <div style={{ display: "flex", flexWrap: "wrap" }}> */}
-            {/* <FormControl> */}
+          <form onSubmit={handleSubmit}>
             <div>
               <Field
                 name="firstName"
@@ -111,8 +104,8 @@ const AddRecord = () => {
                 // )}
               />
               {/* {meta.error && meta.touched && <span>{meta.error}</span>} */}
-              {/* </div> */}
-              {/* <div> */}
+            </div>
+            <div>
               <Field
                 name="lastName"
                 component={TextFieldComp}
@@ -120,61 +113,58 @@ const AddRecord = () => {
                 label="Last Name"
                 placeholder="Last Name"
               />
-              {/* </FormControl> */}
-              {/* </div> */}
-              <div>
-                {/* <label>Employed</label> */}
-                <Field name="employment" type="radio" component={RadioComp} />
-                {/* <Field name="employed" component="input" type="checkbox" /> */}
-              </div>
-              <div>
-                <Field
-                  name="favCol"
-                  label="Fav Col"
-                  type="select"
-                  placeholder="Fav Col"
-                  component={SelectComp}
-                  options={["red", "green", "blue", "yellow"]}
-                />
-                {/* </div> */}
-                {/* <div> */}
-                <Field
-                  name="toppings"
-                  label="Toppings"
-                  type="select"
-                  placeholder="toppings"
-                  component={SelectComp}
-                  options={[
-                    "chicken",
-                    "ham",
-                    "mushrooms",
-                    "cheese",
-                    "tuna",
-                    "pineapple",
-                  ]}
-                />
-              </div>
-
-              <div>
-                <button type="submit" disabled={submitting || pristine}>
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  onClick={form.reset}
-                  disabled={submitting || pristine}
-                >
-                  Reset
-                </button>
-              </div>
-              <pre>{JSON.stringify(values, 0, 2)}</pre>
-              {/* </form> */}
             </div>
-          </Box>
+            <div>
+              {/* <label>Employed</label> */}
+              <Field name="employment" type="radio" component={RadioComp} />
+              {/* <Field name="employed" component="input" type="checkbox" /> */}
+            </div>
+            <div>
+              <Field
+                name="favCol"
+                label="Fav Col"
+                type="select"
+                placeholder="Fav Col"
+                component={SelectComp}
+                options={["red", "green", "blue", "yellow"]}
+              />
+            </div>
+            <div>
+              <Field
+                name="toppings"
+                label="Toppings"
+                type="select"
+                placeholder="toppings"
+                component={SelectComp}
+                options={[
+                  "chicken",
+                  "ham",
+                  "mushrooms",
+                  "cheese",
+                  "tuna",
+                  "pineapple",
+                ]}
+              />
+            </div>
+
+            <div>
+              <button type="submit" disabled={submitting || pristine}>
+                Submit
+              </button>
+              <button
+                type="button"
+                onClick={form.reset}
+                disabled={submitting || pristine}
+              >
+                Reset
+              </button>
+            </div>
+            <pre>{JSON.stringify(values, 0, 2)}</pre>
+          </form>
         )}
       />
     </Container>
   );
 };
 
-export default AddRecord;
+export default CreateRecord;

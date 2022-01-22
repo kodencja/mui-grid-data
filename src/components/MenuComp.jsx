@@ -49,6 +49,8 @@ const MenuComp = ({ menuItems }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
+  console.log("MenuComp0");
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };

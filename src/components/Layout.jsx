@@ -22,11 +22,11 @@ const menuItems = [
     icon: <StorageRounded />,
     path: "/",
   },
-  {
-    text: "Table data",
-    icon: <StorageRounded />,
-    path: "/data",
-  },
+  // {
+  //   text: "Table data",
+  //   icon: <StorageRounded />,
+  //   path: "/data",
+  // },
   {
     text: "Add record",
     icon: <AddCircleOutlineOutlined />,

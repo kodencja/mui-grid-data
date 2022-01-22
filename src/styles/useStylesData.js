@@ -1,22 +1,24 @@
 import { makeStyles } from "@mui/styles";
+import { createTheme } from '@mui/material/styles';
 import  * as colors from "@mui/material/colors";
 
+const defaultTheme = createTheme();
 // export const dataTableStyle = () => {
 // export const useStylesData = () => {
-    export const useStylesData = makeStyles({
-        cellHeight: {
-          ".MuiDataGrid-row, .MuiDataGrid-root .MuiDataGrid-cell, .rendering-zone": {
-            "max-height": "none !important",
-          },
-          ".MuiDataGrid-root .MuiDataGrid-window": {
-            position: "relative !important",
-          },
-          ".MuiDataGrid-root .MuiDataGrid-viewport": {
-            "max-height": "none !important",
-          },
-          ".MuiDataGrid-root": { height: "auto !important" },
-        },
-        headersAndCells: {
+    export const useStylesData = makeStyles((theme)=>{
+        // cellHeight: {
+        //   ".MuiDataGrid-row, .MuiDataGrid-root .MuiDataGrid-cell, .rendering-zone": {
+        //     "max-height": "none !important",
+        //   },
+        //   ".MuiDataGrid-root .MuiDataGrid-window": {
+        //     position: "relative !important",
+        //   },
+        //   ".MuiDataGrid-root .MuiDataGrid-viewport": {
+        //     "max-height": "none !important",
+        //   },
+        //   ".MuiDataGrid-root": { height: "auto !important" },
+        // },
+        return { headersAndCells: {
           // autoHeight: "true",
           // fontWeight: 700,
           // height: "400px",
@@ -44,6 +46,10 @@ import  * as colors from "@mui/material/colors";
             // wordWrap: "break-word !important",
             // overflow: "visible !important",
           },
+          '& .Mui-error': {
+            // backgroundColor: `rgba(12, 12, 12, 0.7)`,
+            color: '#ff4343',
+          },
           "& .id": {
             backgroundColor: colors.lightBlue[100],
           },
@@ -59,8 +65,9 @@ import  * as colors from "@mui/material/colors";
           "& .gray": {
             backgroundColor: colors.grey[100],
           },
-        },
-      });
+        }
+      }
+      }, {defaultTheme});
     //   const classes = useStylesData();
     //   return useStylesData;
     //   return stylesData();

@@ -34,12 +34,14 @@ const ModalComp = ({
   // console.log("params:");
   // console.log(params);
 
-  const [row_to_del, set_row_to_del] = useState([]);
+  const [row_to_del_or_view, set_row_to_del_or_view] = useState([]);
 
   useEffect(() => {
+    let isMounted = true;
     let row = [];
+    console.log("ModalComp0");
     // let row = new Map();
-    if (params && params.row) {
+    if (isMounted && params && params.row) {
       // zamiana obiektu na tablicę z parami tablic 'key-value'
       for (let [key, value] of Object.entries(params.row)) {
         // row.set(key, value);
@@ -60,8 +62,13 @@ const ModalComp = ({
       }
       // console.log(row);
       row.map((el, ind) => console.log(el));
-      set_row_to_del(row);
+      set_row_to_del_or_view(row);
     }
+
+    return () => {
+      console.log("ModalComp1");
+      isMounted = false;
+    };
   }, [params, params.row]);
 
   return (
@@ -109,8 +116,8 @@ const ModalComp = ({
                 mt: 1,
               }}
             >
-              {row_to_del &&
-                row_to_del.map((el, ind) => (
+              {row_to_del_or_view &&
+                row_to_del_or_view.map((el, ind) => (
                   <Typography key={el[0]}>
                     {el[0]}:{" "}
                     <Typography
@@ -118,7 +125,9 @@ const ModalComp = ({
                       component="span"
                       sx={{ color: "white" }}
                     >
-                      {el[1]}
+                      {el[0] === "discount" || el[0] === "vat"
+                        ? `${parseFloat((el[1] * 100).toFixed(2))}%`
+                        : el[1]}
                     </Typography>
                   </Typography>
                 ))}

@@ -12,13 +12,15 @@ import {
 } from "@mui/x-data-grid";
 import { createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
-import { FormControl, Select, Typography, InputLabel, OutlinedInput, MenuItem, Checkbox, ListItemText } from "@mui/material";
+import { FormControl, Select, Typography, InputLabel, OutlinedInput, MenuItem, Checkbox, ListItemText, TextField } from "@mui/material";
 // import {EditIcon, CancelIcon, DeleteIcon, SaveIcon } from '@mui/icons-material';
 import EditIcon from "@mui/icons-material/Edit";
 import CancelIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import PreviewIcon from '@mui/icons-material/Preview';
+import {list_of_countries} from '../../constants/countries';
+import {currencies, units, discounts, vat, qualities} from '../../constants/array_in_columns';
 import { format, parseISO, formatISO } from "date-fns";
 
 // const useColumns = (handleOpen, classes) => {
@@ -133,21 +135,24 @@ const useColumns = (handleOpen) => {
   }
 
   const getBruttoPrice = (params) => {
+    const netto_discount = params.getValue(params.id, "discount_netto");
     return parseFloat(
       (
-        params.getValue(params.id, "Discount_netto") +
-        params.getValue(params.id, "Discount_netto") *
-          (params.getValue(params.id, "VAT"))
+        netto_discount + netto_discount * (params.getValue(params.id, "vat"))
       ).toFixed(2)
     );
   };
 
   const getDiscountNettoPrice = (params) => {
+    const netto = params.getValue(params.id, "price_netto");
+    // return parseFloat(
+    //   (
+    //    netto - (netto * params.getValue(params.id, "discount"))
+    //   ).toFixed(2)
+    // );
     return parseFloat(
       (
-        params.getValue(params.id, "Price_netto") -
-        (params.getValue(params.id, "Price_netto") *
-          params.getValue(params.id, "Discount"))
+       netto - (netto * params.getValue(params.id, "discount")/100 )
       ).toFixed(2)
     );
   };
@@ -156,6 +161,12 @@ const useColumns = (handleOpen) => {
     const alterCols= columnsAll.filter((el) => (el.hide === false )).map((elem, ind)=> ind%2 === 0);
 console.log(alterCols);
   };
+
+  const checkFloat = (val) => {
+    if (!isNaN(val)) {
+      return parseFloat(val/10 + val/100);
+    } else return val;
+  }
 
  
   // Client-side validation
@@ -170,7 +181,7 @@ console.log(alterCols);
     {
       // field: "firstName",
       // headerName: "First name",
-      field: "Name",
+      field: "name",
       headerName: "Name",
       // headerAlign: "center",
       width: 180,
@@ -178,9 +189,13 @@ console.log(alterCols);
       // error: true,
       editable: true,
       // preProcessEditCellProps: (params) => {
-      //   console.log("preProcessEditCellProps");
+      //   const hasError = params.props.value.length < 5;
+      //   return { ...params.props, error: hasError };
+      // },
+      // preProcessEditCellProps: (params) => {
+      //   // console.log("preProcessEditCellProps");
       //   return new Promise((resolve) =>{
-      //     const hasError = params.props.value.length < 3;
+      //     const hasError = params.props.value.length < 5;
       //     // console.log(params);
       //     console.log(hasError);
       //     resolve ({ ...params.props, error: hasError });
@@ -188,7 +203,7 @@ console.log(alterCols);
       // },
     },
     {
-      field: "Price_netto",
+      field: "price_netto",
       headerName: "Netto",
       type: "number",
       // headerAlign: "center",
@@ -196,22 +211,83 @@ console.log(alterCols);
       editable: true,
       headerClassName: "data-grid-header",
       // valueParser: (value) => Number(value) / 10
+      // preProcessEditCellProps: async (params) => {
+      //   // console.log("preProcessEditCellProps");
+      //   return new Promise((resolve) =>{
+      //     const hasError = params.props.value < 5;
+      //     // console.log(params);
+      //     console.log(hasError);
+      //     resolve ({ ...params.props, error: hasError });
+      //   })
+      // },
+      // preProcessEditCellProps: (params) => {
+      //   const hasError = params.props.value < 5;
+      //   return { ...params.props, error: hasError };
+      // },
     },
     {
-      field: "Discount",
+      field: "discount",
       headerName: "Discount",
-      type: "number",
+      // type: "number",
+      // step: 0.1,
       // headerAlign: "center",
+      align: "right",
       width: 90,
       editable: true,
       headerClassName: "data-grid-header",
+      type: "singleSelect",
+      // valueOptions: [0,0.05,0.1,0.15, 0.2,0.25,0.3,0.4,0.5,0.6,0.7,0.8,0.9],
+      // valueOptions: new Array(100).fill(0).map((el,i) => parseInt((i+1)/100)),
+      valueOptions: discounts,
+      // valueOptions: new Array(100).fill(0).map((el,i) => parseInt((i+1))),
       valueFormatter: (params) => {
-        // const valFormatted = Number(params)
-        return `${parseFloat((params.value * 100).toFixed(2))} %`;
+        // console.log(params);
+        // return `${(parseFloat(params.value * 100).toFixed(2))} %`;
+        // return `${(Number(params.value * 100).toLocaleString())} %`;
+        // return (parseInt(params.value * 100).toFixed(2));
+        // return `${(Number(params.value * 100).toFixed(2))} %`;
+        // return `${(parseInt(params.value * 100))} %`;
+        // return `${(parseFloat(params.value * 100).toFixed(2))} %`;
+        // return parseFloat(params.value * 100).toFixed(2);
+        // return parseInt(params.value);
+        // return `${parseInt(params.value)} %`;
+        return `${params.value} %`;
       },
+      // valueGetter: (params) => {
+        // return parseInt((params.value / 100));
+        // return Number((params.value / 100));
+        // return parseFloat((params.value / 100).toFixed(2));
+        // return parseFloat((params.value / 100).toFixed(2));
+      // },
+      // valueSetter: (params) => {
+        // return parseInt((params.value / 100));
+        // return Number((params.value / 100));
+        // return parseFloat((params.value / 100).toFixed(2));
+        // return parseFloat((params.value / 100).toFixed(2));
+      // },
+      // renderEditCell: (params) => {
+      //   console.log(params);
+      //   return (
+      //     <TextField 
+      //       inputProps= { {max: 100, min: 10 }} {...params} />
+      //     // <input onChange={params.onChange} type="number" step={0.1} format="#0.00%" {...params} />
+      //   )
+      // }
+      // valueParser: (value) => checkFloat(value),
+      // valueParser: (value) => (Number(value) / 100).toFixed(2),
+      // valueSetter: (params) =>{
+        // return parseFloat(params.value);
+        // return parseFloat((params.value * 100).toFixed(2));
+      // }
+      // renderCell: (params) => {
+      //   console.log(params);
+      //   return (
+      //     <input type="number" step={0.1} value={params.value} {...params} />
+      //   )
+      // }
     },
     {
-      field: "Discount_netto",
+      field: "discount_netto",
       headerName: "Discount netto",
       type: "number",
       // headerAlign: "center",
@@ -222,7 +298,7 @@ console.log(alterCols);
       valueGetter: getDiscountNettoPrice,
     },
     {
-      field: "VAT",
+      field: "vat",
       headerName: "VAT",
       headerAlign: "center",
       align: "right",
@@ -230,14 +306,15 @@ console.log(alterCols);
       editable: true,
       headerClassName: "data-grid-header",
       type: "singleSelect",
-      valueOptions: [0,5,8,23],
+      valueOptions: vat,
+      // valueOptions: [0,0.05,0.08,0.23],
       valueFormatter: (params) => {
         // const valFormatted = Number(params)
         return `${params.value * 100} %`;
       },
     },
     {
-      field: "Brutto",
+      field: "brutto",
       headerName: "Brutto",
       type: "number",
       // step: 0.1,
@@ -253,24 +330,26 @@ console.log(alterCols);
       valueGetter: getBruttoPrice,
     },
     {
-      field: "Currency",
+      field: "currency",
       headerName: "Currency",
       width: 90,
       editable: true,
       align: "center",
       type: "singleSelect",
-      valueOptions: ['EUR','USD','GBP', 'PLN', 'CNY'],
+      valueOptions: currencies,
+      // valueOptions: ['EUR','USD','GBP', 'PLN', 'CNY'],
     },
     {
-      field: "Unit",
+      field: "unit",
       headerName: "Unit",
       width: 90,
       editable: true,
       type: "singleSelect",
-      valueOptions: ['kg','box','bag','piece'],
+      valueOptions: units,
+      // valueOptions: ['kg','box','bag','piece'],
     },
     {
-      field: "Quality",
+      field: "quality",
       headerName: "Quality: Top, Medium, Low",
       align: "center",
       // headerName: (
@@ -281,7 +360,8 @@ console.log(alterCols);
       // headerName: <Typography className={classes.headers} >Quality: Top, Medium, Low</Typography>,
       width: 80,
       type: "singleSelect",
-      valueOptions: ['T','M','L'],
+      valueOptions: qualities,
+      // valueOptions: ['T','M','L'],
       editable: true,
     },
     {
@@ -296,7 +376,7 @@ console.log(alterCols);
         // first converts to JS Date, then to locale option through date-fns
         // return format(new Date(2016, 0, 1), 'dd/MM/Y');
         // return format(new Date(params.value), 'dd/MM/Y');
-        return format(new Date(params.value), 'Y/MM/dd');
+        return format(new Date(params.value), 'Y-MM-dd');
         // console.log(params.value);
         // return format(parseISO(params.value), 'dd/MM/Y');
         // return format(parseISO(params.value), 'MM/dd/yyyy');
@@ -304,17 +384,20 @@ console.log(alterCols);
       // valueGetter for filtering
       valueGetter: (params) => {
 
-        return format(new Date(params.value), 'Y/MM/dd');
+        return format(new Date(params.value), 'Y-MM-dd');
       },
     },
     {
-      field: "Origin",
+      field: "origin",
       headerName: "Country of origin",
       width: 130,
       editable: true,
+      align: "right",
+      type: "singleSelect",
+      valueOptions: list_of_countries
     },
     {
-      field: "Producer",
+      field: "producer",
       headerName: "Producer",
       width: 160,
       editable: true,
@@ -395,3 +478,29 @@ console.log(alterCols);
 };
 
 export default useColumns;
+
+/*
+      "id": 6,
+      "name": "Barramoundi",
+      "price_netto": 468.06,
+      "discount": 0.24,
+      "vat": 0.08,
+      "currency": "EUR",
+      "unit": "kg",
+      "quality": "L",
+      "use_by_date": "2022/11/06",
+      "origin": "Indonesia",
+      "producer": "Ortiz and Sons",
+      "email_contact": "ttomley5@163.com"
+
+
+            preProcessEditCellProps: (params) => {
+        // console.log("preProcessEditCellProps");
+        return new Promise((resolve) =>{
+          const hasError = params.props.value < 1;
+          // console.log(params);
+          console.log(hasError);
+          resolve ({ ...params.props, error: hasError });
+        })
+      },
+*/

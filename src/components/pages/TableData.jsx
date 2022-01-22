@@ -25,14 +25,14 @@ import {
   yellow,
 } from "@mui/material/colors";
 import axios from "axios";
-import datadb from "../components/fakeDB/datadb.json";
+import datadb from "../fakeDB/datadb.json";
 // import useFetch from "../components/customHooks/useFetch";
 // import ErrorBoundary from "../components/ErrorBoundary";
-import ModalComp from "../components/ModalComp";
-import useColumns from "../components/customHooks/useColumns";
+import ModalComp from "../ModalComp";
+import useColumns from "../customHooks/useColumns";
 
 const TableData = () => {
-  console.log("DataTable Comp.");
+  console.log("Table Data Comp.");
   // const DataTable = ({ columns, rows }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [row_params, set_row_params] = useState({});

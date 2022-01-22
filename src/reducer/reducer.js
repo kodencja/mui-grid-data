@@ -1,5 +1,5 @@
 import  initState  from "./initState";
-import { final_text_resp, api_method, current_url, post_data } from "./types";
+import { final_text_resp, api_method, current_url, post_data, current_record_id } from "./types";
 
 const reducer = (state = initState, action) => {
     console.log("reducer");
@@ -15,6 +15,9 @@ const reducer = (state = initState, action) => {
         };
         case post_data: return {
             ...state, postData: action.payload
+        };
+        case current_record_id: return {
+            ...state, currentRecordId: action.payload
         };
         default: return state;
 

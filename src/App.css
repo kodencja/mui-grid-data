@@ -1,9 +1,11 @@
 body {
+  -webkit-appearance: none;
   /* background-color: #eef5ee; */
   /* background-color: #dee9de; */
   /* background-color: oldlace; */
   /* background-color: l; */
   background-color: floralwhite;
+  /* background-color: rgba(12, 12, 12, 0.7); */
 }
 
 .App {
@@ -43,6 +45,10 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+.MuiCalendarPicker-root {
+  background-color: grey;
 }
 
 /* .data-grid-header {

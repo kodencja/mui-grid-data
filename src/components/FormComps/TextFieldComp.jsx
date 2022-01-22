@@ -5,6 +5,9 @@ import {
   FormControlLabel,
   FormControl,
   FormLabel,
+  InputLabel,
+  Box,
+  InputAdornment,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
@@ -25,28 +28,182 @@ const useStyles = makeStyles({
     // backgroundColor: "snow",
     // },
   },
+  textInputPadding: {
+    paddingLeft: "10px",
+    // "& .MuiInputBase-input-MuiInput-input": {
+    "&:after": {
+      // backgroundColor: "lightyellow",
+      border: "1px solid green",
+      paddingLeft: "15px",
+    },
+  },
+  root: {
+    marginTop: "20px",
+    marginBottom: "20px",
+    marginRight: "10px",
+    maxWidth: "200px",
+    // MuiInput-underline": {
+    // "& .MuiInputBase-root": {
+    // },
+    // NOT BAD
+    "& .MuiInputBase-root": {
+      paddingLeft: 10,
+      // width: "50%",
+      // backgroundColor: "#e8f0fe",
+      // backgroundColor: "papayawhip",
+      // color: "orange",
+      // "&::selected": {
+      //   backgroundColor: "lightgreen",
+      //   color: "green",
+      // },
+      "&:focus": {
+        // backgroundColor: "#e8f0fe",
+        // backgroundColor: "lightpink",
+      },
+
+      // "&:after": {
+      //   color: "black",
+      //   backgroundColor: "lightpink",
+      // },
+      // "&:after:selected": {
+      //   // paddingLeft: 10,
+      //   backgroundColor: "lightpink",
+      // },
+      // "& *:selected": {
+      //   backgroundColor: "seashell",
+      // },
+    },
+    "& .MuiInputBase-root:selected": {
+      // color: "pink",
+      // paddingLeft: 10,
+      // backgroundColor: "lightpink",
+      "&:before": {
+        // backgroundColor: "lightpink",
+      },
+    },
+    "& .MuiInputBase-root:focus": {
+      // color: "pink",
+      // paddingLeft: 10,
+      // backgroundColor: "lightpink",
+    },
+    // QUITE GOOD
+    // "& .MuiInput-underline.MuiInputBase-formControl.Mui-focused": {
+    "& .MuiInput-underline.Mui-focused": {
+      // backgroundColor: "burlywood",
+      backgroundColor: "#e8f0fe",
+      color: "darkslategray",
+      // "& input": {
+      //   // color: "black",
+      //   // backgroundColor: "lightpink",
+      // },
+      // "&::before": {
+      // backgroundColor: "lightpink !important",
+      //   color: "black",
+      // },
+      // "&::after": {
+      //   backgroundColor: "lightpink !important",
+      //   color: "black",
+      // },
+      // "& p.MuiFormHelperText-root.MuiFormHelperText-sizeMedium.MuiFormHelperText-filled":
+      // "& p":
+      // {
+      //   backgroundColor: "lightpink !important",
+      // },
+    },
+
+    // QUITE GOOD
+    // "& .MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary": {
+    // "& .MuiInput-underline.MuiInputBase-formControl.Mui-focused": {
+    // "& .MuiInput-underline.MuiInputBase-formControl": {
+    //   color: "green",
+    //   // paddingLeft: 20,
+    //   // backgroundColor: "ivory",
+    //   // "& input:focus": {
+    //   "& input": {
+    //     color: "black",
+    //     // backgroundColor: "lightpink",
+    //   },
+    //   "&:after": {
+    //     color: "black",
+    //     // backgroundColor: "lightpink",
+    //   },
+    //   "&:after:selected": {
+    //     // paddingLeft: 10,
+    //     // backgroundColor: "lightpink",
+    //   },
+    //   "& *:selected": {
+    //     backgroundColor: "lightpink",
+    //   },
+    // },
+    // "& .MuiFormLabel-filled": {
+    // backgroundColor: "lightpink",
+    // },
+  },
 });
 
 // const TextFieldComp = ({ label, placeholder }) => {
 const TextFieldComp = (props) => {
   const classes = useStyles();
 
+  const getFieldStyle = () => {
+    // sx={name === "discount" ? fieldStyle.dateWidth : undefined}
+    if (name === "discount") {
+      return {
+        dateWidth: {
+          "& .MuiInputBase-root": {
+            width: "60%",
+          },
+        },
+      };
+    } else if (restInput.type === "date") {
+      return {
+        dateMargin: {
+          marginTop: "30px",
+        },
+      };
+    }
+  };
+
   const fieldStyle = {
     marginTop: "20px",
     marginBottom: "20px",
     marginRight: "10px",
+    // paddingLeft: "15px",
     // bgcolor: "seashell",
     // display: "block",
     // "& .MuiOutlinedInput-input": {
-    "& .MuiInputBase-root-MuiOutlinedInput-root": {
-      bgcolor: "snow",
-      border: "1px solid green",
+    // "& .MuiInputBase-root-MuiOutlinedInput-root": {
+    // "& .MuiInput-input MuiInputBase-input css-1x51dt5-MuiInputBase-input-MuiInput-input":
+    // "& .MuiInputBase-input-MuiInput-input": {
+    // "& .MuiInput-input MuiInputBase-input": {
+
+    // "& .MuiInputBase-input-MuiInput-input": {
+    //   bgcolor: "lightyellow",
+    //   border: "1px solid green",
+    //   paddingLeft: "15px",
+    //   backgroundColor: "seashell",
+    // },
+
+    "& .MuiInput-root MuiInput-underline MuiInputBase-root": {
+      // MuiInputBase-colorPrimary MuiInputBase-formControl css-1480iag-MuiInputBase-root-MuiInput-root": {
       // backgroundColor: "snow",
+    },
+    shorterWidth: {
+      "& .MuiInputBase-root": {
+        width: "60%",
+      },
+    },
+    highTopMargin: {
+      "& .MuiInputBase-root": {
+        marginTop: "17.25px",
+      },
     },
   };
 
   // console.log("Props input: ");
   // console.log(props.input);
+  // console.log("props");
+  // console.log(props);
 
   const {
     input: { name, onChange, onBlur, value, ...restInput },
@@ -54,38 +211,127 @@ const TextFieldComp = (props) => {
     ...rest
   } = props;
 
-  console.log("TextFieldCompo: ");
+  // console.log("TextFieldCompo: ");
   // console.log(restInput);
-  console.log(rest);
-
-  // console.log(meta);
-  // console.log(meta.touched);
+  // console.log(rest); // sign, required
   // console.log(meta.error);
+  // console.log(meta.touched);
+
+  // const getClassRoot = () =>{
+  //   restInput.type === "date"
+  // }
 
   return (
     // <div className={classes.textInput}>
+    // <Box>
+    //   {restInput.type === "date" ? (
+    //     <InputLabel id={rest.label}>{rest.label}</InputLabel>
+    //   ) : (
+    //     ""
+    //   )}
     <TextField
       name={name}
+      type={restInput.type}
       helperText={meta.touched ? meta.error : undefined}
       error={meta.error && meta.touched}
+      // error={
+      //   restInput.type === "date" && value === "dd.mm.rrrr"
+      //     ? meta.error
+      //     : meta.error && meta.touched
+      // }
+      // inputProps={name === "discount" ? rest.inputProps : rest}
+      // inputProps={
+      //   name === "discount" ? { inputMode: "numeric", pattern: "[0-9]*" } : rest
+      // }
       inputProps={rest}
+      // pattern={rest.pattern}
+      // inputmode={rest.inputMode}
+      // min={rest.minDate}
+      min={rest.min}
+      max={rest.max}
       onChange={onChange}
       onBlur={onBlur}
+      defaultValue={rest.defaultValue}
       // onBlur={(event) => onBlur(event)}
+      // value={rest.sign ? Number(value) : value} // to co się wyświetla w inpucie
+      // value={rest.sign ? Number(parseInt(value) / 10) : value} // to co się wyświetla w inpucie
+      // value={name === "discount" ? Number(value) : value}
       value={value}
-      label={rest.label}
-      variant="outlined"
-      color="primary"
-      required
+      // value={rest.sign ? Number(value) / 100 : value}
+      // value={rest.sign ? Number(value) * 10 : value}
+      label={restInput.type !== "date" ? rest.label : ""}
+      variant="standard"
+      // min={rest.minDate}
+      // InputLabelProps={
+      //   restInput.type === "date" ? { shrink: true } : { shrink: false }
+      // }
+      // variant="outlined"
+      // color="info"
+      required={rest.required}
       placeholder={rest.placeholder}
-      // className={classes.textInput}
       // sx={{
       //   "& .MuiTextField-root": { m: 5, width: "25ch" },
       // }}
-      sx={fieldStyle}
-      // sx={{ ...fieldStyle }}
+      // sx={fieldStyle}
+      className={classes.root}
+      // className={getClassRoot}
+      // sx={{ marginTop: "50px" }}
+      sx={
+        name === "discount"
+          ? fieldStyle.shorterWidth
+          : restInput.type === "date"
+          ? fieldStyle.highTopMargin
+          : undefined
+      }
+      // sx={getFieldStyle()}
+      // sx={fieldStyle.dateWidth}
+      // style={{ "&:after": { paddingLeft: "20px" } }}
+      // style={{ marginLeft: "-10px" }}
+
+      InputProps={{
+        // startAdornment: (
+        //   <InputAdornment position="start" sx={{ ml: "25px" }}>
+        //     %
+        //   </InputAdornment>
+        // ),
+        endAdornment: rest.sign ? (
+          <InputAdornment position="end" sx={{ mr: "5px" }}>
+            {rest.sign}
+          </InputAdornment>
+        ) : (
+          ""
+        ),
+      }}
+
+      // startAdornment={
+      //   <InputAdornment
+      //     position="start"
+      //     // sx={{ textAlign: "left" }}
+      //     // sx={{ "&::after": { mr: "25px" } }}
+      //     // sx={{ "& .MuiTypography-root": { mr: "25px" } }}
+      //     // sx={{ position: "absolute", left: "50px", top: 0 }}
+      //   >
+      //     {rest.sign}
+      //   </InputAdornment>
+      // }
+      // endAdornment={
+      //   // startAdornment={
+      //   rest.sign ? (
+      //     <InputAdornment
+      //       position="end"
+      //       // sx={{ textAlign: "left" }}
+      //       // sx={{ "&::after": { mr: "25px" } }}
+      //       // sx={{ "& .MuiTypography-root": { mr: "25px" } }}
+      //       // sx={{ position: "absolute", left: "50px", top: 0 }}
+      //     >
+      //       {rest.sign}
+      //     </InputAdornment>
+      //   ) : (
+      //     ""
+      //   )
+      // }
     />
-    // {/* </div> */}
+    // </Box>
   );
 };
 
@@ -152,4 +398,32 @@ sx={{ ...fieldStyle }}
         placeholder={props.rest && props.rest.placeholder}
         sx={{ ...fieldStyle }}
       />
+
+
+
+
+        console.log(restInput); // {checked: undefined, type: 'text', onFocus: ƒ}
+  console.log(rest); // {label: 'First Name', placeholder: 'First Name', children: undefined, render: undefined}
+
+  console.log(meta); // { active: false
+  data: Object
+  dirty: true
+  dirtySinceLastSubmit: false
+  error: undefined
+  initial: undefined
+  invalid: false
+  length: undefined
+  modified: true
+  modifiedSinceLastSubmit: false
+  pristine: false
+  submitError: undefined
+  submitFailed: false
+  submitSucceeded: false
+  submitting: false
+  touched: true
+  valid: true
+  validating: false
+  visited: false }
+  console.log(meta.touched);
+  console.log(meta.error);
 */
