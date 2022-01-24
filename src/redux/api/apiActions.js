@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_DATA_SUCCESS, FETCH_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, POST_DATA_SUCCESS, DEL_DATA_SUCCESS } from "./apiTypes";
+import { FETCH_DATA_SUCCESS, FETCH_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS } from "./apiTypes";
 import {initState} from './apiReducer';
 
 
@@ -31,18 +31,18 @@ export const putDataSuccess = (data) => {
     }
 }
 
-export const postDataSuccess = (data) => {
-    return {
-        type: POST_DATA_SUCCESS,
-        payload: data
-    }
-}
+// export const postDataSuccess = (data) => {
+//     return {
+//         type: POST_DATA_SUCCESS,
+//         payload: data
+//     }
+// }
 
 
-export const deleteDataSuccess = () => {
-    return {
-        type: DEL_DATA_SUCCESS    }
-}
+// export const deleteDataSuccess = () => {
+//     return {
+//         type: DEL_DATA_SUCCESS    }
+// }
 
 export const apiDataFailure = (error) => {
     return {

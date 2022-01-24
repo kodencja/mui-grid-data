@@ -10,6 +10,7 @@ import {
   import {currencies, units, discounts, vat, qualities} from '../../constants/array_in_columns';
   import usePostPut from './usePostPut';
 import useFetch from './useFetch1';
+import { format, parseISO, formatISO } from "date-fns";
 
 
 const useEditRow = (api_put, baseURLtoDB) => {
@@ -302,7 +303,11 @@ tomorrow.setDate(tomorrow.getDate() + 1);
     console.log(id); // id number
     post_id.current = id;
     // console.log(editRowsModel);
-    // console.log(editRowData);
+    console.log("editRowData 1:");
+    console.log(editRowData);
+    editRowData.use_by_date = format(new Date(editRowData.use_by_date), 'Y-MM-dd');
+    console.log("editRowData 2:");
+    console.log(editRowData);
     // TUTAJ ROBIMY ROW UPDATE - trzeba pobrać dany row i zmienić currentURLtoDB na typu update
     // dispatch({ type: post_data, payload: editRowData });
     // dispatch({ type: api_method, payload: "PUT" });

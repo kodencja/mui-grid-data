@@ -373,6 +373,8 @@ console.log(alterCols);
       editable: true,
       // valueFormatter for displaying
       valueFormatter: (params) => {
+        // console.log("valueFormatter in date");
+        // console.log(params.value);
         // first converts to JS Date, then to locale option through date-fns
         // return format(new Date(2016, 0, 1), 'dd/MM/Y');
         // return format(new Date(params.value), 'dd/MM/Y');
@@ -386,6 +388,10 @@ console.log(alterCols);
 
         return format(new Date(params.value), 'Y-MM-dd');
       },
+      // valueSetter: (params) => {
+
+      //   return format(new Date(params.value), 'Y-MM-dd');
+      // },
     },
     {
       field: "origin",

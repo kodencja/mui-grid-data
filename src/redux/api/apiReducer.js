@@ -22,12 +22,12 @@ const dataReducer = (state = initState, action) => {
             const updatedData = state.data.map((el) =>
               Number(el.id) - 1 !== indexOfItem ? el : action.payload
             );
-            console.log(updatedData);
+            // console.log(updatedData);
             // setData(updatedData);
             return {...state, loading: false, data: updatedData};
         }
-        case POST_DATA_SUCCESS: return {...state, loading: false};
-        case DEL_DATA_SUCCESS: return {...state, loading: false};
+        // case POST_DATA_SUCCESS: return {...state, loading: false};
+        // case DEL_DATA_SUCCESS: return {...state, loading: false};
         case FETCH_DATA_FAILURE: return {...state, error: action.payload, loading: false};
         default: return state;
     }

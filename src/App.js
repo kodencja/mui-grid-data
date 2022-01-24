@@ -83,7 +83,7 @@ function App(props) {
 
   const rows = useMemo(() => {
     console.log("rows in App.js");
-    console.log(data);
+    // console.log(data);
     if(isMountedRef.current){
       if(data && data.length > 0) return data;
       else return [];

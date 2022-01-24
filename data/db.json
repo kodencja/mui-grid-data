@@ -4,12 +4,12 @@
       "id": 1,
       "name": "Puree - Blackcurrant",
       "price_netto": 266.49,
-      "discount": 17,
-      "vat": 0,
+      "discount": 25,
+      "vat": 0.08,
       "currency": "EUR",
       "unit": "box",
       "quality": "M",
-      "use_by_date": "2022-05-10",
+      "use_by_date": "2022-06-06",
       "origin": "United Kingdom",
       "producer": "Langworth, Grady and Anderson",
       "email_contact": "rtidey0@bigcartel.com"
@@ -37,7 +37,7 @@
       "currency": "CNY",
       "unit": "box",
       "quality": "T",
-      "use_by_date": "2022-01-11T23:00:00.000Z",
+      "use_by_date": "2022-01-11",
       "origin": "Colombia",
       "producer": "Raynor-Reichert",
       "email_contact": "21@h.net"
@@ -21029,32 +21029,32 @@
       "id": 1502
     },
     {
-      "discount": 15,
-      "vat": 0.05,
-      "unit": "kg",
-      "use_by_date": "2022-02-25",
+      "id": 1503,
       "name": "Melon",
       "price_netto": 32.3,
+      "discount": 15,
+      "vat": 0.05,
+      "currency": "USD",
+      "unit": "box",
+      "quality": "M",
+      "use_by_date": "2022-03-29T22:00:00.000Z",
       "origin": "Turkey",
       "producer": "Veg Tur",
-      "email_contact": "vegtur@com.tr",
-      "currency": "USD",
-      "quality": "M",
-      "id": 1503
+      "email_contact": "vegtur@com.tr"
     },
     {
-      "discount": 0,
-      "vat": 0.05,
+      "discount": 10,
+      "vat": 0.08,
       "unit": "kg",
-      "use_by_date": "2022-02-26",
-      "name": "Apples",
-      "price_netto": 12.3,
-      "origin": "Poland",
+      "use_by_date": "2022-02-28",
       "email_contact": "jablkopol@jb.pl",
       "producer": "JablkoPol",
+      "name": "Apples",
+      "price_netto": 35.5,
+      "origin": "Poland",
       "currency": "PLN",
-      "quality": "T",
-      "id": 1505
+      "quality": "M",
+      "id": 1504
     }
   ]
 }
