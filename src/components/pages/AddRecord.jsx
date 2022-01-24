@@ -33,31 +33,40 @@ const useStyles = makeStyles({
 });
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-const handleOnSubmit = async (values) => {
-  const dataSubmit = { ...values };
-  console.log(values);
-  dataSubmit.discount = parseFloat(dataSubmit.discount) / 100;
-  // dataSubmit.price_netto = parseFloat(dataSubmit.price_netto);
-  // dataSubmit.vat = parseFloat(dataSubmit.vat);
-  console.log(dataSubmit);
-  await sleep(300);
-  window.alert(JSON.stringify(dataSubmit, 0, 2));
-};
-
-const AddRecord = () => {
+// const AddRecord = ({ api_post, baseURLtoDB, loading }) => {
+const AddRecord = ({ apiPropsPost }) => {
   const classes = useStyles();
+
+  const { api_post, baseURLtoDB, loading } = apiPropsPost;
 
   let formData = {
     discount: 0,
     vat: 0,
     unit: "kg",
-    use_by_date: format(new Date(), "Y-MM-dd"),
+    use_by_date: format(
+      new Date().setDate(new Date().getDate() + 1),
+      "Y-MM-dd"
+    ),
+    // use_by_date: format(new Date(), "Y-MM-dd"),
     // use_by_date: format(new Date(), "dd.MM.Y"),
     // stooge: "larry",
     // toppings: [],
     // sauces: [],
     // employment: "unemployed",
     // favCol: "",
+  };
+
+  const handleOnSubmit = async (values) => {
+    const dataSubmit = { ...values };
+    console.log(values);
+    dataSubmit.discount = parseFloat(dataSubmit.discount);
+    // dataSubmit.discount = parseFloat(dataSubmit.discount) / 100;
+    // dataSubmit.price_netto = parseFloat(dataSubmit.price_netto);
+    // dataSubmit.vat = parseFloat(dataSubmit.vat);
+    console.log(dataSubmit);
+    await api_post(baseURLtoDB, dataSubmit);
+    // await sleep(800);
+    window.alert(JSON.stringify(dataSubmit, 0, 2));
   };
 
   // const validate = (values) => {
@@ -323,7 +332,7 @@ const AddRecord = () => {
               </div>
               <div>
                 <button type="submit" disabled={submitting || pristine}>
-                  Submit
+                  {loading ? "Submitting" : "Submit"}
                 </button>
                 <button
                   type="button"

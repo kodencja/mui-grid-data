@@ -12,8 +12,9 @@ import {
 import useFetch from './useFetch1';
 
 
-// const useEditRow = (dispatch, baseURLtoDB) => {
-const useEditRow = (dispatch, baseURLtoDB, currentURLtoDB, apiMethod) => {
+const useEditRow = (api_put, baseURLtoDB) => {
+  // const isMountedRef = useRef(true);
+// const useEditRow = (dispatch, baseURLtoDB, currentURLtoDB, apiMethod) => {
     const [editRowsModel, setEditRowsModel] = useState({});
   // store row data after editing
   const [editRowData, setEditRowData] = useState({});
@@ -22,9 +23,9 @@ const useEditRow = (dispatch, baseURLtoDB, currentURLtoDB, apiMethod) => {
   const post_id = useRef();
   const prev_val = useRef();
   const prev_id = useRef();
-  const useFetchOptions = {baseURLtoDB, currentURLtoDB, apiMethod, postData: editRowData, dispatch};
+  // const useFetchOptions = {baseURLtoDB, currentURLtoDB, apiMethod, postData: editRowData, dispatch};
   // const { api_put, error_msg, loading, anyError } = usePostPut();
-  const {putData} = useFetch(useFetchOptions);
+  // const {putData} = useFetch(useFetchOptions);
 
   // useEffect(() => {
   //   console.log("post_id.current");
@@ -33,6 +34,15 @@ const useEditRow = (dispatch, baseURLtoDB, currentURLtoDB, apiMethod) => {
   //     dispatch({ type: current_url, payload: `${baseURLtoDB}/${post_id}` });
   //   }
   // }, [post_data])
+
+  // useEffect(() => {
+  //   isMountedRef.current = true;
+
+  //   return () => {
+  //       console.log("useEditRow.js return: " + isMountedRef.current);
+  //       isMountedRef.current = false;
+  //   };
+  // })
 
 //   useEffect(() => {
 // console.log("editRowData:");
@@ -287,7 +297,7 @@ tomorrow.setDate(tomorrow.getDate() + 1);
   //   [editRowData]
   // );
 
-  const editRowCommit = (id) => {
+  const editRowCommit = async (id) => {
     console.log("EDIT_ROW_COMMIT: ");
     console.log(id); // id number
     post_id.current = id;
@@ -298,8 +308,13 @@ tomorrow.setDate(tomorrow.getDate() + 1);
     // dispatch({ type: api_method, payload: "PUT" });
     // dispatch({ type: current_url, payload: `${baseURLtoDB}/${id}` });
     // dispatch({ type: current_record_id, payload: id });
-    // api_put(`${baseURLtoDB}/${id}`, editRowData);
-    putData(`${baseURLtoDB}/${id}`, editRowData);
+    // console.log("editRowCommit: " + isMountedRef.current);
+    // if(isMountedRef.current){
+      console.log("Call api_put in editRowCommit 1");
+      await api_put(`${baseURLtoDB}/${id}`, editRowData);
+      console.log("Call api_put in editRowCommit 2");
+    // }
+    // putData(`${baseURLtoDB}/${id}`, editRowData);
   };
 return {editRowsModel, editRowCommit, handleEditRowsModelChange}
 }

@@ -9,23 +9,26 @@ import { handleDeleteRow } from "../../functions/modalFn";
 import { modalStyle } from "../../styles/modalStyle";
 // import { dataTableStyle } from "../components/styles/dataTableStyle";
 import { useStylesData } from "../../styles/useStylesData";
-import {
-  api_method,
-  current_url,
-  post_data,
-  current_record_id,
-} from "../../reducer/types";
+// import {
+//   api_method,
+//   current_url,
+//   post_data,
+//   current_record_id,
+// } from "../../reducer/types";
 
 // const defaultTheme = createTheme();
 
-const DataTable = ({ rows, dataTableProps }) => {
-  const {
-    dispatch,
-    finalTextResponse,
-    baseURLtoDB,
-    currentURLtoDB,
-    apiMethod,
-  } = dataTableProps;
+const DataTable = ({ rows, apiProps }) => {
+  const { baseURLtoDB, api_put, api_del } = apiProps;
+  // const DataTable = ({ rows, api_put, api_del, baseURLtoDB }) => {
+  // const DataTable = ({ rows, dataTableProps }) => {
+  // const {
+  //   // dispatch,
+  //   // finalTextResponse,
+  //   baseURLtoDB,
+  //   currentURLtoDB,
+  //   apiMethod,
+  // } = dataTableProps;
 
   const classes = useStylesData();
   // const classes = useStylesData();
@@ -41,7 +44,9 @@ const DataTable = ({ rows, dataTableProps }) => {
   console.log("DataTable Comp.");
 
   const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
-    useEditRow(dispatch, baseURLtoDB, currentURLtoDB, apiMethod);
+    useEditRow(api_put, baseURLtoDB);
+  // const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
+  //   useEditRow(dispatch, baseURLtoDB, currentURLtoDB, apiMethod);
   // useEditRow(dispatch, baseURLtoDB);
 
   const handleOpen = (params, flag) => {
@@ -63,11 +68,12 @@ const DataTable = ({ rows, dataTableProps }) => {
 
   const handleClose = () => setModalOpen(false);
 
-  const handleDeleteClick = (e) => {
+  const handleDeleteClick = async (e) => {
     e.stopPropagation();
     handleDeleteRow(row_params, set_row_params);
-    dispatch({ type: api_method, payload: "DELETE" });
-    dispatch({ type: current_url, payload: `${baseURLtoDB}/${row_params.id}` });
+    await api_del(`${baseURLtoDB}/${row_params.id}`);
+    // dispatch({ type: api_method, payload: "DELETE" });
+    // dispatch({ type: current_url, payload: `${baseURLtoDB}/${row_params.id}` });
     handleClose();
   };
 
@@ -95,7 +101,7 @@ const DataTable = ({ rows, dataTableProps }) => {
       className={classes.headersAndCells}
     >
       {/* <ErrorBoundary> */}
-      <Typography>{finalTextResponse}</Typography>
+      {/* <Typography>{finalTextResponse}</Typography> */}
       <DataGrid
         // className={classes.cellHeight}
         // className={classes.headersAndCells}

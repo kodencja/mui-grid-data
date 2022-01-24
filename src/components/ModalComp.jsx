@@ -51,11 +51,15 @@ const ModalComp = ({
         //   </span>
         // );
         // let divide_key = key[key.findIndex(letter => letter === letter.toUpperCase())]
-        if (key === "Discount") {
-          value = `${parseFloat((value * 100).toFixed(2))} %`;
-        } else if (key === "VAT") {
-          value = `${value * 100} %`;
-        } else if (key === "use_by_date") {
+        // if (key === "discount") {
+        if (key === "vat") {
+          // value = `${parseFloat((value * 100).toFixed(2))} %`;
+          value = parseFloat((value * 100).toFixed(2));
+        }
+        // else if (key === "vat") {
+        //   value = `${value * 100} %`;
+        // }
+        else if (key === "use_by_date") {
           value = format(new Date(value), "Y/MM/dd");
         }
         row.push([key, value]);
@@ -126,8 +130,10 @@ const ModalComp = ({
                       sx={{ color: "white" }}
                     >
                       {el[0] === "discount" || el[0] === "vat"
-                        ? `${parseFloat((el[1] * 100).toFixed(2))}%`
+                        ? `${el[1]} %`
                         : el[1]}
+                      {/* ? `${parseFloat((el[1] * 100).toFixed(2))}%` */}
+                      {/* {el[1]} */}
                     </Typography>
                   </Typography>
                 ))}

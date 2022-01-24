@@ -2,17 +2,17 @@
   "grocery": [
     {
       "id": 1,
-      "name": "Fish - Tuna",
-      "price_netto": 242.43,
-      "discount": 4,
+      "name": "Puree - Blackcurrant",
+      "price_netto": 266.49,
+      "discount": 17,
       "vat": 0,
-      "currency": "USD",
-      "unit": "kg",
-      "quality": "L",
-      "use_by_date": "2022-08-25",
-      "origin": "China",
-      "producer": "Bergstrom Inc",
-      "email_contact": "tunafish8@ovh.net"
+      "currency": "EUR",
+      "unit": "box",
+      "quality": "M",
+      "use_by_date": "2022-05-10",
+      "origin": "United Kingdom",
+      "producer": "Langworth, Grady and Anderson",
+      "email_contact": "rtidey0@bigcartel.com"
     },
     {
       "id": 2,
@@ -20999,6 +20999,62 @@
       "origin": "Haiti",
       "producer": "Sanford-Thompson",
       "email_contact": "glendendv@alexa.com"
+    },
+    {
+      "discount": 5,
+      "vat": 0.05,
+      "unit": "kg",
+      "use_by_date": "2022-01-29",
+      "name": "Kiwi",
+      "price_netto": 21.3,
+      "origin": "Ekwador",
+      "producer": "Buena Vita",
+      "email_contact": "bvita@mk.com",
+      "currency": "USD",
+      "quality": "T",
+      "id": 1501
+    },
+    {
+      "discount": 7,
+      "vat": 0.08,
+      "unit": "kg",
+      "use_by_date": "2022-01-28",
+      "name": "Orange",
+      "price_netto": 21.3,
+      "origin": "Spain",
+      "producer": "Buena Vita Espana",
+      "email_contact": "oranges@es.com",
+      "currency": "EUR",
+      "quality": "M",
+      "id": 1502
+    },
+    {
+      "discount": 15,
+      "vat": 0.05,
+      "unit": "kg",
+      "use_by_date": "2022-02-25",
+      "name": "Melon",
+      "price_netto": 32.3,
+      "origin": "Turkey",
+      "producer": "Veg Tur",
+      "email_contact": "vegtur@com.tr",
+      "currency": "USD",
+      "quality": "M",
+      "id": 1503
+    },
+    {
+      "discount": 0,
+      "vat": 0.05,
+      "unit": "kg",
+      "use_by_date": "2022-02-26",
+      "name": "Apples",
+      "price_netto": 12.3,
+      "origin": "Poland",
+      "email_contact": "jablkopol@jb.pl",
+      "producer": "JablkoPol",
+      "currency": "PLN",
+      "quality": "T",
+      "id": 1505
     }
   ]
 }
