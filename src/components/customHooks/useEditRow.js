@@ -1,15 +1,6 @@
 import React, {useState, useRef, useEffect} from 'react';
-import {
-    final_text_resp,
-    api_method,
-    current_url,
-    post_data,
-    current_record_id
-  } from "../../reducer/types";
   import {list_of_countries} from '../../constants/countries';
   import {currencies, units, discounts, vat, qualities} from '../../constants/array_in_columns';
-  import usePostPut from './usePostPut';
-import useFetch from './useFetch1';
 import { format, parseISO, formatISO } from "date-fns";
 
 
@@ -24,9 +15,6 @@ const useEditRow = (api_put, baseURLtoDB) => {
   const post_id = useRef();
   const prev_val = useRef();
   const prev_id = useRef();
-  // const useFetchOptions = {baseURLtoDB, currentURLtoDB, apiMethod, postData: editRowData, dispatch};
-  // const { api_put, error_msg, loading, anyError } = usePostPut();
-  // const {putData} = useFetch(useFetchOptions);
 
   // useEffect(() => {
   //   console.log("post_id.current");

@@ -9,12 +9,6 @@ import { handleDeleteRow } from "../../functions/modalFn";
 import { modalStyle } from "../../styles/modalStyle";
 // import { dataTableStyle } from "../components/styles/dataTableStyle";
 import { useStylesData } from "../../styles/useStylesData";
-// import {
-//   api_method,
-//   current_url,
-//   post_data,
-//   current_record_id,
-// } from "../../reducer/types";
 
 // const defaultTheme = createTheme();
 

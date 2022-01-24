@@ -30,11 +30,6 @@ import { createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Button, Typography } from "@mui/material";
-import useFetch from "./components/customHooks/useFetch1";
-import useAxios from "./components/customHooks/useAxios";
-import usePostPut from "./components/customHooks/usePostPut";
-
-import useGetData from "./components/customHooks/useGetData";
 
 
 // function App({data_db, fetchData, api_put, api_post, api_del}) {
@@ -47,14 +42,6 @@ function App(props) {
   // const [modalOpen, setModalOpen] = useState(false);
   // const [row_params, set_row_params] = useState({});
 
-  // const useFetchOptions = {baseURLtoDB, currentURLtoDB, apiMethod, postData, dispatch};
-  // const useFetchOptions = {baseURLtoDB, currentURLtoDB, apiMethod};
-
-  // const { data, err_msg, isLoading, isError, changeData, setChangeData } = useAxios(useFetchOptions);
-  // const { data, err_msg, isLoading, isError } = useGetData();
-  // const { data, err_msg, isLoading, isError } = useFetch();
-
-  // const { data, err_msg, isLoading, isError } = useFetch(useFetchOptions);
 
   useEffect(() => {
     isMountedRef.current = true;
