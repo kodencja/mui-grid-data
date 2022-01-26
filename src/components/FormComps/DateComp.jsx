@@ -113,28 +113,11 @@ const DateComp = (props) => {
         name={name}
         label={rest.label}
         value={value}
-        // value={value ? value : rest.value}
-        // value={value ? value : rest.value}
         onChange={onChange}
-        // onBlur={onBlur}
         required={rest.required}
         type={restInput.type}
-        // type="date"
-        // className={classes.root}
-        // error={meta.error && true}
-        // error={true}
-        // minDate={new Date().setMonth(new Date().getMonth() + 1)}
-        // formData.date.setMonth(formData.date.getMonth() + 3)
         minDate={new Date().setDate(new Date().getDate() + 1)}
-        // minDate={new Date()}
-        // onError={meta.touched && meta.error}
-        // error={meta.error && meta.touched}
-        // style={{ backgroundColor: "coral" }}
         // style={{
-        //   backgroundColor: "coral",
-        //   ".MuiCalendarPicker-root": { backgroundColor: colors.grey[300] },
-        // }}
-        // sx={{
         //   backgroundColor: "coral",
         //   ".MuiCalendarPicker-root": { backgroundColor: colors.grey[300] },
         // }}
@@ -143,47 +126,16 @@ const DateComp = (props) => {
         //   backgroundColor: "coral",
         //   "& .MuiCalendarPickerRoot": { backgroundColor: "coral" },
         // }}
-        // sx={{
-        //   backgroundColor: "coral",
-        //   "& .MuiCalendarPickerRoot": { backgroundColor: "coral" },
-        // }}
-        // mask={"dd/MM/yyyy"}
-        // toolbarFormat={"dd/MM/yyyy"}
-        // inputFormat={"dd/MM/yyyy"}
         inputFormat="yyyy-MM-dd"
-        // renderInput={(params) => <TextFieldComp {...params} />}
-        // .MuiCalendarPicker-root. PrivatePickersFadeTransitionGroup-root MuiCalendarPicker-viewTransitionContainer css-1wvgxus-MuiCalendarPicker-viewTransitionContainer
-        // sx={{
-        //   // "& .MuiCalendarPicker-root.MuiCalendarPicker-viewTransitionContainer": {
-        //   // "& .MuiCalendarPicker-root.MuiPaper-root": {
-        //   "& .MuiCalendarPicker-root": {
-        //     // "& .MuiCalendarPicker-viewTransitionContainer": {
-        //     // backgroundColor: colors.grey[300],
-        //     backgroundColor: "coral",
-        //     // "& .MuiPaper-root": {
-        //     // backgroundColor: colors.grey[200] + " !important",
-
-        //     // bgcolor: "black !important",
-        //     color: colors.blue[500],
-        //     // },
-        //   },
-        // }}
         renderInput={(params) => {
           console.log(params);
           // params.error = meta.error && true;
           params.error = meta.error && meta.touched;
           return (
-            // <input type="date" />
             <TextField
               className={classes.root}
-              // onChange={onChange}
               onBlur={onBlur}
               helperText={meta.touched ? meta.error : undefined}
-              // helperText={meta.error && meta.touched}
-              // helperText="Error"
-              // error={meta.error && meta.touched}
-              // error={params.error}
-              // error={meta.error && true}
               {...params}
             />
           );
@@ -191,8 +143,6 @@ const DateComp = (props) => {
       />
       {/* <FormHelperText>{meta.touched ? meta.error : undefined}</FormHelperText> */}
     </LocalizationProvider>
-    // {/* <FormHelperText>Helper text</FormHelperText> */}
-    // {/* </FormControl> */}
   );
 };
 

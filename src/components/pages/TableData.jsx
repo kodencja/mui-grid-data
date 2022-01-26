@@ -26,7 +26,6 @@ import {
 } from "@mui/material/colors";
 import axios from "axios";
 import datadb from "../fakeDB/datadb.json";
-// import useFetch from "../components/customHooks/useFetch";
 // import ErrorBoundary from "../components/ErrorBoundary";
 import ModalComp from "../ModalComp";
 import useColumns from "../customHooks/useColumns";

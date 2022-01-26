@@ -4,6 +4,8 @@ import { makeStyles } from "@mui/styles";
 import {
   Container,
   Box,
+  Button,
+  Stack,
   TextField,
   FormControlLabel,
   FormControl,
@@ -14,6 +16,7 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import TextFieldComp from "../../components/FormComps/TextFieldComp";
 // import RadioComp from "../../components/FormComps/RadioComp";
 import SelectComp from "../../components/FormComps/SelectComp";
@@ -21,20 +24,40 @@ import { format, parseISO, formatISO } from "date-fns";
 import DateComp from "../../components/FormComps/DateComp";
 import { validate } from "../../functions/validation";
 
-const useStyles = makeStyles({
-  field: {
-    marginTop: 20,
-    marginBottom: 20,
-    display: "block",
-  },
-  title: {
-    fontSize: "22px",
-  },
-});
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // const AddRecord = ({ api_post, baseURLtoDB, loading }) => {
 const AddRecord = ({ apiPropsPost }) => {
+  const matches = useMediaQuery("(min-width: 750px)");
+  const useStyles = makeStyles({
+    marginV: {
+      marginTop: "10px",
+      marginBottom: "10px",
+    },
+    center: {
+      textAlign: "center",
+      justifyContent: "center",
+    },
+    rowBreak: {
+      flexBasis: "100%",
+      height: "0",
+      display: matches ? "flex" : "none",
+    },
+    break: {
+      flexBasis: "100%",
+      height: "0",
+    },
+    rowFlex: {
+      // display: matches ? "flex" : "block",
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+    },
+    title: {
+      fontSize: "22px",
+    },
+  });
+
   const classes = useStyles();
 
   const { api_post, baseURLtoDB, loading } = apiPropsPost;
@@ -49,11 +72,6 @@ const AddRecord = ({ apiPropsPost }) => {
     ),
     // use_by_date: format(new Date(), "Y-MM-dd"),
     // use_by_date: format(new Date(), "dd.MM.Y"),
-    // stooge: "larry",
-    // toppings: [],
-    // sauces: [],
-    // employment: "unemployed",
-    // favCol: "",
   };
 
   const handleOnSubmit = async (values) => {
@@ -68,39 +86,6 @@ const AddRecord = ({ apiPropsPost }) => {
     // await sleep(800);
     window.alert(JSON.stringify(dataSubmit, 0, 2));
   };
-
-  // const validate = (values) => {
-  //   const errors = {};
-  //   // console.log(formData);
-  //   // console.log("VALUES: ");
-  //   // console.log(values);
-  //   // console.log(values.favCol);
-  //   // console.log(Number(values.use_by_date));
-  //   // console.log(values.employed);
-  //   // console.log(values.unemployed);
-  //   if (!values.name) {
-  //     errors.name = "This field is required";
-  //   }
-  //   if (!values.price_netto) {
-  //     errors.price_netto = "This field is required";
-  //   }
-  //   if (values.vat !== 0 && !values.vat) {
-  //     errors.vat = "This field is required";
-  //   }
-  //   if (!values.currency) {
-  //     errors.currency = "This field is required";
-  //   }
-  //   // if (!values.use_by_date || isNaN(values.use_by_date)) {
-  //   // if (!values.use_by_date || Number(values.use_by_date)) {
-  //   if (!values.use_by_date) {
-  //     console.log(values.use_by_date);
-  //     errors.use_by_date = "This field is required";
-  //   }
-  //   // if (values.employment === undefined || !values.employment) {
-  //   //   errors.employment = "Required";
-  //   // }
-  //   return errors;
-  // };
 
   const converseDiscount = (val) => {
     // if (val) return `${Number(val)}%`;
@@ -175,14 +160,8 @@ const AddRecord = ({ apiPropsPost }) => {
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           // <form onSubmit={handleSubmit} className={styles.form}>
           <Box component="form" onSubmit={handleSubmit}>
-            {/* <form
-              onSubmit={handleSubmit}
-              style={{ display: "flex", flexWrap: "wrap" }}
-            > */}
-            {/* <div style={{ display: "flex", flexWrap: "wrap" }}> */}
-            {/* <FormControl> */}
             <div>
-              <div>
+              <div className={classes.rowFlex}>
                 <Field
                   name="name"
                   type="text"
@@ -190,19 +169,7 @@ const AddRecord = ({ apiPropsPost }) => {
                   placeholder="Product name"
                   required
                   component={TextFieldComp}
-                  // style={{ padding: 10 }}
-                  // render={({ input, meta }) => (
-                  //   <div>
-                  //     <label>Bio</label>
-                  //     <textarea {...input} />
-                  //     <TextFieldComp {...input} {...meta} />
-                  //     {meta.touched && meta.error && <span>{meta.error}</span>}
-                  //   </div>
-                  // )}
                 />
-                {/* {meta.error && meta.touched && <span>{meta.error}</span>} */}
-                {/* </div> */}
-                {/* <div> */}
                 <Field
                   name="price_netto"
                   type="number"
@@ -216,26 +183,16 @@ const AddRecord = ({ apiPropsPost }) => {
                 <Field
                   name="discount"
                   type="number"
-                  // type="text"
                   label="Discount"
                   defaultValue={formData.discount}
-                  // pattern={"[0-9]*"}
-                  // inputMode="numeric"
-                  // inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
-                  // min={1}
-                  // max={99}
-                  // step={0.01}
                   sign="%"
-                  // placeholder="Discount"
                   component={TextFieldComp}
                   // parse={checkFloat}
                   // format={checkFloat}
-                  // data={checkFloat}
                   // parse={converseDiscount}
                   // format={converseDiscount}
                 />
-              </div>
-              <div>
+                <div className={classes.break}></div>
                 <Field
                   name="origin"
                   type="text"
@@ -257,93 +214,85 @@ const AddRecord = ({ apiPropsPost }) => {
                   placeholder="Email contact"
                   component={TextFieldComp}
                 />
-                <Field
-                  name="use_by_date"
-                  type="date"
-                  label="Use by date"
-                  // defaultValue={"2002-02-03"}
-                  initialValue={formData.use_by_date}
-                  // subscription={{ touched: true }}
-                  // defaultValue={new Date()}
-                  // value={new Date()}
-                  // value={new Date().setDate(new Date().getDay() + 1)}
-                  // error={true}
-                  // value={formData.date.setMonth(formData.date.getMonth() + 1)}
-                  // value={formData.date.setMonth(+3)}
-                  // value={new Date().setMonth(new Date().getMonth() + 2)}
-                  required
-                  component={DateComp}
-                  // defaultValue={formData.use_by_date}
-                  // min={new Date()}
-                  parse={dateFormating}
-                />
-                {/* </Field> */}
-                {/* <Field
-                  name="use_by_date"
-                  type="date"
-                  label="Use by date"
-                  required
-                  component={TextFieldComp}
-                  // defaultValue={formData.use_by_date}
-                  // min={new Date()}
-                /> */}
               </div>
-              <div>
-                <Field
-                  name="vat"
-                  type="select"
-                  label="VAT"
-                  sign="%"
-                  placeholder="VAT"
-                  component={SelectComp}
-                  options={[0, 5, 8, 23]}
-                  defaultValue={formData.vat}
-                  // parse={checkFloat}
-                />
-                <Field
-                  name="currency"
-                  type="select"
-                  label="Currency"
-                  placeholder="Currency"
-                  component={SelectComp}
-                  options={["EUR", "USD", "GBP", "PLN", "CNY"]}
-                  required
-                />
-                <Field
-                  name="unit"
-                  type="select"
-                  label="Unit"
-                  placeholder="Unit"
-                  component={SelectComp}
-                  options={["kg", "box", "bag", "piece"]}
-                  defaultValue={formData.unit}
-                  required
-                />
-                <Field
-                  name="quality"
-                  type="select"
-                  label="Quality"
-                  placeholder="Quality"
-                  component={SelectComp}
-                  options={["Top", "Medium", "Low"]}
-                  required
-                  // parse={converseQuality}
-                />
-              </div>
-              <div>
-                <button type="submit" disabled={submitting || pristine}>
-                  {loading ? "Submitting" : "Submit"}
-                </button>
-                <button
-                  type="button"
-                  onClick={form.reset}
+              <div className={`${classes.rowBreak} ${classes.marginV}`}></div>
+              <Field
+                name="use_by_date"
+                type="date"
+                label="Use by date"
+                // defaultValue={"2002-02-03"}
+                initialValue={formData.use_by_date}
+                // subscription={{ touched: true }}
+                // defaultValue={new Date()}
+                required
+                component={DateComp}
+                // defaultValue={formData.use_by_date}
+                // min={new Date()}
+                parse={dateFormating}
+              />
+              <Field
+                name="vat"
+                type="select"
+                label="VAT"
+                sign="%"
+                placeholder="VAT"
+                component={SelectComp}
+                options={[0, 5, 8, 23]}
+                defaultValue={formData.vat}
+                // parse={checkFloat}
+              />
+              <Field
+                name="currency"
+                type="select"
+                label="Currency"
+                placeholder="Currency"
+                component={SelectComp}
+                options={["EUR", "USD", "GBP", "PLN", "CNY"]}
+                required
+              />
+              <Field
+                name="unit"
+                type="select"
+                label="Unit"
+                placeholder="Unit"
+                component={SelectComp}
+                options={["kg", "box", "bag", "piece"]}
+                defaultValue={formData.unit}
+                required
+              />
+              <Field
+                name="quality"
+                type="select"
+                label="Quality"
+                placeholder="Quality"
+                component={SelectComp}
+                options={["Top", "Medium", "Low"]}
+                required
+                // parse={converseQuality}
+              />
+              <div className={classes.break}></div>
+              <Stack
+                spacing={2}
+                direction="row"
+                className={classes.marginV + " " + classes.center}
+              >
+                <Button
+                  type="submit"
+                  variant="contained"
                   disabled={submitting || pristine}
                 >
+                  {loading ? "Submitting" : "Submit"}
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={form.reset}
+                  disabled={submitting || pristine}
+                  color="secondary"
+                >
                   Reset
-                </button>
-              </div>
+                </Button>
+              </Stack>
               <pre>{JSON.stringify(values, 0, 2)}</pre>
-              {/* </form> */}
             </div>
           </Box>
         )}
@@ -353,10 +302,3 @@ const AddRecord = ({ apiPropsPost }) => {
 };
 
 export default AddRecord;
-
-/* {({ input, meta }) => (
-<div>
-<DateComp {...input} {...meta} />
-{meta.error && meta.touched && <span>{meta.error}</span>}
-</div>
-)} */

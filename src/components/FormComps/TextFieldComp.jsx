@@ -38,113 +38,23 @@ const useStyles = makeStyles({
     },
   },
   root: {
-    marginTop: "20px",
-    marginBottom: "20px",
-    marginRight: "10px",
-    maxWidth: "200px",
-    // MuiInput-underline": {
-    // "& .MuiInputBase-root": {
-    // },
-    // NOT BAD
+    marginTop: "15px",
+    marginBottom: "15px",
+    marginRight: "15px",
+    maxWidth: (props) => (props.name === "discount" ? "100px" : "200px"),
+    // maxWidth: "200px",
     "& .MuiInputBase-root": {
-      paddingLeft: 10,
-      // width: "50%",
-      // backgroundColor: "#e8f0fe",
-      // backgroundColor: "papayawhip",
-      // color: "orange",
-      // "&::selected": {
-      //   backgroundColor: "lightgreen",
-      //   color: "green",
-      // },
-      "&:focus": {
-        // backgroundColor: "#e8f0fe",
-        // backgroundColor: "lightpink",
-      },
-
-      // "&:after": {
-      //   color: "black",
-      //   backgroundColor: "lightpink",
-      // },
-      // "&:after:selected": {
-      //   // paddingLeft: 10,
-      //   backgroundColor: "lightpink",
-      // },
-      // "& *:selected": {
-      //   backgroundColor: "seashell",
-      // },
+      paddingLeft: 5,
     },
-    "& .MuiInputBase-root:selected": {
-      // color: "pink",
-      // paddingLeft: 10,
-      // backgroundColor: "lightpink",
-      "&:before": {
-        // backgroundColor: "lightpink",
-      },
-    },
-    "& .MuiInputBase-root:focus": {
-      // color: "pink",
-      // paddingLeft: 10,
-      // backgroundColor: "lightpink",
-    },
-    // QUITE GOOD
-    // "& .MuiInput-underline.MuiInputBase-formControl.Mui-focused": {
     "& .MuiInput-underline.Mui-focused": {
-      // backgroundColor: "burlywood",
       backgroundColor: "#e8f0fe",
       color: "darkslategray",
-      // "& input": {
-      //   // color: "black",
-      //   // backgroundColor: "lightpink",
-      // },
-      // "&::before": {
-      // backgroundColor: "lightpink !important",
-      //   color: "black",
-      // },
-      // "&::after": {
-      //   backgroundColor: "lightpink !important",
-      //   color: "black",
-      // },
-      // "& p.MuiFormHelperText-root.MuiFormHelperText-sizeMedium.MuiFormHelperText-filled":
-      // "& p":
-      // {
-      //   backgroundColor: "lightpink !important",
-      // },
     },
-
-    // QUITE GOOD
-    // "& .MuiInput-root.MuiInput-underline.MuiInputBase-colorPrimary": {
-    // "& .MuiInput-underline.MuiInputBase-formControl.Mui-focused": {
-    // "& .MuiInput-underline.MuiInputBase-formControl": {
-    //   color: "green",
-    //   // paddingLeft: 20,
-    //   // backgroundColor: "ivory",
-    //   // "& input:focus": {
-    //   "& input": {
-    //     color: "black",
-    //     // backgroundColor: "lightpink",
-    //   },
-    //   "&:after": {
-    //     color: "black",
-    //     // backgroundColor: "lightpink",
-    //   },
-    //   "&:after:selected": {
-    //     // paddingLeft: 10,
-    //     // backgroundColor: "lightpink",
-    //   },
-    //   "& *:selected": {
-    //     backgroundColor: "lightpink",
-    //   },
-    // },
-    // "& .MuiFormLabel-filled": {
-    // backgroundColor: "lightpink",
-    // },
   },
 });
 
 // const TextFieldComp = ({ label, placeholder }) => {
 const TextFieldComp = (props) => {
-  const classes = useStyles();
-
   const getFieldStyle = () => {
     // sx={name === "discount" ? fieldStyle.dateWidth : undefined}
     if (name === "discount") {
@@ -210,7 +120,7 @@ const TextFieldComp = (props) => {
     meta,
     ...rest
   } = props;
-
+  const classes = useStyles({ name: name });
   // console.log("TextFieldCompo: ");
   // console.log(restInput);
   // console.log(rest); // sign, required
@@ -276,13 +186,15 @@ const TextFieldComp = (props) => {
       className={classes.root}
       // className={getClassRoot}
       // sx={{ marginTop: "50px" }}
-      sx={
-        name === "discount"
-          ? fieldStyle.shorterWidth
-          : restInput.type === "date"
-          ? fieldStyle.highTopMargin
-          : undefined
-      }
+
+      // sx={
+      //   name === "discount"
+      //     ? fieldStyle.shorterWidth
+      //     : restInput.type === "date"
+      //     ? fieldStyle.highTopMargin
+      //     : undefined
+      // }
+
       // sx={getFieldStyle()}
       // sx={fieldStyle.dateWidth}
       // style={{ "&:after": { paddingLeft: "20px" } }}
