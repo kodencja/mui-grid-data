@@ -47,7 +47,7 @@ const useStyles = makeStyles({
 const DateComp = (props) => {
   const classes = useStyles();
 
-  console.log(props);
+  // console.log(props);
   // console.log(props.input.value);
   // console.log(props.input.restInput);
   // console.log(props.rest);
@@ -59,17 +59,17 @@ const DateComp = (props) => {
   } = props;
 
   // console.log("DateComp: ");
-  console.log(restInput); // {checked: undefined, type: 'date', onFocus: ƒ}
-  console.log(rest); // children: undefined,   label: "Use by date",   render: undefined,   required: true
+  // console.log(restInput); // {checked: undefined, type: 'date', onFocus: ƒ}
+  // console.log(rest); // children: undefined,   label: "Use by date",   render: undefined,   required: true
   // console.log(rest.value);
   // console.log(value);
   // console.log(onBlur);
   // console.log(meta);
-  console.log("meta.error: ");
-  console.log(meta.error);
+  // console.log("meta.error: ");
+  // console.log(meta.error);
   // console.log(meta.error && true);
-  console.log("meta.touched:");
-  console.log(meta.touched);
+  // console.log("meta.touched:");
+  // console.log(meta.touched);
 
   function addDays(date, days) {
     var result = new Date(date);
@@ -85,6 +85,9 @@ const DateComp = (props) => {
     <LocalizationProvider
       dateAdapter={AdapterDateFns}
       className={classes.datePicker}
+      // onBlur={onBlur}
+      // helperText={meta.touched ? meta.error : undefined}
+
       // error={meta.error && meta.touched}
       // onChange={onChange}
       // onBlur={onBlur}
@@ -116,7 +119,8 @@ const DateComp = (props) => {
         onChange={onChange}
         required={rest.required}
         type={restInput.type}
-        minDate={new Date().setDate(new Date().getDate() + 1)}
+        minDate={rest.min}
+        // minDate={new Date().setDate(new Date().getDate() + 1)}
         // style={{
         //   backgroundColor: "coral",
         //   ".MuiCalendarPicker-root": { backgroundColor: colors.grey[300] },
@@ -128,7 +132,7 @@ const DateComp = (props) => {
         // }}
         inputFormat="yyyy-MM-dd"
         renderInput={(params) => {
-          console.log(params);
+          // console.log(params);
           // params.error = meta.error && true;
           params.error = meta.error && meta.touched;
           return (

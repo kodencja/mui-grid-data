@@ -16,13 +16,15 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import { list_of_countries } from "../../constants/countries";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TextFieldComp from "../../components/FormComps/TextFieldComp";
 // import RadioComp from "../../components/FormComps/RadioComp";
 import SelectComp from "../../components/FormComps/SelectComp";
 import { format, parseISO, formatISO } from "date-fns";
 import DateComp from "../../components/FormComps/DateComp";
-import { validate } from "../../functions/validation";
+import { escapeHTMLentities } from "../../functions/validation/escapeHTMLent";
+import { validate } from "../../functions/validation/validation";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -66,91 +68,55 @@ const AddRecord = ({ apiPropsPost }) => {
     discount: 0,
     vat: 0,
     unit: "kg",
-    use_by_date: format(
-      new Date().setDate(new Date().getDate() + 1),
-      "Y-MM-dd"
-    ),
-    // use_by_date: format(new Date(), "Y-MM-dd"),
+    // use_by_date: format(new Date().setDate(new Date().getDate()), "Y-MM-dd"),
+    use_by_date: format(new Date(), "Y-MM-dd"),
     // use_by_date: format(new Date(), "dd.MM.Y"),
   };
 
   const handleOnSubmit = async (values) => {
     const dataSubmit = { ...values };
     console.log(values);
-    dataSubmit.discount = parseFloat(dataSubmit.discount);
-    // dataSubmit.discount = parseFloat(dataSubmit.discount) / 100;
-    // dataSubmit.price_netto = parseFloat(dataSubmit.price_netto);
-    // dataSubmit.vat = parseFloat(dataSubmit.vat);
+    if (!dataSubmit.discount || dataSubmit.discount === "0") {
+      dataSubmit.discount = 0;
+    }
+    console.log("dataSubmit");
     console.log(dataSubmit);
-    await api_post(baseURLtoDB, dataSubmit);
+
+    const dataNoHTML = await escapeHTMLentities(dataSubmit);
+    console.log("dataNoHTML");
+    console.log(dataNoHTML);
+    // await api_post(baseURLtoDB, dataSubmit);
     // await sleep(800);
     window.alert(JSON.stringify(dataSubmit, 0, 2));
   };
 
-  const converseDiscount = (val) => {
-    // if (val) return `${Number(val)}%`;
-    console.log(val);
-    // if (val === "top") return "T";
-    // else if (val === "medium") return "M";
-    // else if (val === "low") return "L";
-    // else return val;
-    // return Number(val) / 10;
-    // return parseFloat(val / 100);
-    return val / 100;
-    // return Number(Number(val) / 10);
-    // return val / 10;
-    // if (!val || val === "0") {
-    //   return val;
-    // } else {
-    //   return Number(val) * 10;
-    // }
-
-    // return parseFloat((Number(val) / 100).toFixed(2));
+  const checkInt = (val, prevVal) => {
+    if (!val || Number(val === 0)) {
+      // console.log("!val Int");
+      return Number(val);
+    } else {
+      return parseInt(val);
+    }
   };
 
-  const checkFloat = (val, prevVal) => {
-    // console.log(val);
-    // console.log(isNaN(val));
-    // console.log(prevVal);
-    // console.log(isNaN(prevVal));
-    // if (!prevVal || prevVal === "0") {
-    // if (val && isNaN(prevVal)) {
-    //   return val;
-    // } else {
-    //   console.log("ELSE");
-    //   // return parseFloat(val * 100);
-    //   return prevVal + val * 100;
-    // }
-    // return val;
-    // return val / 100;
-    if (!isNaN(val)) {
+  const checkFloat = (val) => {
+    if (!val || val === "0") {
+      // console.log("!val Float");
+      return val;
+    } else {
       return parseFloat(val);
-    } else return val;
+    }
   };
 
   const dateFormating = (val) => {
-    return format(new Date(val), "Y-MM-dd");
-  };
-
-  const checkInteger = (val) => {
-    // console.log("val: ", val);
-    if (!val || val === "0") {
-      return val;
-    } else {
-      return Number(val);
+    if (val) {
+      return format(new Date(val), "Y-MM-dd");
     }
   };
 
   return (
     <Container>
       <div className={classes.title}>Add product to database</div>
-      <a
-        href="https://final-form.org/react"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Read Docs
-      </a>
       <Form
         onSubmit={handleOnSubmit}
         initialValues={{
@@ -158,7 +124,6 @@ const AddRecord = ({ apiPropsPost }) => {
         }}
         validate={validate}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
-          // <form onSubmit={handleSubmit} className={styles.form}>
           <Box component="form" onSubmit={handleSubmit}>
             <div>
               <div className={classes.rowFlex}>
@@ -187,19 +152,9 @@ const AddRecord = ({ apiPropsPost }) => {
                   defaultValue={formData.discount}
                   sign="%"
                   component={TextFieldComp}
-                  // parse={checkFloat}
-                  // format={checkFloat}
-                  // parse={converseDiscount}
-                  // format={converseDiscount}
+                  parse={checkInt}
                 />
                 <div className={classes.break}></div>
-                <Field
-                  name="origin"
-                  type="text"
-                  label="Country of origin"
-                  placeholder="Country of origin"
-                  component={TextFieldComp}
-                />
                 <Field
                   name="producer"
                   type="text"
@@ -217,17 +172,21 @@ const AddRecord = ({ apiPropsPost }) => {
               </div>
               <div className={`${classes.rowBreak} ${classes.marginV}`}></div>
               <Field
+                name="origin"
+                type="text"
+                label="Origin"
+                placeholder="Origin"
+                component={SelectComp}
+                options={list_of_countries}
+              />
+              <Field
                 name="use_by_date"
                 type="date"
                 label="Use by date"
-                // defaultValue={"2002-02-03"}
                 initialValue={formData.use_by_date}
-                // subscription={{ touched: true }}
-                // defaultValue={new Date()}
                 required
                 component={DateComp}
-                // defaultValue={formData.use_by_date}
-                // min={new Date()}
+                min={new Date()}
                 parse={dateFormating}
               />
               <Field
@@ -239,7 +198,7 @@ const AddRecord = ({ apiPropsPost }) => {
                 component={SelectComp}
                 options={[0, 5, 8, 23]}
                 defaultValue={formData.vat}
-                // parse={checkFloat}
+                parse={checkFloat}
               />
               <Field
                 name="currency"
@@ -268,7 +227,6 @@ const AddRecord = ({ apiPropsPost }) => {
                 component={SelectComp}
                 options={["Top", "Medium", "Low"]}
                 required
-                // parse={converseQuality}
               />
               <div className={classes.break}></div>
               <Stack

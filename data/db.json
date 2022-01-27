@@ -21055,6 +21055,20 @@
       "currency": "PLN",
       "quality": "M",
       "id": 1504
+    },
+    {
+      "discount": 12,
+      "vat": 0,
+      "unit": "kg",
+      "use_by_date": "2022-01-29",
+      "name": "Wine Amaragio",
+      "price_netto": 123.2,
+      "origin": "Italy",
+      "producer": "Vino Veritas",
+      "email_contact": "veritas@vino.it",
+      "currency": "EUR",
+      "quality": "T",
+      "id": 1505
     }
   ]
 }

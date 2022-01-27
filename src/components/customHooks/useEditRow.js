@@ -2,6 +2,7 @@ import React, {useState, useRef, useEffect} from 'react';
   import {list_of_countries} from '../../constants/countries';
   import {currencies, units, discounts, vat, qualities} from '../../constants/array_in_columns';
 import { format, parseISO, formatISO } from "date-fns";
+import { validateEmail } from '../../functions/validation/validateEmail';
 
 
 const useEditRow = (api_put, baseURLtoDB) => {
@@ -107,20 +108,7 @@ tomorrow.setDate(tomorrow.getDate() + 1);
       else return date.valueOf() < tomorrow.valueOf();
     }
 
-    function validateEmail(email) {
-      const re =
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        const reg = 
-        /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        console.log('validateEmail:');
-        const reg_email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-        var rege = /\S+@\S+\.\S+/;
-        console.log(reg.test(String(email).toLowerCase()));
-      return reg.test(String(email).toLowerCase());
-      // return reg_email.test(email);
-      // return rege.test(email);
-      // return rege.test(String(email));
-    }
+
    
     // console.log(editedIds);
     const getUpdatedRowObj = () => {

@@ -124,6 +124,8 @@ const TextFieldComp = (props) => {
   // console.log("TextFieldCompo: ");
   // console.log(restInput);
   // console.log(rest); // sign, required
+  // console.log("meta.error");
+  // console.log(name);
   // console.log(meta.error);
   // console.log(meta.touched);
 
