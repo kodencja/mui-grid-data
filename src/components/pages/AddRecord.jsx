@@ -76,8 +76,13 @@ const AddRecord = ({ apiPropsPost }) => {
   const handleOnSubmit = async (values) => {
     const dataSubmit = { ...values };
     console.log(values);
+
+    // escape from '0' as string to '0' as a number
     if (!dataSubmit.discount || dataSubmit.discount === "0") {
       dataSubmit.discount = 0;
+    }
+    if (!dataSubmit.price_netto || dataSubmit.price_netto === "0") {
+      dataSubmit.price_netto = 0;
     }
     console.log("dataSubmit");
     console.log(dataSubmit);
@@ -85,12 +90,12 @@ const AddRecord = ({ apiPropsPost }) => {
     const dataNoHTML = await escapeHTMLentities(dataSubmit);
     console.log("dataNoHTML");
     console.log(dataNoHTML);
-    // await api_post(baseURLtoDB, dataSubmit);
+    await api_post(baseURLtoDB, dataSubmit);
     // await sleep(800);
     window.alert(JSON.stringify(dataSubmit, 0, 2));
   };
 
-  const checkInt = (val, prevVal) => {
+  const checkInt = (val) => {
     if (!val || Number(val === 0)) {
       // console.log("!val Int");
       return Number(val);
@@ -250,7 +255,6 @@ const AddRecord = ({ apiPropsPost }) => {
                   Reset
                 </Button>
               </Stack>
-              <pre>{JSON.stringify(values, 0, 2)}</pre>
             </div>
           </Box>
         )}
