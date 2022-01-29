@@ -3,13 +3,13 @@
     {
       "id": 1,
       "name": "Puree - Blackcurrant",
-      "price_netto": 266.49,
+      "price_netto": 270.49,
       "discount": 25,
-      "vat": 0.08,
+      "vat": 0,
       "currency": "EUR",
       "unit": "box",
       "quality": "M",
-      "use_by_date": "2022-06-06",
+      "use_by_date": "2022-01-30",
       "origin": "United Kingdom",
       "producer": "Langworth, Grady and Anderson",
       "email_contact": "rtidey0@bigcartel.com"
@@ -21069,6 +21069,20 @@
       "currency": "EUR",
       "quality": "T",
       "id": 1505
+    },
+    {
+      "discount": 0,
+      "vat": 0,
+      "unit": "box",
+      "use_by_date": "2022-02-04",
+      "price_netto": 0.1,
+      "name": "banany",
+      "producer": "Banana Compo",
+      "email_contact": "bananaviva@op.pl",
+      "origin": "Bahamas",
+      "currency": "USD",
+      "quality": "T",
+      "id": 1506
     }
   ]
 }

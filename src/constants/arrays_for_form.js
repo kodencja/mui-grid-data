@@ -21,9 +21,9 @@ export const requiredFieldsNames = [
   export const numberTypeFields = ["price_netto", "discount", "vat"];
   
   // arrays according to the checking function by validator
-  export const forAscii = ['name','producer'];
+  export const forAscii = ['name'];
   export const forEmail = ["email_contact"];
-  export const forAlpha = ["quality", "currency", "unit", "origin"];
+  export const forAlpha = ["quality", "currency", "unit", "origin", 'producer'];
   // const forFloat = ["price_netto", "vat"];
   // const forInt = ["discount"];
 

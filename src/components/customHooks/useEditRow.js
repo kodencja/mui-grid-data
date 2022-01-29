@@ -3,6 +3,7 @@ import React, {useState, useRef, useEffect} from 'react';
   import {currencies, units, discounts, vat, qualities} from '../../constants/array_in_columns';
 import { format, parseISO, formatISO } from "date-fns";
 import { validateEmail } from '../../functions/validation/validateEmail';
+import { isDaysAhead } from '../../functions/validation/isDaysAhead';
 
 
 const useEditRow = (api_put, baseURLtoDB) => {
@@ -83,32 +84,6 @@ console.log(rowObj);
 console.log(prev_id.current);
 // console.log(rowObj.discount);
 
-    const isTwoDaysAhead = (date) => {
-    const today = new Date();
-const tomorrow = new Date(today);
-// console.log(tomorrow.valueOf());
-tomorrow.setDate(tomorrow.getDate() + 1);
-// console.log(today.valueOf());
-// console.log(tomorrow.valueOf());
-// console.log(tomorrow);
-// console.log(date.valueOf());
-// console.log(date);
-
-      // console.log(new Date(date).valueOf());
-
-      // const dayForward = new Date().setDate(new Date().getDate() + 1);
-      // const dayForward = new Date().setDate(new Date().getDay() + 1);
-      // console.log(new Date().setDate(new Date().getDate() + 1));
-      // console.log(dayForward);
-      // console.log(isNaN(new Date(date).valueOf()));
-      if(isNaN(new Date(date).valueOf())) return true;
-      // else return new Date(date).valueOf() < monthForward.valueOf();
-      // else return new Date(date).valueOf() < dayForward.valueOf();
-      // else return date.valueOf() < dayForward.valueOf();
-      else return date.valueOf() < tomorrow.valueOf();
-    }
-
-
    
     // console.log(editedIds);
     const getUpdatedRowObj = () => {
@@ -177,6 +152,8 @@ tomorrow.setDate(tomorrow.getDate() + 1);
         rowObj.name = {...rowObj.name, error: true };
         modelChecked[editedIds[0]] = rowObj;
         setError(true);
+        console.log("error1");
+        console.log(error);
         // return;
         // return false;
         // setEditRowData({});
@@ -204,7 +181,7 @@ tomorrow.setDate(tomorrow.getDate() + 1);
         // return;
         setError(true);
       } 
-      if(!rowObj.use_by_date.value || isTwoDaysAhead(rowObj.use_by_date.value)){
+      if(!rowObj.use_by_date.value || isDaysAhead(rowObj.use_by_date.value, 2)){
         rowObj.use_by_date = {...rowObj.use_by_date, error: true };
         // rowObj = {...rowObj, price_netto: {...value,} };
         // console.log('rowObj_2');
@@ -252,6 +229,8 @@ tomorrow.setDate(tomorrow.getDate() + 1);
         setError(true);
       } 
       if(!error) {
+        console.log("error2");
+        console.log(error);
         console.log("OKAY");
         setEditRowData({ id: Number(editedIds[0]), ...getUpdatedRowObj() });
 
@@ -263,6 +242,9 @@ tomorrow.setDate(tomorrow.getDate() + 1);
       // setEditRowData({ id: Number(editedIds[0]), ...getUpdatedRowObj() });
       
     }
+
+    console.log("error3");
+        console.log(error);
     // setEditRowsModel(rowObj);
     setEditRowsModel(modelChecked);
     // setEditRowsModel(model);
