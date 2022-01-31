@@ -367,3 +367,19 @@ const TableData = () => {
 };
 
 export default TableData;
+
+/*
+
+      "id": 1,
+      "name": "Puree - Blackcurrant",
+      "price_netto": 110.49,
+      "discount": 20,
+      "vat": 0.05,
+      "currency": "EUR",
+      "unit": "box",
+      "quality": "M",
+      "use_by_date": "2022-02-18",
+      "origin": "Canada",
+      "producer": "Langworth, Grady and Anderson",
+      "email_contact": "rtidey0@bigcartel.com"
+*/

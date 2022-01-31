@@ -3,30 +3,19 @@ import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import ModalComp from "../../components/ModalComp";
 import { Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import useColumns from "../../components/customHooks/useColumns";
-import useEditRow from "../../components/customHooks/useEditRow";
+import useColumns from "../customHooks/useColumns";
+import useEditRow from "../customHooks/useEditRow";
 import { handleDeleteRow } from "../../functions/modalFn";
 import { modalStyle } from "../../styles/modalStyle";
-// import { dataTableStyle } from "../components/styles/dataTableStyle";
 import { useStylesData } from "../../styles/useStylesData";
 
 // const defaultTheme = createTheme();
 
 const DataTable = ({ rows, apiProps }) => {
   const { baseURLtoDB, api_put, api_del } = apiProps;
-  // const DataTable = ({ rows, api_put, api_del, baseURLtoDB }) => {
-  // const DataTable = ({ rows, dataTableProps }) => {
-  // const {
-  //   // dispatch,
-  //   // finalTextResponse,
-  //   baseURLtoDB,
-  //   currentURLtoDB,
-  //   apiMethod,
-  // } = dataTableProps;
 
   const classes = useStylesData();
-  // const classes = useStylesData();
-  // const classes = dataTableStyle();
+
   const [pageSize, setPageSize] = useState(10);
 
   const matches = useMediaQuery("(max-height:500px)");
@@ -39,9 +28,6 @@ const DataTable = ({ rows, apiProps }) => {
 
   const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
     useEditRow(api_put, baseURLtoDB);
-  // const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
-  //   useEditRow(dispatch, baseURLtoDB, currentURLtoDB, apiMethod);
-  // useEditRow(dispatch, baseURLtoDB);
 
   const handleOpen = (params, flag) => {
     console.log("flag");
@@ -83,7 +69,6 @@ const DataTable = ({ rows, apiProps }) => {
   return (
     <div
       style={{
-        // height: "80vh",
         height: "calc(80vh - 5vmin)",
         maxHeight: "85vh",
         width: "100%",
@@ -102,6 +87,7 @@ const DataTable = ({ rows, apiProps }) => {
         rows={rows}
         columns={columns}
         pagination
+        scrollbarSize={10}
         pageSize={pageSize}
         rowsPerPageOptions={[5, 10, 25, 50, 100]}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}

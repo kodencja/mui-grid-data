@@ -1,5 +1,6 @@
 import React, { useMemo, useRef, useState, useReducer, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import DateData from "./components/pages/DateData";
 import Layout from "./components/Layout";
 import "./App.css";
 import DataTable from "./components/pages/DataTable";
@@ -105,20 +106,21 @@ const apiPropsPost = {baseURLtoDB, api_post, loading};
                 loading ? <CircularProgress /> :
                 // data.length <= 0 ? <CircularProgress /> :
                 <DataTable
-                  // columns={columns}
+                //   // columns={columns}
                   rows={rows}
                   apiProps={apiProps}
-                  // api_put={api_put}
-                  // api_del={api_del}
-                  // baseURLtoDB={baseURLtoDB}
+                //   // api_put={api_put}
+                //   // api_del={api_del}
+                //   // baseURLtoDB={baseURLtoDB}
 
-                  // rows={data}
-                  // dataTableProps={dataTableProps}
-                  // modalOpen={modalOpen}
-                  // handleDelete={handleDeleteClick}
-                  // handleClose={handleClose}
-                  // params={row_params}
+                //   // rows={data}
+                //   // dataTableProps={dataTableProps}
+                //   // modalOpen={modalOpen}
+                //   // handleDelete={handleDeleteClick}
+                //   // handleClose={handleClose}
+                //   // params={row_params}
                 />
+                // <DateData />
               }
             ></Route>
             {/* <Route path="/data" element={<TableData />}></Route> */}

@@ -1,17 +1,48 @@
-import validator from "validator";
-import { checkAndValidate } from "./checkAndValidate";
 
-export const validate = (values) => {
-    const anyError = {};
-    // console.log("values1");
-    // console.log(values);
+import { checkType } from "./checkType";
+import { forDate, requiredFieldsNames } from "../../constants/data_types_for_form_validation";
+import { chooseValidationForStringsOrNumbers } from "./validationForStringsOrNumbers";
+import { checkIfPropFit } from "./checkIfPropFit";
 
-    if(isNaN(values.discount) || !values.discount) {
-      // console.log("isNaN in validate");
-      values.discount = 0;
+export const validate = (values, fromEditForm = false) => {
+  console.log("values2");
+  console.log(values);
+  let errors = {};
+
+  // REQUIRED FIELDS from Add Form
+  if(!fromEditForm){
+    for (let eachProp of requiredFieldsNames) {
+      if (!values[eachProp] && values[eachProp] !== 0) {
+        errors[eachProp] = "This field is required";
+      }
     }
-   const errors = checkAndValidate(values);
-   anyError.errors = errors;
-    console.log(anyError.errors);
-    return anyError.errors;
-  };
+  }
+
+  // ALL FIELDS CURRENTLY USED / TYPED both from ADD and EDIT FROM
+  let valNoSpaces;
+  for (let eachProp in values) {
+    if((values && values[eachProp]) || values[eachProp] === 0){
+      if(checkIfPropFit(eachProp, forDate)){
+        valNoSpaces =  values[eachProp];
+      }
+      else {
+       valNoSpaces = values[eachProp].toString().split(" ").join("");
+      } 
+    }
+
+      
+    // const valNoSpaces = validator.escape(
+    //   values[eachProp].toString().split(" ").join(""));
+    if (!errors[eachProp]) {
+    errors[eachProp] = chooseValidationForStringsOrNumbers(valNoSpaces, eachProp);
+    }
+    // CHECK TYPE OF THE VALUES (if no errors pointed to them so far)
+    if (!errors[eachProp]) {
+      errors[eachProp] = checkType(valNoSpaces, eachProp);
+    }
+  }
+  console.log("errors");
+  console.log(errors);
+
+  return errors;
+};

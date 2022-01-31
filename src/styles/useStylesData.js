@@ -19,10 +19,8 @@ const defaultTheme = createTheme();
         //   ".MuiDataGrid-root": { height: "auto !important" },
         // },
         return { headersAndCells: {
-          // autoHeight: "true",
-          // fontWeight: 700,
-          // height: "400px",
-          // headerHeight: "300px",
+   
+
           "& .MuiDataGrid-columnHeaderTitle": {
             // "& .data-grid-header": {
             fontWeight: 700,
@@ -34,6 +32,7 @@ const defaultTheme = createTheme();
             lineHeight: "1rem",
             whiteSpace: "normal",
             wordWrap: "break-word",
+            // overflow: "scroll",
             overflow: "visible",
             // flexWrap: "wrap",
           },
@@ -44,7 +43,7 @@ const defaultTheme = createTheme();
             // lineHeight: "1rem",
             // whiteSpace: "normal !important",
             // wordWrap: "break-word !important",
-            // overflow: "visible !important",
+            // overflowX: "visible !important",
           },
           '& .Mui-error': {
             // backgroundColor: `rgba(12, 12, 12, 0.7)`,

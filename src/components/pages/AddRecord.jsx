@@ -99,6 +99,8 @@ const AddRecord = ({ apiPropsPost }) => {
     if (!val || Number(val === 0)) {
       // console.log("!val Int");
       return Number(val);
+    } else if (isNaN(val) || !val) {
+      val = 0;
     } else {
       return parseInt(val);
     }
@@ -255,6 +257,7 @@ const AddRecord = ({ apiPropsPost }) => {
                   Reset
                 </Button>
               </Stack>
+              <pre>{JSON.stringify(values, 0, 2)}</pre>
             </div>
           </Box>
         )}
