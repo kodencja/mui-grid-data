@@ -1,14 +1,7 @@
-import axios from "axios";
-import {
-  FETCH_DATA_SUCCESS,
-  FETCH_REQUEST,
-  REQUEST_COMPLETE,
-  FETCH_DATA_FAILURE,
-  FETCH_DATA_REQUEST,
-  PUT_DATA_SUCCESS,
-  DEL_ROWS_SUCCESS,
-} from "./apiTypes";
-import { initState } from "./apiReducer";
+import axios from 'axios';
+import { FETCH_DATA_SUCCESS, FETCH_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS } from "./apiTypes";
+import {initApiState} from './apiReducer';
+
 
 export const apiRequest = () => {
   return {
@@ -114,12 +107,11 @@ export const putData = (url, sendData) => {
           throw new Error("Could not amend data from that resource!");
           // console.log("Could not fetch data from that resource!");
         }
-        console.log("Amend");
-        // another option instead of fetching amended data by dispatch(fetchData(initState.baseURLtoDB) is to change the fetched data stored in 'data' array
-        dispatch(putDataSuccess(res.data));
-      })
-      // .then((res) => dispatch(fetchData(initState.baseURLtoDB)))
-      .catch((error) => {
+            console.log("Amend")
+            dispatch(putDataSuccess(res.data));
+    })
+    // .then((res) => dispatch(fetchData(initApiState.baseURLtoDB)))
+    .catch(error => {
         console.log("Error");
         console.log(error.message);
         dispatch(apiDataFailure(error.message));
@@ -191,11 +183,11 @@ export const deleteData = (url) => {
           throw new Error("Could not fetch data from that resource!");
           // console.log("Could not fetch data from that resource!");
         }
-        console.log("Delete");
-        // dispatch(deleteRowsSuccess());
-      })
-      .then((res) => dispatch(fetchData(initState.baseURLtoDB)))
-      .catch((error) => {
+            console.log("Post")
+            // dispatch(deleteDataSuccess());
+    })
+    .then((res) => dispatch(fetchData(initApiState.baseURLtoDB)))
+    .catch(error => {
         console.log("Error");
         console.log(error.message);
         dispatch(apiDataFailure(error.message));

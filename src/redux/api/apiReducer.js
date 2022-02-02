@@ -1,12 +1,12 @@
 import { FETCH_DATA_SUCCESS, REQUEST_COMPLETE, FETCH_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, DEL_ROWS_SUCCESS, POST_DATA_SUCCESS, DEL_DATA_SUCCESS } from "./apiTypes";
 
-export const initState = { baseURLtoDB: 'http://localhost:8000/grocery', currentURLtoDB: '', loading: false, data: [], error: ''};
+export const initApiState = { baseURLtoDB: 'http://localhost:8000/grocery', currentURLtoDB: '', loading: false, data: [], error: ''};
 
-const dataReducer = (state = initState, action) => {
-    // console.log("Loading in apiReducer:");
-    // console.log(state.loading);
-    // console.log("action.type:");
-    // console.log(action.type);
+const apiReducer = (state = initApiState, action) => {
+    console.log("Loading in apiReducer:");
+    console.log(state.loading);
+    console.log("action.type:");
+    console.log(action.type);
     switch(action.type){
         case FETCH_REQUEST: return {...state, loading: true};
         // case REQUEST_COMPLETE: return {...state, loading: false};
@@ -44,4 +44,4 @@ const dataReducer = (state = initState, action) => {
     }
 }
 
-export default dataReducer;
+export default apiReducer;

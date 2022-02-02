@@ -23,7 +23,11 @@ import SaveIcon from "@mui/icons-material/Save";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { connect } from "react-redux";
 // import {fetchData} from "./redux/api/apiActions";
+<<<<<<< HEAD
 import {fetchData, putData, postData, deleteData, deleteRows} from "./redux/api";
+=======
+import {fetchData, putData, postData, deleteData, set_if_to_del_row, set_row_params} from "./redux";
+>>>>>>> redux
 import CircularProgress from '@mui/material/CircularProgress';
 import AddRecord from "./components/pages/AddRecord";
 import About from "./components/pages/About";
@@ -33,12 +37,17 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { Button, Typography } from "@mui/material";
 
 
-// function App({data_db, fetchData, api_put, api_post, api_del}) {
+// function App({api_db, fetchData, api_put, api_post, api_del}) {
 function App(props) {
   const isMountedRef = useRef(true);
   // const [state, dispatch] = useReducer(reducer, initState);
+<<<<<<< HEAD
   const {data_db: { data, loading, currentURLtoDB, baseURLtoDB, error }, fetchData, api_put, api_post, api_del, rows_del} = props;
   // const { data, loading, currentURLtoDB, baseURLtoDB, error } = data_db;
+=======
+  const {api_db: { data, loading, currentURLtoDB, baseURLtoDB, error }, grid_actions: {row_params, del_to_row}, fetchData, api_put, api_post, api_del, set_if_to_del_row, set_row_params} = props;
+  // const { data, loading, currentURLtoDB, baseURLtoDB, error } = api_db;
+>>>>>>> redux
 
   // const [modalOpen, setModalOpen] = useState(false);
   // const [row_params, set_row_params] = useState({});
@@ -136,7 +145,8 @@ const apiPropsPost = {baseURLtoDB, api_post, loading};
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    data_db: state.data_from_db
+    api_db: state.api_db,
+    grid_actions: state.grid_actions
   }
 };
 
@@ -146,7 +156,12 @@ const mapDispatchToProps = (dispatch) => {
     api_put: (url, sendData) => dispatch(putData(url, sendData)),
     api_post: (url, sendData) => dispatch(postData(url, sendData)),
     api_del: (url) => dispatch(deleteData(url)),
+<<<<<<< HEAD
     rows_del: (url) => dispatch(deleteRows(url)),
+=======
+    set_if_to_del_row: (flag) => dispatch(set_if_to_del_row(flag)),
+    set_row_params: (params) => dispatch(set_row_params(params))
+>>>>>>> redux
   }
 }
 
