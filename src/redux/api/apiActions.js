@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_DATA_SUCCESS, FETCH_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS } from "./apiTypes";
+import { FETCH_DATA_SUCCESS, FETCH_REQUEST, REQUEST_COMPLETE, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, DEL_ROWS_SUCCESS } from "./apiTypes";
 import {initApiState} from './apiReducer';
 
 
