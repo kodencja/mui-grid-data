@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { FETCH_DATA_SUCCESS, FETCH_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS } from "./apiTypes";
-import {initState} from './apiReducer';
+import {initApiState} from './apiReducer';
 
 
 export const apiRequest = () => {
@@ -105,7 +105,7 @@ return (dispatch) => {
             console.log("Amend")
             dispatch(putDataSuccess(res.data));
     })
-    // .then((res) => dispatch(fetchData(initState.baseURLtoDB)))
+    // .then((res) => dispatch(fetchData(initApiState.baseURLtoDB)))
     .catch(error => {
         console.log("Error");
         console.log(error.message);
@@ -187,7 +187,7 @@ return (dispatch) => {
             console.log("Post")
             // dispatch(deleteDataSuccess());
     })
-    .then((res) => dispatch(fetchData(initState.baseURLtoDB)))
+    .then((res) => dispatch(fetchData(initApiState.baseURLtoDB)))
     .catch(error => {
         console.log("Error");
         console.log(error.message);
