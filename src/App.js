@@ -23,7 +23,7 @@ import SaveIcon from "@mui/icons-material/Save";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { connect } from "react-redux";
 // import {fetchData} from "./redux/api/apiActions";
-import {fetchData, putData, postData, deleteData} from "./redux/api";
+import {fetchData, putData, postData, deleteData, deleteRows} from "./redux/api";
 import CircularProgress from '@mui/material/CircularProgress';
 import AddRecord from "./components/pages/AddRecord";
 import About from "./components/pages/About";
@@ -37,7 +37,7 @@ import { Button, Typography } from "@mui/material";
 function App(props) {
   const isMountedRef = useRef(true);
   // const [state, dispatch] = useReducer(reducer, initState);
-  const {data_db: { data, loading, currentURLtoDB, baseURLtoDB, error }, fetchData, api_put, api_post, api_del} = props;
+  const {data_db: { data, loading, currentURLtoDB, baseURLtoDB, error }, fetchData, api_put, api_post, api_del, rows_del} = props;
   // const { data, loading, currentURLtoDB, baseURLtoDB, error } = data_db;
 
   // const [modalOpen, setModalOpen] = useState(false);
@@ -86,7 +86,7 @@ function App(props) {
 // const dataTableProps = { modalOpen, handleDeleteClick, handleClose, row_params, dispatch, finalTextResponse, baseURLtoDB };
 // const dataTableProps = { baseURLtoDB, currentURLtoDB, apiMethod };
 // const dataTableProps = { finalTextResponse, baseURLtoDB, currentURLtoDB, apiMethod };
-const apiProps = {baseURLtoDB, api_put, api_del};
+const apiProps = {baseURLtoDB, api_put, api_del, rows_del};
 const apiPropsPost = {baseURLtoDB, api_post, loading};
 
 
@@ -146,6 +146,7 @@ const mapDispatchToProps = (dispatch) => {
     api_put: (url, sendData) => dispatch(putData(url, sendData)),
     api_post: (url, sendData) => dispatch(postData(url, sendData)),
     api_del: (url) => dispatch(deleteData(url)),
+    rows_del: (url) => dispatch(deleteRows(url)),
   }
 }
 

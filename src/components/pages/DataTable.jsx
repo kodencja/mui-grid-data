@@ -1,34 +1,71 @@
-import React, { useState, useCallback, useRef, useMemo } from "react";
-import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import React, { useState, useEffect, useRef, useMemo } from "react";
+import {
+  DataGrid,
+  GridToolbar,
+  GridToolbarContainer,
+  GridToolbarColumnsButton,
+  GridToolbarFilterButton,
+  GridToolbarExport,
+  GridToolbarDensitySelector,
+} from "@mui/x-data-grid";
 import ModalComp from "../../components/ModalComp";
-import { Typography } from "@mui/material";
+import { Typography, IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import useColumns from "../customHooks/useColumns";
 import useEditRow from "../customHooks/useEditRow";
 import { handleDeleteRow } from "../../functions/modalFn";
 import { modalStyle } from "../../styles/modalStyle";
 import { useStylesData } from "../../styles/useStylesData";
+import {
+  red,
+  pink,
+  purple,
+  deepPurple,
+  indigo,
+  blue,
+  lightBlue,
+  cyan,
+  teal,
+  green,
+  lightGreen,
+  lime,
+  amber,
+  orange,
+  deepOrange,
+  brown,
+  grey,
+  blueGrey,
+  yellow,
+} from "@mui/material/colors";
 
 // const defaultTheme = createTheme();
 
 const DataTable = ({ rows, apiProps }) => {
-  const { baseURLtoDB, api_put, api_del } = apiProps;
+  const { baseURLtoDB, api_put, api_del, rows_del } = apiProps;
 
   const classes = useStylesData();
 
   const [pageSize, setPageSize] = useState(10);
 
+  const [modalOpen, setModalOpen] = useState(false);
+  const [current_row_params, set_current_row_params] = useState({});
+  const [del_row, set_del_row] = useState(true);
+  const [selectionRow, setSelectionRow] = useState([]);
+
   const matches = useMediaQuery("(max-height:500px)");
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [row_params, set_row_params] = useState({});
-  const [del_row, set_del_row] = useState(true);
+  useEffect(() => {
+    console.log("selectionRow");
+    console.log(selectionRow);
+  }, [selectionRow]);
 
   console.log("DataTable Comp.");
 
   const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
     useEditRow(api_put, baseURLtoDB);
 
+  // przy del_rows nie ma 'params'
   const handleOpen = (params, flag) => {
     console.log("flag");
     console.log(flag);
@@ -37,7 +74,7 @@ const DataTable = ({ rows, apiProps }) => {
     } else {
       set_del_row(false);
     }
-    set_row_params(params);
+    set_current_row_params(params);
     setModalOpen(true);
   };
   const columnsAll = useColumns(handleOpen);
@@ -48,14 +85,52 @@ const DataTable = ({ rows, apiProps }) => {
 
   const handleClose = () => setModalOpen(false);
 
-  const handleDeleteClick = async (e) => {
+  const handleDelete = async (e, multi = false) => {
     e.stopPropagation();
-    handleDeleteRow(row_params, set_row_params);
-    await api_del(`${baseURLtoDB}/${row_params.id}`);
-    // dispatch({ type: api_method, payload: "DELETE" });
-    // dispatch({ type: current_url, payload: `${baseURLtoDB}/${row_params.id}` });
+    console.log("current_row_params");
+    console.log(current_row_params);
+    if (multi) {
+      console.log("MULTI");
+      // handleDeleteRow(current_row_params, set_current_row_params);
+      // await handleDeleteRow(rows, selectionRow);
+      await rows_del(selectionRow);
+      set_current_row_params({});
+    } else {
+      console.log("Single row del");
+      // await api_del(`${baseURLtoDB}/${current_row_params.id}`);
+    }
     handleClose();
   };
+
+  function CustomToolbar() {
+    return (
+      <GridToolbarContainer>
+        <GridToolbarColumnsButton />
+        <GridToolbarFilterButton />
+        <GridToolbarDensitySelector />
+        <GridToolbarExport />
+        <IconButton
+          size="large"
+          edge="start"
+          aria-label="menu"
+          id="basic-button"
+          aria-controls="basic-menu"
+          aria-haspopup="true"
+          // aria-expanded={open ? "true" : undefined}
+          // onClick={(e) => handleDelete(e, true)}
+          onClick={(e) => handleOpen(e, true)}
+          variant="contained"
+          disabled={selectionRow.length > 0 ? false : true}
+          sx={{ color: "warning.main" }}
+          // sx={{ color: selectionRow.length > 0 ? "warning" : grey[500] }}
+          // sx={{ color: blue[700] }}
+          // sx={styles.iconMenu}>
+        >
+          <DeleteIcon />
+        </IconButton>
+      </GridToolbarContainer>
+    );
+  }
 
   const styles = {
     customHeaderCell: {
@@ -91,14 +166,20 @@ const DataTable = ({ rows, apiProps }) => {
         pageSize={pageSize}
         rowsPerPageOptions={[5, 10, 25, 50, 100]}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        checkboxSelection
         editRowsModel={editRowsModel}
         editMode="row"
         onEditRowsModelChange={handleEditRowsModelChange}
         onRowEditCommit={editRowCommit}
         autoHeight={true}
+        checkboxSelection
+        disableSelectionOnClick
+        onSelectionModelChange={(newSelectionModel) => {
+          setSelectionRow(newSelectionModel);
+        }}
+        selectionModel={selectionRow}
         components={{
-          Toolbar: GridToolbar,
+          Toolbar: CustomToolbar,
+          // Toolbar: GridToolbar,
         }}
         getCellClassName={(params) =>
           params.field === "discount_netto"
@@ -124,10 +205,10 @@ const DataTable = ({ rows, apiProps }) => {
       <ModalComp
         del_row={del_row}
         style={modalStyle(matches)}
-        handleDelete={handleDeleteClick}
+        handleDelete={handleDelete}
         handleClose={handleClose}
         modalOpen={modalOpen}
-        params={row_params}
+        params={current_row_params}
       />
       {/* </ErrorBoundary> */}
     </div>

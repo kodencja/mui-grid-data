@@ -19,7 +19,6 @@ import { format } from "date-fns";
 
 // const useColumns = (handleOpen, classes) => {
 const useColumns = (handleOpen) => {
-  const [quality, setQuality] = useState("");
 
   const defaultTheme = createTheme();
   const useStyles = makeStyles(

@@ -31,8 +31,12 @@ const ModalComp = ({
   modalOpen,
   params,
 }) => {
-  // console.log("params:");
-  // console.log(params);
+  console.log("params:");
+  console.log(params);
+  // api: {unstable_eventManager: Ms, state: {…}, instanceId: 5, subscribeEvent: ƒ, publishEvent: ƒ, …}, cellMode: "view", colDef: {width: 100, minWidth: 50, maxWidth: Infinity, hide: false, hideable: true, …}, field: "action", formattedValue: undefined, getValue: ƒ (), hasFocus: false, id: 1502, isEditable: false, row: {discount: 7, vat: 0.08, unit: 'kg', use_by_date: '2022-01-28', name: 'Orange', …}, rowNode: {id: 1502, depth: 0, parent: null, groupingKey: '', groupingField: null}, tabIndex: -1, value: undefined
+
+  console.log("del_row");
+  console.log(del_row); // true or false
 
   const [row_to_del_or_view, set_row_to_del_or_view] = useState([]);
 
@@ -65,7 +69,7 @@ const ModalComp = ({
         row.push([key, value]);
       }
       // console.log(row);
-      row.map((el, ind) => console.log(el));
+      // row.map((el, ind) => console.log(el));
       set_row_to_del_or_view(row);
     }
 
@@ -148,7 +152,7 @@ const ModalComp = ({
             <>
               <Button
                 variant="contained"
-                onClick={handleDelete}
+                onClick={(e) => handleDelete(e)}
                 color="warning"
               >
                 Yes

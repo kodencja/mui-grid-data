@@ -14127,7 +14127,7 @@
       "email_contact": "jvelasquez8@ucla.edu"
     },
     {
-      "id": 10,
+      "id": 1010,
       "name": "Beets - Golden",
       "price_netto": 706.37,
       "discount": 33,
@@ -21043,20 +21043,6 @@
       "email_contact": "vegtur@com.tr"
     },
     {
-      "discount": 10,
-      "vat": 0.08,
-      "unit": "kg",
-      "use_by_date": "2022-02-28",
-      "email_contact": "jablkopol@jb.pl",
-      "producer": "JablkoPol",
-      "name": "Apples",
-      "price_netto": 35.5,
-      "origin": "Poland",
-      "currency": "PLN",
-      "quality": "M",
-      "id": 1504
-    },
-    {
       "discount": 12,
       "vat": 0,
       "unit": "kg",
@@ -21069,20 +21055,6 @@
       "currency": "EUR",
       "quality": "T",
       "id": 1505
-    },
-    {
-      "discount": 0,
-      "vat": 0,
-      "unit": "box",
-      "use_by_date": "2022-02-04",
-      "price_netto": 0.1,
-      "name": "banany",
-      "producer": "Banana Compo",
-      "email_contact": "bananaviva@op.pl",
-      "origin": "Bahamas",
-      "currency": "USD",
-      "quality": "T",
-      "id": 1506
     }
   ]
 }

@@ -35,7 +35,7 @@ const styles = {
   iconMenu: {
     // color: yellow["A100"],
     color: lime[100],
-    // color: purple[50],
+    // color: purple[200],
   },
   textMenu: {
     // color: yellow[50],
