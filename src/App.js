@@ -40,6 +40,7 @@ import { createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Button, Typography } from "@mui/material";
+import { useModalCommands } from "./components/customHooks/useModalCommands";
 
 export const ActionsContext = React.createContext();
 export const ConstsContext = React.createContext();
@@ -69,13 +70,12 @@ function App(props) {
     },
   } = props;
 
-  const [modalOpen, setModalOpen] = useState(false);
-  // const [selectionRow, setSelectionRow] = useState([]);
-
-  // const { data, loading, currentURLtoDB, baseURLtoDB, error } = api_db;
-
   // const [modalOpen, setModalOpen] = useState(false);
-  // const [row_params, set_row_params] = useState({});
+
+  const propsForModal = {modal_action_name, baseURLtoDB, row_params, selection_row, rows_del, api_del, set_row_params, set_modal_action};
+  
+  const {modalOpen, handleClose, handleDelete, handleOpen} = useModalCommands(propsForModal);
+
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -112,39 +112,12 @@ function App(props) {
     }
   }, [modalOpen]);
 
-  // przy del_rows nie ma 'params'
-  const handleOpen = (params, name) => {
-    console.log("name");
-    console.log(name);
-    console.log("params in handleOpen");
-    console.log(params);
-    set_row_params(params);
-    set_modal_action(name);
-    setModalOpen(true);
-  };
 
-  const handleClose = () => setModalOpen(false);
+  // const handleClose = () => {
+  //   handleCloseFn(setModalOpen);
+  // };
 
-  const checkIfMultiDel = () => {
-    if (modal_action_name !== "multi_del") {
-      return false;
-    }
-    return true;
-  };
 
-  const handleDelete = async (e) => {
-    // e.stopPropagation();
-    console.log("handleDelete1");
-
-    if (!checkIfMultiDel()) {
-      await api_del(`${baseURLtoDB}/${row_params.id}`);
-      handleClose();
-      return;
-    }
-    await rows_del(selection_row);
-    handleClose();
-    console.log("handleDelete2");
-  };
 
   const rows = useMemo(() => {
     console.log("rows in App.js");
@@ -157,28 +130,7 @@ function App(props) {
   // }, [data, isMountedRef]);
   // }, [data, vat1]);
 
-  // }, [data && data.length]);
-
-  // const dataTableProps = { modalOpen, handleDeleteClick, handleClose, row_params, dispatch, finalTextResponse, baseURLtoDB };
-  // const dataTableProps = { baseURLtoDB, currentURLtoDB, apiMethod };
-  // const dataTableProps = { finalTextResponse, baseURLtoDB, currentURLtoDB, apiMethod };
-  // const apiProps = {baseURLtoDB, api_put, api_del, rows_del};
-  // const gridActionsProps = {row_params, to_del_row, set_row_params, set_modal_action};
   const apiPropsPost = { baseURLtoDB, api_post, loading };
-
-  const valueActionsContext = useMemo(() => {
-    return {
-      baseURLtoDB,
-      api_put,
-      api_del,
-      rows_del,
-      row_params,
-      modal_action_name,
-      set_row_params,
-      set_modal_action,
-      modalOpen,
-    };
-  }, []);
 
   return (
     <div className="App">
@@ -214,39 +166,21 @@ function App(props) {
             >
               <Layout>
                 <Routes>
-                  {/* <Route exact path="/" element={<DataTable apiRef={apiRef} columns={columns} rows={rows} />} ></Route> */}
                   <Route
                     exact
                     path="/"
-                    // element={<DataTable columns={columns} rows={rows} modalOpen={modalOpen} handleDelete={handleDeleteClick} handleClose={handleClose} params={row_params} />}
                     element={
                       // error ? <Typography>{error.message}</Typography> :
                       loading ? (
                         <CircularProgress />
                       ) : (
-                        // data.length <= 0 ? <CircularProgress /> :
                         <DataTable
-                          //   // columns={columns}
                           rows={rows}
-                          // apiProps={apiProps}
-                          // gridActionsProps={gridActionsProps}
-                          //   // api_put={api_put}
-                          //   // api_del={api_del}
-                          //   // baseURLtoDB={baseURLtoDB}
-
-                          //   // rows={data}
-                          //   // dataTableProps={dataTableProps}
-                          //   // modalOpen={modalOpen}
-                          //   // handleDelete={handleDeleteClick}
-                          //   // handleClose={handleClose}
-                          //   // params={row_params}
                         />
                       )
 
-                      // <DateData />
                     }
                   ></Route>
-                  {/* <Route path="/data" element={<TableData />}></Route> */}
                   <Route
                     path="/add"
                     element={<AddRecord apiPropsPost={apiPropsPost} />}

@@ -21029,18 +21029,32 @@
       "email_contact": "vegtur@com.tr"
     },
     {
-      "discount": 12,
-      "vat": 0,
-      "unit": "kg",
-      "use_by_date": "2022-01-29",
+      "id": 1505,
       "name": "Wine Amaragio",
-      "price_netto": 123.2,
+      "price_netto": 109.2,
+      "discount": 25,
+      "vat": 0.05,
+      "currency": "USD",
+      "unit": "box",
+      "quality": "T",
+      "use_by_date": "2022-02-25",
       "origin": "Italy",
       "producer": "Vino Veritas",
-      "email_contact": "veritas@vino.it",
-      "currency": "EUR",
-      "quality": "T",
-      "id": 1505
+      "email_contact": "veritas@vino.it"
+    },
+    {
+      "discount": 10,
+      "vat": 0.05,
+      "unit": "kg",
+      "use_by_date": "2022-02-22",
+      "name": "banany",
+      "price_netto": 3.7,
+      "producer": "Banana Compo",
+      "email_contact": "bananaviva@op.pl",
+      "origin": "Bahamas",
+      "currency": "USD",
+      "quality": "M",
+      "id": 1506
     }
   ]
 }

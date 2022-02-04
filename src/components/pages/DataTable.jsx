@@ -53,13 +53,8 @@ const DataTable = ({ rows }) => {
   const {
     baseURLtoDB,
     api_put,
-    api_del,
-    rows_del,
     row_params,
-    set_row_params,
-    set_modal_action,
     handleOpen,
-    handleDelete,
     set_selection_row,
     selection_row,
   } = actsContext;

@@ -80,7 +80,7 @@ const AddRecord = ({ apiPropsPost }) => {
     const dataNoHTML = await escapeHTMLentitiesForNaN(dataSubmit);
     console.log("dataNoHTML");
     console.log(dataNoHTML);
-    // await api_post(baseURLtoDB, dataSubmit);
+    await api_post(baseURLtoDB, dataSubmit);
     // await sleep(800);
     window.alert(JSON.stringify(dataSubmit, 0, 2));
   };
