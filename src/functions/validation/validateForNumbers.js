@@ -1,6 +1,6 @@
 import { checkIfPropFit } from "./checkIfPropFit";
 import validator from "validator";
-import { min01MaxMld, min0Max023, min0Max100 } from "../../constants/data_types_for_form_validation";
+import { min01MaxMld, min0Max023, min0Max100 } from "../../constsNotInStore/data_types_for_validation";
 
 export const validateForNumbers = (valNoSpaces, eachProp) => {
     let min, max, error;

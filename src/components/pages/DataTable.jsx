@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
+import React, { useState, useEffect, useRef, useMemo, useContext } from "react";
 import {
   DataGrid,
   GridToolbar,
@@ -11,96 +11,92 @@ import {
 import ModalComp from "../../components/ModalComp";
 import { Typography, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import useColumns from "../customHooks/useColumns";
 import useEditRow from "../customHooks/useEditRow";
-import { handleDeleteRow } from "../../functions/modalFn";
-import { modalStyle } from "../../styles/modalStyle";
+// import { handleDeleteRow } from "../../functions/modalFn";
 import { useStylesData } from "../../styles/useStylesData";
-import {
-  red,
-  pink,
-  purple,
-  deepPurple,
-  indigo,
-  blue,
-  lightBlue,
-  cyan,
-  teal,
-  green,
-  lightGreen,
-  lime,
-  amber,
-  orange,
-  deepOrange,
-  brown,
-  grey,
-  blueGrey,
-  yellow,
-} from "@mui/material/colors";
+// import {
+//   red,
+//   pink,
+//   purple,
+//   deepPurple,
+//   indigo,
+//   blue,
+//   lightBlue,
+//   cyan,
+//   teal,
+//   green,
+//   lightGreen,
+//   lime,
+//   amber,
+//   orange,
+//   deepOrange,
+//   brown,
+//   grey,
+//   blueGrey,
+//   yellow,
+// } from "@mui/material/colors";
+import { ActionsContext } from "../../App";
 
 // const defaultTheme = createTheme();
 
-const DataTable = ({ rows, apiProps }) => {
-  const { baseURLtoDB, api_put, api_del, rows_del } = apiProps;
+// const DataTable = ({ rows, apiProps, gridActionsProps }) => {
+const DataTable = ({ rows }) => {
+  // const DataTable = ({ rows, api_db, grid_actions }) => {
+  const actsContext = useContext(ActionsContext);
+
+  // console.log("api_db.baseURLtoDB");
+  // console.log(api_db.baseURLtoDB);
+  // console.log("grid_actions.rows_del");
+  // console.log(grid_actions.rows_del);
+
+  const {
+    baseURLtoDB,
+    api_put,
+    api_del,
+    rows_del,
+    row_params,
+    set_row_params,
+    set_modal_action,
+    handleOpen,
+    handleDelete,
+    set_selection_row,
+    selection_row,
+  } = actsContext;
+
+  // const { baseURLtoDB, api_put, api_del, rows_del } = apiProps;
+  // const { row_params, set_row_params, to_del_row, set_modal_action } =
+  //   gridActionsProps;
 
   const classes = useStylesData();
 
   const [pageSize, setPageSize] = useState(10);
 
-  const [modalOpen, setModalOpen] = useState(false);
-  const [current_row_params, set_current_row_params] = useState({});
-  const [del_row, set_del_row] = useState(true);
-  const [selectionRow, setSelectionRow] = useState([]);
-
-  const matches = useMediaQuery("(max-height:500px)");
+  // const [row_params, set_row_params] = useState({});
+  // const [del_row, set_modal_action] = useState(true);
 
   useEffect(() => {
-    console.log("selectionRow");
-    console.log(selectionRow);
-  }, [selectionRow]);
+    console.log("selection_row");
+    console.log(selection_row);
+  }, [selection_row]);
+
+  // useEffect(() => {
+
+  //   // }, [to_del_row]);
+  // }, [row_params.id]);
 
   console.log("DataTable Comp.");
+  console.log("row_params:");
+  console.log(row_params);
 
   const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
     useEditRow(api_put, baseURLtoDB);
 
-  // przy del_rows nie ma 'params'
-  const handleOpen = (params, flag) => {
-    console.log("flag");
-    console.log(flag);
-    if (flag === "del") {
-      set_del_row(true);
-    } else {
-      set_del_row(false);
-    }
-    set_current_row_params(params);
-    setModalOpen(true);
-  };
   const columnsAll = useColumns(handleOpen);
 
   const columns = useMemo(() => {
     return columnsAll;
   }, []);
-
-  const handleClose = () => setModalOpen(false);
-
-  const handleDelete = async (e, multi = false) => {
-    e.stopPropagation();
-    console.log("current_row_params");
-    console.log(current_row_params);
-    if (multi) {
-      console.log("MULTI");
-      // handleDeleteRow(current_row_params, set_current_row_params);
-      // await handleDeleteRow(rows, selectionRow);
-      await rows_del(selectionRow);
-      set_current_row_params({});
-    } else {
-      console.log("Single row del");
-      // await api_del(`${baseURLtoDB}/${current_row_params.id}`);
-    }
-    handleClose();
-  };
 
   function CustomToolbar() {
     return (
@@ -118,11 +114,11 @@ const DataTable = ({ rows, apiProps }) => {
           aria-haspopup="true"
           // aria-expanded={open ? "true" : undefined}
           // onClick={(e) => handleDelete(e, true)}
-          onClick={(e) => handleOpen(e, true)}
+          onClick={(e) => handleOpen(e, "multi_del")}
           variant="contained"
-          disabled={selectionRow.length > 0 ? false : true}
+          disabled={selection_row.length > 0 ? false : true}
           sx={{ color: "warning.main" }}
-          // sx={{ color: selectionRow.length > 0 ? "warning" : grey[500] }}
+          // sx={{ color: selection_row.length > 0 ? "warning" : grey[500] }}
           // sx={{ color: blue[700] }}
           // sx={styles.iconMenu}>
         >
@@ -174,9 +170,9 @@ const DataTable = ({ rows, apiProps }) => {
         checkboxSelection
         disableSelectionOnClick
         onSelectionModelChange={(newSelectionModel) => {
-          setSelectionRow(newSelectionModel);
+          set_selection_row(newSelectionModel);
         }}
-        selectionModel={selectionRow}
+        selectionModel={selection_row}
         components={{
           Toolbar: CustomToolbar,
           // Toolbar: GridToolbar,
@@ -203,12 +199,11 @@ const DataTable = ({ rows, apiProps }) => {
         // sx={{ "& .MuiDataGrid-root": { padding: "15px" } }}
       />
       <ModalComp
-        del_row={del_row}
-        style={modalStyle(matches)}
-        handleDelete={handleDelete}
-        handleClose={handleClose}
-        modalOpen={modalOpen}
-        params={current_row_params}
+      // to_del_row={to_del_row}
+      // handleDelete={handleDelete}
+      // handleClose={handleClose}
+      // modalOpen={modalOpen}
+      // params={row_params}
       />
       {/* </ErrorBoundary> */}
     </div>
@@ -216,6 +211,11 @@ const DataTable = ({ rows, apiProps }) => {
 };
 
 export default DataTable;
+// export default connect((state, dispatch) => ({
+//   api_db: state.api_db,
+//   grid_actions: state.grid_actions,
+//   rows_del: (url) => dispatch(deleteRows(url)),
+// }))(DataTable);
 
 // import {
 //   red,

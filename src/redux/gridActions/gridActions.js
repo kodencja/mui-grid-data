@@ -1,4 +1,4 @@
-import { IF_TO_DEL_ROW, ROW_PARAMS } from "./gridTypes";
+import { MODAL_ACTION, ROW_PARAMS, SELECTION_ROW } from "./gridTypes";
 
 export const set_row_params = (params) => {
     return {
@@ -7,10 +7,17 @@ export const set_row_params = (params) => {
     }
 }
 
-export const set_if_to_del_row = (flag) => {
+export const set_modal_action = (name) => {
     return {
-        type: IF_TO_DEL_ROW,
-        payload: flag
+        type: MODAL_ACTION,
+        payload: name
+    }
+}
+
+export const set_selection_row = (row_ids_arr) => {
+    return {
+        type: SELECTION_ROW,
+        payload: row_ids_arr
     }
 }
 

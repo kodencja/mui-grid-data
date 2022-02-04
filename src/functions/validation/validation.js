@@ -1,6 +1,6 @@
 
 import { checkType } from "./checkType";
-import { forDate, requiredFieldsNames } from "../../constants/data_types_for_form_validation";
+import { forDate, requiredFieldsNames } from "../../constsNotInStore/data_types_for_validation";
 import { chooseValidationForStringsOrNumbers } from "./validationForStringsOrNumbers";
 import { checkIfPropFit } from "./checkIfPropFit";
 

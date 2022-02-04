@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 import { createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
@@ -7,18 +7,23 @@ import CancelIcon from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import PreviewIcon from "@mui/icons-material/Preview";
-import { list_of_countries } from "../../constants/countries";
-import {
-  currencies,
-  units,
-  discounts,
-  vat,
-  qualities,
-} from "../../constants/constant_data";
+import { ConstsContext } from "../../App";
+// import { list_of_countries } from "../../redux/constants/countries";
+// import {
+//   currencies,
+//   units,
+//   discounts,
+//   vat,
+//   qualities,
+// } from "../../redux/constants/vars_for_columns";
 import { format } from "date-fns";
 
 // const useColumns = (handleOpen, classes) => {
 const useColumns = (handleOpen) => {
+  const constsContext = useContext(ConstsContext);
+
+  const { list_of_countries, currencies, units, discounts, vat, qualities } =
+    constsContext;
 
   const defaultTheme = createTheme();
   const useStyles = makeStyles(
@@ -131,11 +136,9 @@ const useColumns = (handleOpen) => {
     );
   };
 
-
   // Client-side validation
   // To validate the value in the cells, first add a preProcessEditCellProps callback to the column definition of the field to validate. Once it is called, validate the value provided in params.props.value. Then, return a new object contaning params.props and also the error attribute set to true or false. If the error attribute is true, the value never will be committed.
   const columnsAll = [
-
     {
       field: "action",
       type: "actions",
@@ -275,7 +278,7 @@ const useColumns = (handleOpen) => {
       align: "center",
       width: 80,
       type: "singleSelect",
-      valueOptions: qualities,
+      valueOptions: qualities.map((el) => el[0]),
       editable: true,
     },
     {
@@ -287,7 +290,7 @@ const useColumns = (handleOpen) => {
       editable: true,
       // valueFormatter for displaying
       valueFormatter: (params) => {
-      return format(new Date(params.value), 'Y/MM/dd');
+        return format(new Date(params.value), "Y/MM/dd");
       },
     },
     {
@@ -310,7 +313,7 @@ const useColumns = (handleOpen) => {
       headerName: "Email contact",
       width: 180,
       editable: true,
-    }
+    },
   ];
 
   return columnsAll;

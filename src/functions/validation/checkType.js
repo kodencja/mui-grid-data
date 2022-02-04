@@ -1,6 +1,6 @@
 import validator from "validator";
 import { checkIfPropFit } from "./checkIfPropFit";
-import { forAscii, forEmail, forAlpha } from "../../constants/data_types_for_form_validation";
+import { forAscii, forEmail, forAlpha } from "../../constsNotInStore/data_types_for_validation";
 
 export const checkType = (valNoSpaces, eachProp) => {
   let error;

@@ -1,25 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form, Field } from "react-final-form";
 import { makeStyles } from "@mui/styles";
-import {
-  Container,
-  Box,
-  Button,
-  Stack,
-  TextField,
-  FormControlLabel,
-  FormControl,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  InputLabel,
-  Select,
-  MenuItem,
-} from "@mui/material";
-import { list_of_countries } from "../../constants/countries";
+import { Container, Box, Button, Stack } from "@mui/material";
+import { ConstsContext } from "../../App";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TextFieldComp from "../../components/FormComps/TextFieldComp";
-// import RadioComp from "../../components/FormComps/RadioComp";
 import SelectComp from "../../components/FormComps/SelectComp";
 import { format, parseISO, formatISO } from "date-fns";
 import DateComp from "../../components/FormComps/DateComp";
@@ -30,6 +15,11 @@ const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // const AddRecord = ({ api_post, baseURLtoDB, loading }) => {
 const AddRecord = ({ apiPropsPost }) => {
+  const constsContext = useContext(ConstsContext);
+
+  const { list_of_countries, currencies, units, vat, qualities } =
+    constsContext;
+
   const matches = useMediaQuery("(min-width: 750px)");
   const useStyles = makeStyles({
     marginV: {
@@ -203,7 +193,8 @@ const AddRecord = ({ apiPropsPost }) => {
                 sign="%"
                 placeholder="VAT"
                 component={SelectComp}
-                options={[0, 5, 8, 23]}
+                // options={[0, 5, 8, 23]}
+                options={vat.map((n) => parseInt(n * 100))}
                 defaultValue={formData.vat}
                 parse={checkFloat}
               />
@@ -213,7 +204,7 @@ const AddRecord = ({ apiPropsPost }) => {
                 label="Currency"
                 placeholder="Currency"
                 component={SelectComp}
-                options={["EUR", "USD", "GBP", "PLN", "CNY"]}
+                options={currencies}
                 required
               />
               <Field
@@ -222,7 +213,7 @@ const AddRecord = ({ apiPropsPost }) => {
                 label="Unit"
                 placeholder="Unit"
                 component={SelectComp}
-                options={["kg", "box", "bag", "piece"]}
+                options={units}
                 defaultValue={formData.unit}
                 required
               />
@@ -232,7 +223,7 @@ const AddRecord = ({ apiPropsPost }) => {
                 label="Quality"
                 placeholder="Quality"
                 component={SelectComp}
-                options={["Top", "Medium", "Low"]}
+                options={qualities}
                 required
               />
               <div className={classes.break}></div>

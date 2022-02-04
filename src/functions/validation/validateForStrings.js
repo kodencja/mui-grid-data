@@ -2,8 +2,8 @@ import validator from "validator";
 import { checkIfPropFit } from "./checkIfPropFit";
 import { checkLength } from "./checkLength";
 import { isDaysAhead } from "./isDaysAhead";
-import { min2Max50, min3Max35, min3Max3, min1Max1, min1Max10, forDate } from "../../constants/data_types_for_form_validation";
-import { noOfdaysAhead } from '../../constants/constant_data'
+import { min2Max50, min3Max35, min3Max3, min1Max1, min1Max10, forDate } from "../../constsNotInStore/data_types_for_validation";
+import { noOfdaysAhead } from '../../constsNotInStore/data_val_for_validation'
 
 export const validateForStrings = (valNoSpaces, eachProp) => {
     let min, max, error;

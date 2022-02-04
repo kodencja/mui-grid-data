@@ -21015,20 +21015,6 @@
       "id": 1501
     },
     {
-      "discount": 7,
-      "vat": 0.08,
-      "unit": "kg",
-      "use_by_date": "2022-01-28",
-      "name": "Orange",
-      "price_netto": 21.3,
-      "origin": "Spain",
-      "producer": "Buena Vita Espana",
-      "email_contact": "oranges@es.com",
-      "currency": "EUR",
-      "quality": "M",
-      "id": 1502
-    },
-    {
       "id": 1503,
       "name": "Melon",
       "price_netto": 32.3,
@@ -21037,7 +21023,7 @@
       "currency": "USD",
       "unit": "box",
       "quality": "M",
-      "use_by_date": "2022-03-29T22:00:00.000Z",
+      "use_by_date": "2022-03-29",
       "origin": "Turkey",
       "producer": "Veg Tur",
       "email_contact": "vegtur@com.tr"

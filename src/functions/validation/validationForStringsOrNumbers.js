@@ -1,7 +1,7 @@
 import { checkIfPropFit } from "./checkIfPropFit";
 import { validateForStrings } from "./validateForStrings";
 import { validateForNumbers } from "./validateForNumbers";
-import { stringTypeFields, numberTypeFields } from "../../constants/data_types_for_form_validation";
+import { stringTypeFields, numberTypeFields } from "../../constsNotInStore/data_types_for_validation";
 
 export const chooseValidationForStringsOrNumbers = (valNoSpaces, eachProp, errors) => {
   let anyError;

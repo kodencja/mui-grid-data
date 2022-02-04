@@ -1,3 +1,5 @@
+// these constants are kept here since they are used in validation functions that are neiter React components nor custom hooks and therefore they cannot be imported to those functions as props or through useContext
+
 // array of required fields in the form
 export const requiredFieldsNames = [
     "name",
@@ -7,7 +9,8 @@ export const requiredFieldsNames = [
     "unit",
     "quality",
   ];
-  // arrays according to values types
+
+  // arrays gathered according to values types
   export const stringTypeFields = [
     "name",
     "use_by_date",
@@ -18,12 +21,14 @@ export const requiredFieldsNames = [
     "origin",
     "email_contact",
   ];
+
   export const numberTypeFields = ["price_netto", "discount", "vat"];
   
-  // arrays according to the checking function by validator
+  // arrays according to the checking type function by validator
   export const forAscii = ['name', 'producer'];
   export const forEmail = ["email_contact"];
   export const forAlpha = ["quality", "currency", "unit", "origin"];
+  export const forDate = ["use_by_date"];
   // const forFloat = ["price_netto", "vat"];
   // const forInt = ["discount"];
 
@@ -39,5 +44,3 @@ export const requiredFieldsNames = [
   export const min3Max3 = ["currency"];
   export const min1Max1 = ["quality"];
   export const min1Max10 = ["unit"];
-
-  export const forDate = ["use_by_date"];
