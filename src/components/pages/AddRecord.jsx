@@ -8,8 +8,8 @@ import TextFieldComp from "../../components/FormComps/TextFieldComp";
 import SelectComp from "../../components/FormComps/SelectComp";
 import { format, parseISO, formatISO } from "date-fns";
 import DateComp from "../../components/FormComps/DateComp";
-import { escapeHTMLentities } from "../../functions/validation/escapeHTMLent";
-import { validate } from "../../functions/validation/validation";
+import { escapeHTMLentitiesForNaN } from "../../functions/validation/escapeHTMLent";
+import { validateFromAddForm } from "../../functions/validation/validation";
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -77,7 +77,7 @@ const AddRecord = ({ apiPropsPost }) => {
     console.log("dataSubmit");
     console.log(dataSubmit);
 
-    const dataNoHTML = await escapeHTMLentities(dataSubmit);
+    const dataNoHTML = await escapeHTMLentitiesForNaN(dataSubmit);
     console.log("dataNoHTML");
     console.log(dataNoHTML);
     // await api_post(baseURLtoDB, dataSubmit);
@@ -119,7 +119,7 @@ const AddRecord = ({ apiPropsPost }) => {
         initialValues={{
           ...formData,
         }}
-        validate={validate}
+        validate={validateFromAddForm}
         render={({ handleSubmit, form, submitting, pristine, values }) => (
           <Box component="form" onSubmit={handleSubmit}>
             <div>

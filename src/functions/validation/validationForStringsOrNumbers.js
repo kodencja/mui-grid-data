@@ -1,22 +1,19 @@
 import { checkIfPropFit } from "./checkIfPropFit";
 import { validateForStrings } from "./validateForStrings";
 import { validateForNumbers } from "./validateForNumbers";
-import { stringTypeFields, numberTypeFields } from "../../constsNotInStore/data_types_for_validation";
+import {
+  stringTypeFields,
+  numberTypeFields,
+} from "../../constsNotInStore/data_types_for_validation";
 
-export const chooseValidationForStringsOrNumbers = (valNoSpaces, eachProp, errors) => {
-  let anyError;
-    if (checkIfPropFit(eachProp, stringTypeFields)) {
-        anyError = validateForStrings(
-          valNoSpaces,
-          eachProp
-        );
+export const chooseValidationForStringsOrNumbers = (valNoSpaces, eachProp) => {
+  if (checkIfPropFit(eachProp, stringTypeFields)) {
+    return validateForStrings(valNoSpaces, eachProp);
+  }
 
-      } else if (checkIfPropFit(eachProp, numberTypeFields)) {
-        anyError = validateForNumbers(
-          valNoSpaces,
-          eachProp
-        );
-      }
+  if (checkIfPropFit(eachProp, numberTypeFields)) {
+    return validateForNumbers(valNoSpaces, eachProp);
+  }
 
-      return anyError;
-}
+  return; // throw error
+};

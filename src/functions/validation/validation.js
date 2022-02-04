@@ -1,40 +1,53 @@
-
 import { checkType } from "./checkType";
-import { forDate, requiredFieldsNames } from "../../constsNotInStore/data_types_for_validation";
+import {
+  forDate,
+  requiredFieldsNames,
+} from "../../constsNotInStore/data_types_for_validation";
 import { chooseValidationForStringsOrNumbers } from "./validationForStringsOrNumbers";
 import { checkIfPropFit } from "./checkIfPropFit";
 
-export const validate = (values, fromEditForm = false) => {
-  console.log("values2");
-  console.log(values);
-  let errors = {};
+const getValuesWithoutSpaces = (val) => {
+ return val.toString().split(" ").join("");
+}
 
-  // REQUIRED FIELDS from Add Form
-  if(!fromEditForm){
-    for (let eachProp of requiredFieldsNames) {
-      if (!values[eachProp] && values[eachProp] !== 0) {
-        errors[eachProp] = "This field is required";
-      }
+const getValueToBeChecked = (values, eachProp) => {
+  if ((values && values[eachProp]) || values[eachProp] === 0) {
+    if (!checkIfPropFit(eachProp, forDate)) {
+      return getValuesWithoutSpaces(values[eachProp]);
     }
+    return values[eachProp];
   }
 
-  // ALL FIELDS CURRENTLY USED / TYPED both from ADD and EDIT FROM
-  let valNoSpaces;
-  for (let eachProp in values) {
-    if((values && values[eachProp]) || values[eachProp] === 0){
-      if(checkIfPropFit(eachProp, forDate)){
-        valNoSpaces =  values[eachProp];
-      }
-      else {
-       valNoSpaces = values[eachProp].toString().split(" ").join("");
-      } 
-    }
+  return; // throw an error
+};
 
-      
-    // const valNoSpaces = validator.escape(
-    //   values[eachProp].toString().split(" ").join(""));
+const checkRequiredFields = (values, eachProp) => {
+  // some values might be equal '0' e.g. from discount or vat fields
+  if (!values[eachProp] && values[eachProp] !== 0) {
+    return "This field is required";
+  }
+};
+
+export const validateFromAddForm = (values) => {
+  let errors = {};
+  // REQUIRED FIELDS from Add Form
+  for (let eachProp of requiredFieldsNames) {
+    errors[eachProp] = checkRequiredFields(values, eachProp);
+  }
+  return validate(values, errors);
+};
+
+export const validate = (values, errors = {}) => {
+  // ALL FIELDS CURRENTLY USED / ARE BEING TYPED both from ADD and EDIT FROM
+  for (let eachProp in values) {
+    // value without spaces if not of date type
+    const valNoSpaces = getValueToBeChecked(values, eachProp);
+
     if (!errors[eachProp]) {
-    errors[eachProp] = chooseValidationForStringsOrNumbers(valNoSpaces, eachProp);
+      errors[eachProp] = chooseValidationForStringsOrNumbers(
+        valNoSpaces,
+        eachProp
+      );
     }
     // CHECK TYPE OF THE VALUES (if no errors pointed to them so far)
     if (!errors[eachProp]) {

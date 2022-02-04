@@ -3,21 +3,24 @@ import { checkIfPropFit } from "./checkIfPropFit";
 import { forAscii, forEmail, forAlpha } from "../../constsNotInStore/data_types_for_validation";
 
 export const checkType = (valNoSpaces, eachProp) => {
-  let error;
     if (checkIfPropFit(eachProp, forAscii)) {
         if (!validator.isAscii(valNoSpaces)) {
-          error = "Please use only ASCII chars";
+          return "Please use only ASCII chars";
         }
-      } else if (checkIfPropFit(eachProp, forAlpha)) {
+      } 
+      
+      if (checkIfPropFit(eachProp, forAlpha)) {
         console.log("isAlpha");
         if (!validator.isAlpha(valNoSpaces)) {
-          error = "Please use only letters";
+          return "Please use only letters";
         }
-      } else if (checkIfPropFit(eachProp, forEmail)) {
+      } 
+      
+      if (checkIfPropFit(eachProp, forEmail)) {
         if (!validator.isEmail(valNoSpaces)) {
-          error = "Provide a valid email address";
+          return "Provide a valid email address";
         }
       }
 
-      return error;
+      return;
 }
