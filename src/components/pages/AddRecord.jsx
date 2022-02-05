@@ -6,14 +6,17 @@ import { ConstsContext } from "../../App";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TextFieldComp from "../../components/FormComps/TextFieldComp";
 import SelectComp from "../../components/FormComps/SelectComp";
-import { format, parseISO, formatISO } from "date-fns";
+
 import DateComp from "../../components/FormComps/DateComp";
-import { escapeHTMLentitiesForNaN } from "../../functions/validation/escapeHTMLent";
+import { format } from "date-fns";
 import { validateFromAddForm } from "../../functions/validation/validation";
+import { onSubmit } from "../../functions/forInputs/formSubmit";
+import {
+  checkFloat,
+  checkInt,
+  dateFormating,
+} from "../../functions/formatParse/formatParse";
 
-const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-
-// const AddRecord = ({ api_post, baseURLtoDB, loading }) => {
 const AddRecord = ({ apiPropsPost }) => {
   const constsContext = useContext(ConstsContext);
 
@@ -63,65 +66,34 @@ const AddRecord = ({ apiPropsPost }) => {
     // use_by_date: format(new Date(), "dd.MM.Y"),
   };
 
-  const handleOnSubmit = async (values) => {
-    const dataSubmit = { ...values };
-    console.log(values);
-
-    // escape from '0' as string to '0' as a number
-    if (!dataSubmit.discount || dataSubmit.discount === "0") {
-      dataSubmit.discount = 0;
-    }
-    if (!dataSubmit.price_netto || dataSubmit.price_netto === "0") {
-      dataSubmit.price_netto = 0;
-    }
-    console.log("dataSubmit");
-    console.log(dataSubmit);
-
-    const dataNoHTML = await escapeHTMLentitiesForNaN(dataSubmit);
-    console.log("dataNoHTML");
-    console.log(dataNoHTML);
-    await api_post(baseURLtoDB, dataSubmit);
-    // await sleep(800);
-    window.alert(JSON.stringify(dataSubmit, 0, 2));
-  };
-
-  const checkInt = (val) => {
-    if (!val || Number(val === 0)) {
-      // console.log("!val Int");
-      return Number(val);
-    } else if (isNaN(val) || !val) {
-      val = 0;
-    } else {
-      return parseInt(val);
-    }
-  };
-
-  const checkFloat = (val) => {
-    if (!val || val === "0") {
-      // console.log("!val Float");
-      return val;
-    } else {
-      return parseFloat(val);
-    }
-  };
-
-  const dateFormating = (val) => {
-    if (val) {
-      return format(new Date(val), "Y-MM-dd");
-    }
-  };
+  // const onSubmit = ( values ) => {
+  //   nSubmit(values, api_post, baseURLtoDB);
+  // }
 
   return (
     <Container>
       <div className={classes.title}>Add product to database</div>
       <Form
-        onSubmit={handleOnSubmit}
+        onSubmit={(values) => onSubmit(values, api_post, baseURLtoDB)}
         initialValues={{
           ...formData,
         }}
         validate={validateFromAddForm}
-        render={({ handleSubmit, form, submitting, pristine, values }) => (
-          <Box component="form" onSubmit={handleSubmit}>
+        render={({
+          handleSubmit,
+          form: { reset, restart },
+          submitting,
+          pristine,
+          values,
+          resetFieldState,
+          // restart,
+        }) => (
+          <Box
+            component="form"
+            onSubmit={(event) => {
+              handleSubmit(event).then(restart);
+            }}
+          >
             <div>
               <div className={classes.rowFlex}>
                 <Field
@@ -241,14 +213,14 @@ const AddRecord = ({ apiPropsPost }) => {
                 </Button>
                 <Button
                   variant="contained"
-                  onClick={form.reset}
+                  onClick={restart}
                   disabled={submitting || pristine}
                   color="secondary"
                 >
                   Reset
                 </Button>
               </Stack>
-              <pre>{JSON.stringify(values, 0, 2)}</pre>
+              {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
             </div>
           </Box>
         )}

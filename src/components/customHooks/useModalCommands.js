@@ -20,11 +20,11 @@ export const useModalCommands = (props) => {
 
    const handleDelete = async (e) => {
      e.stopPropagation();
-     console.log("handleDelete1");
- 
+     
      if (!checkIfMultiDel(modal_action_name)) {
        await api_del(`${baseURLtoDB}/${row_params.id}`);
        handleClose();
+       console.log("handleDelete1");
        return;
      }
      await rows_del(selection_row);

@@ -26,8 +26,7 @@ export const markErrorInRowObj = (rowObj, errorsObj, setError) => {
       setError(true);
       }
       n++;
-      if(n === errorsObjLength){
-
+      if(n >= errorsObjLength){
         resolve(rowObj);
       }
     }

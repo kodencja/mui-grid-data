@@ -8,15 +8,9 @@ import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import SaveIcon from "@mui/icons-material/Save";
 import PreviewIcon from "@mui/icons-material/Preview";
 import { ConstsContext } from "../../App";
-// import { list_of_countries } from "../../redux/constants/countries";
-// import {
-//   currencies,
-//   units,
-//   discounts,
-//   vat,
-//   qualities,
-// } from "../../redux/constants/vars_for_columns";
 import { format } from "date-fns";
+import { getBruttoPrice, getDiscountNettoPrice } from "../../functions/forColumns.js/valuesGetters";
+import { handleCancelClick, handleEditClick, handleSaveClick } from "../../functions/forColumns.js/actionsGrid";
 
 // const useColumns = (handleOpen, classes) => {
 const useColumns = (handleOpen) => {
@@ -88,56 +82,6 @@ const useColumns = (handleOpen) => {
     },
   };
 
-  const handleEditClick = (event, params) => {
-    event.stopPropagation(); // don't select this row after clicking
-
-    const api = params.api;
-    // console.log("id: ", params.id);
-    // console.log("api");
-    // console.log(api);
-    // console.log("apiRef
-
-    api.setRowMode(params.id, "edit");
-  };
-
-  const handleSaveClick = (event, params) => {
-    event.stopPropagation();
-    console.log(params);
-    params.api.commitRowChange(params.id);
-    params.api.setRowMode(params.id, "view");
-    const row = params.api.getRow(params.id);
-    params.api.updateRows([{ ...row }]);
-  };
-
-  const handleCancelClick = (event, params) => {
-    event.stopPropagation();
-    const api = params.api;
-    // console.log(api.getRowMode(params.id));
-    api.setRowMode(params.id, "view");
-  };
-
-  const getBruttoPrice = (params) => {
-    const netto_discount = params.getValue(params.id, "discount_netto");
-    return parseFloat(
-      (
-        netto_discount +
-        netto_discount * params.getValue(params.id, "vat")
-      ).toFixed(2)
-    );
-  };
-
-  const getDiscountNettoPrice = (params) => {
-    const netto = params.getValue(params.id, "price_netto");
-
-    return parseFloat(
-      (netto - (netto * params.getValue(params.id, "discount")) / 100).toFixed(
-        2
-      )
-    );
-  };
-
-  // Client-side validation
-  // To validate the value in the cells, first add a preProcessEditCellProps callback to the column definition of the field to validate. Once it is called, validate the value provided in params.props.value. Then, return a new object contaning params.props and also the error attribute set to true or false. If the error attribute is true, the value never will be committed.
   const columnsAll = [
     {
       field: "action",
@@ -320,18 +264,3 @@ const useColumns = (handleOpen) => {
 };
 
 export default useColumns;
-
-/*
-      "id": 6,
-      "name": "Barramoundi",
-      "price_netto": 468.06,
-      "discount": 0.24,
-      "vat": 0.08,
-      "currency": "EUR",
-      "unit": "kg",
-      "quality": "L",
-      "use_by_date": "2022/11/06",
-      "origin": "Indonesia",
-      "producer": "Ortiz and Sons",
-      "email_contact": "ttomley5@163.com"
-*/

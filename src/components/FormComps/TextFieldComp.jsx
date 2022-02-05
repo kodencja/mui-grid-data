@@ -127,6 +127,7 @@ const TextFieldComp = (props) => {
   // console.log("meta.error");
   // console.log(name);
   // console.log(meta.error);
+  // console.log("meta.touched");
   // console.log(meta.touched);
 
   // const getClassRoot = () =>{

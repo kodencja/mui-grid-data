@@ -7,6 +7,7 @@ import {
   getUpdatedRowObj,
   markErrorInRowObj,
 } from "../../functions/actionFns/editRowFns";
+import { dateFormating } from "../../functions/formatParse/formatParse";
 
 const useEditRow = (api_put, baseURLtoDB) => {
   const [editRowsModel, setEditRowsModel] = useState({});
@@ -16,12 +17,13 @@ const useEditRow = (api_put, baseURLtoDB) => {
   const [error, setError] = useState(false);
 
   const handleEditRowsModelChange = async (model) => {
-    const editingRowId = Object.keys(model); // 5
+    const editingRowId = Object.keys(model); // e.g. 1 or 5
     const rowObj = model[editingRowId[0]];
-    const modelChecked = { ...model };
+    setEditRowsModel({ ...model });
 
     const flatRowObj = await getFlatRowObj(rowObj);
 
+    // make sure if there is any model being edited
     if (editingRowId.length > 0) {
       setError(false);
       const errors = validate(flatRowObj);
@@ -36,16 +38,13 @@ const useEditRow = (api_put, baseURLtoDB) => {
         });
       }
     }
-    setEditRowsModel(modelChecked);
+   
   };
 
   const editRowCommit = async (id) => {
     console.log("EDIT_ROW_COMMIT: ");
 
-    editRowData.use_by_date = format(
-      new Date(editRowData.use_by_date),
-      "Y-MM-dd"
-    );
+    editRowData.use_by_date = dateFormating(editRowData.use_by_date);
 
     const editRowDataNoHTML = await escapeHTMLentitiesForNaN(editRowData);
 

@@ -1,16 +1,8 @@
 import React, { useMemo, useContext } from "react";
 import { Box, Button, Stack, Typography } from "@mui/material";
 import { ActionsContext } from "../App";
-
 import Buttons from "./Buttons";
 
-// function ProductDetails({
-//   row_to_del_or_view,
-//   modal_action_name,
-//   params,
-//   handleClose,
-//   handleDelete,
-// }) {
 function ProductDetails({ row_to_del_or_view }) {
   const actsContext = useContext(ActionsContext);
 

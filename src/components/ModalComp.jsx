@@ -8,16 +8,7 @@ import { ActionsContext } from "../App";
 // if (process.env.NODE_ENV !== "test") Modal.setAppElement("#root");
 // Modal.setAppElement("#root");
 
-// const ModalComp = ({
-//   modal_action_name,
-//   handleDelete,
-//   handleClose,
-//   modalOpen,
-//   params,
-// }) => {
 const ModalComp = () => {
-  // console.log("params:");
-  // console.log(params);
   // api: {unstable_eventManager: Ms, state: {…}, instanceId: 5, subscribeEvent: ƒ, publishEvent: ƒ, …}, cellMode: "view", colDef: {width: 100, minWidth: 50, maxWidth: Infinity, hide: false, hideable: true, …}, field: "action", formattedValue: undefined, getValue: ƒ (), hasFocus: false, id: 1502, isEditable: false, row: {discount: 7, vat: 0.08, unit: 'kg', use_by_date: '2022-01-28', name: 'Orange', …}, rowNode: {id: 1502, depth: 0, parent: null, groupingKey: '', groupingField: null}, tabIndex: -1, value: undefined
   const actsContext = useContext(ActionsContext);
 
@@ -35,26 +26,21 @@ const ModalComp = () => {
     let isMounted = true;
     let row = [];
     console.log("ModalComp0");
-    // let row = new Map();
     if (isMounted) {
       if (modal_action_name !== "multi_del" && row_params && row_params.row) {
         console.log("row_params.row");
         console.log(row_params.row);
         let n = 0;
-        // row_params.row.vat = parseFloat((row_params.row.vat * 100).toFixed(2));
         // zamiana obiektu na tablicę z parami tablic 'key-value'
         for (let [key, value] of Object.entries(row_params.row)) {
           n++;
           if (modal_action_name !== "view" && n > 9) break;
           if (key === "vat") {
-            // value = `${parseFloat((value * 100).toFixed(2))} %`;
             value = parseFloat((value * 100).toFixed(2));
           }
           row.push([key, value]);
         }
         console.log("Object.entries out");
-        // console.log(row);
-        // row.map((el, ind) => console.log(el));
         set_row_to_del_or_view(row);
       }
     }
@@ -63,7 +49,6 @@ const ModalComp = () => {
       isMounted = false;
     };
   }, [row_params, row_params.row]);
-  // }, [params, params.row]);
 
   return (
     <Modal
@@ -75,13 +60,7 @@ const ModalComp = () => {
     >
       {/* <Box sx={style} alignContent="center"> */}
       <Box sx={modalStyle(matches)}>
-        <ProductDetails
-          row_to_del_or_view={row_to_del_or_view}
-          // modal_action_name={modal_action_name}
-          // params={params}
-          // handleClose={handleClose}
-          // handleDelete={handleDelete}
-        />
+        <ProductDetails row_to_del_or_view={row_to_del_or_view} />
       </Box>
     </Modal>
   );
