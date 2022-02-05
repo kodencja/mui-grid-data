@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_DATA_SUCCESS, FETCH_REQUEST, REQUEST_COMPLETE, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, DEL_ROWS_SUCCESS } from "./apiTypes";
+import { FETCH_DATA_SUCCESS, FETCH_REQUEST, REQUEST_COMPLETE, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, DEL_ROWS_SUCCESS, SET_RESPONSE_TEXT } from "./apiTypes";
 import {initApiState} from './apiReducer';
 
 
@@ -9,19 +9,27 @@ export const apiRequest = () => {
   };
 };
 
-export const apiRequestComplete = () => {
-  return {
-    type: REQUEST_COMPLETE,
-  };
-};
-
-// export const apiDataRequest = (url) => {
 export const apiDataRequest = () => {
   return {
     type: FETCH_DATA_REQUEST,
     // payload: url,
   };
 };
+
+// export const apiRequestComplete = () => {
+//   return {
+//     type: REQUEST_COMPLETE,
+//   };
+// };
+
+// export const apiDataRequest = (url) => {
+export const apiResponseTxt = (txt) => {
+  return {
+    type: SET_RESPONSE_TEXT,
+    payload: txt,
+  };
+};
+
 
 export const apiDataSuccess = (data) => {
   return {

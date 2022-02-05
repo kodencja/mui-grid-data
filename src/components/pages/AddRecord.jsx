@@ -4,10 +4,10 @@ import { makeStyles } from "@mui/styles";
 import { Container, Box, Button, Stack } from "@mui/material";
 import { ConstsContext } from "../../App";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import TextFieldComp from "../../components/FormComps/TextFieldComp";
-import SelectComp from "../../components/FormComps/SelectComp";
+import TextFieldComp from "../smallComponents/forForm/TextFieldComp";
+import SelectComp from "../smallComponents/forForm/SelectComp";
 
-import DateComp from "../../components/FormComps/DateComp";
+import DateComp from "../smallComponents/forForm/DateComp";
 import { format } from "date-fns";
 import { validateFromAddForm } from "../../functions/validation/validation";
 import { onSubmit } from "../../functions/forInputs/formSubmit";

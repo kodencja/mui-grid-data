@@ -5,24 +5,7 @@ import Layout from "./components/Layout";
 import "./App.css";
 import DataTable from "./components/pages/DataTable";
 import PropTypes from "prop-types";
-import {
-  GridCellParams,
-  GridApi,
-  esES,
-  GridColDef,
-  GridToolbarContainer,
-  GridToolbarFilterButton,
-  GridActionsCellItem,
-  GridToolbarDensitySelector,
-} from "@mui/x-data-grid";
-// import {EditIcon, CancelIcon, DeleteIcon, SaveIcon } from '@mui/icons-material';
-import EditIcon from "@mui/icons-material/Edit";
-import CancelIcon from "@mui/icons-material/Close";
-import DeleteIcon from "@mui/icons-material/DeleteOutlined";
-import SaveIcon from "@mui/icons-material/Save";
-import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import { connect } from "react-redux";
-// import {fetchData} from "./redux/api/apiActions";
 import {
   fetchData,
   putData,
@@ -32,6 +15,7 @@ import {
   set_modal_action,
   set_row_params,
   set_selection_row,
+  apiResponseTxt,
 } from "./redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import AddRecord from "./components/pages/AddRecord";
@@ -50,7 +34,7 @@ function App(props) {
   const isMountedRef = useRef(true);
 
   const {
-    api_db: { data, loading, baseURLtoDB, error },
+    api_db: { data, loading, baseURLtoDB, error, responseTxt },
     grid_actions: { row_params, modal_action_name, selection_row },
     fetchData,
     api_put,
@@ -67,15 +51,29 @@ function App(props) {
       qualities,
       vat,
       discounts,
+      warning,
+      product_details,
+      if_sure_single_del,
+      if_sure_multi_del,
+      multi_del, del, view
     },
   } = props;
 
   // const [modalOpen, setModalOpen] = useState(false);
 
-  const propsForModal = {modal_action_name, baseURLtoDB, row_params, selection_row, rows_del, api_del, set_row_params, set_modal_action};
-  
-  const {modalOpen, handleClose, handleDelete, handleOpen} = useModalCommands(propsForModal);
+  const propsForModal = {
+    modal_action_name,
+    baseURLtoDB,
+    row_params,
+    selection_row,
+    rows_del,
+    api_del,
+    set_row_params,
+    set_modal_action,
+  };
 
+  const { modalOpen, handleClose, handleDelete, handleOpen } =
+    useModalCommands(propsForModal);
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -112,12 +110,9 @@ function App(props) {
     }
   }, [modalOpen]);
 
-
   // const handleClose = () => {
   //   handleCloseFn(setModalOpen);
   // };
-
-
 
   const rows = useMemo(() => {
     console.log("rows in App.js");
@@ -162,6 +157,10 @@ function App(props) {
                 qualities,
                 vat,
                 discounts,
+                warning,
+                product_details,
+                if_sure_single_del,
+                if_sure_multi_del, multi_del, del, view
               }}
             >
               <Layout>
@@ -171,14 +170,7 @@ function App(props) {
                     path="/"
                     element={
                       // error ? <Typography>{error.message}</Typography> :
-                      loading ? (
-                        <CircularProgress />
-                      ) : (
-                        <DataTable
-                          rows={rows}
-                        />
-                      )
-
+                      loading ? <CircularProgress /> : <DataTable rows={rows} />
                     }
                   ></Route>
                   <Route
@@ -214,6 +206,7 @@ const mapDispatchToProps = (dispatch) => {
     set_modal_action: (name) => dispatch(set_modal_action(name)),
     set_row_params: (params) => dispatch(set_row_params(params)),
     set_selection_row: (row_id) => dispatch(set_selection_row(row_id)),
+    apiResponseTxt: (txt) => dispatch(apiResponseTxt(txt)),
   };
 };
 
