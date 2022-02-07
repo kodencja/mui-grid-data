@@ -12,7 +12,7 @@
     params.api.commitRowChange(params.id);
     params.api.setRowMode(params.id, "view");
     
-    // update the row - not necessary now
+    // update the row - not necessary now as it is updated throught api_put / putData action in redux
     // const row = params.api.getRow(params.id);
     // params.api.updateRows([{ ...row }]);
   };
