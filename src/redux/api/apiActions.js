@@ -160,6 +160,7 @@ export const postData = (url, sendData) => {
         }
         console.log("Post");
         dispatch(apiResponseTxt("The product has been added to database!"));
+        // return true;
         // dispatch(postDataSuccess(true));
       })
       // .then(() => dispatch(apiResponseTxt("The product has been added to database!")))
@@ -172,6 +173,7 @@ export const postData = (url, sendData) => {
         console.log("Error");
         console.log(error.message);
         dispatch(apiDataFailure(error.message));
+        // return false;
       });
     // }, 1500)
   };
