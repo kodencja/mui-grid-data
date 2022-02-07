@@ -1,12 +1,12 @@
-import { FETCH_DATA_SUCCESS, REQUEST_COMPLETE, FETCH_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, DEL_ROWS_SUCCESS, SET_RESPONSE_TEXT } from "./apiTypes";
+import { FETCH_DATA_SUCCESS, REQUEST_COMPLETE, FETCH_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, POST_DATA_SUCCESS, DEL_ROWS_SUCCESS, SET_RESPONSE_TEXT } from "./apiTypes";
 
-export const initApiState = { baseURLtoDB: 'http://localhost:8000/grocery', currentURLtoDB: '', loading: false, data: [], error: '', responseTxt: ''};
+export const initApiState = { baseURLtoDB: 'http://localhost:8000/grocery', loading: false, data: [], error: '', responseTxt: ''};
 
 const apiReducer = (state = initApiState, action) => {
-    console.log("Loading in apiReducer:");
-    console.log(state.loading);
-    console.log("action.type:");
-    console.log(action.type);
+    // console.log("Loading in apiReducer:");
+    // console.log(state.loading);
+    // console.log("action.type:");
+    // console.log(action.type);
     switch(action.type){
         case FETCH_REQUEST: return {...state, loading: true};
         // case REQUEST_COMPLETE: return {...state, loading: false};
@@ -14,9 +14,9 @@ const apiReducer = (state = initApiState, action) => {
         case FETCH_DATA_REQUEST: return {...state, url: action.payload, loading: true};
         case FETCH_DATA_SUCCESS: return {...state, loading: false, data: action.payload};
         case PUT_DATA_SUCCESS: {
-            console.log("PUT method");
-            console.log("res.data:");
-            console.log(action.payload);
+            // console.log("PUT method");
+            // console.log("res.data:");
+            // console.log(action.payload);
             // console.log(data[action.payload.id - 1]);
             // console.log(action.payload.id - 1);
             const indexOfItem = action.payload.id - 1;

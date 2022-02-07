@@ -28,8 +28,8 @@ const ModalComp = () => {
     console.log("ModalComp0");
     if (isMounted) {
       if (modal_action_name !== "multi_del" && row_params && row_params.row) {
-        console.log("row_params.row");
-        console.log(row_params.row);
+        // console.log("row_params.row");
+        // console.log(row_params.row);
         let n = 0;
         // zamiana obiektu na tablicę z parami tablic 'key-value'
         for (let [key, value] of Object.entries(row_params.row)) {
@@ -40,7 +40,7 @@ const ModalComp = () => {
           }
           row.push([key, value]);
         }
-        console.log("Object.entries out");
+        // console.log("Object.entries out");
         set_row_to_del_or_view(row);
       }
     }

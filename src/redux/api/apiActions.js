@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_DATA_SUCCESS, FETCH_REQUEST, REQUEST_COMPLETE, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, DEL_ROWS_SUCCESS, SET_RESPONSE_TEXT } from "./apiTypes";
+import { FETCH_DATA_SUCCESS, FETCH_REQUEST, REQUEST_COMPLETE, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, POST_DATA_SUCCESS, DEL_ROWS_SUCCESS, SET_RESPONSE_TEXT } from "./apiTypes";
 import {initApiState} from './apiReducer';
 
 
@@ -45,12 +45,12 @@ export const putDataSuccess = (data) => {
   };
 };
 
-// export const postDataSuccess = (data) => {
-//     return {
-//         type: POST_DATA_SUCCESS,
-//         payload: data
-//     }
-// }
+export const postDataSuccess = (flag) => {
+    return {
+        type: POST_DATA_SUCCESS,
+        payload: flag
+    }
+}
 
 export const deleteRowsSuccess = (idsArray) => {
   return {
@@ -76,6 +76,8 @@ export const fetchData = (url) => {
         .then((response) => {
           dispatch(apiDataSuccess(response.data));
         })
+        // .then(() => dispatch(apiResponseTxt('')))
+        // .then(() => dispatch(apiResponseTxt('Data fetched from database:')))
         .catch((error) => {
           console.log(error.message);
           dispatch(apiDataFailure(error.message));
@@ -118,6 +120,7 @@ export const putData = (url, sendData) => {
             console.log("Amend")
             dispatch(putDataSuccess(res.data));
     })
+    .then(() => dispatch(apiResponseTxt('The record has been successfully amended')))
     // .then((res) => dispatch(fetchData(initApiState.baseURLtoDB)))
     .catch(error => {
         console.log("Error");
@@ -156,9 +159,15 @@ export const postData = (url, sendData) => {
           // console.log("Could not fetch data from that resource!");
         }
         console.log("Post");
-        // dispatch(postDataSuccess(res.data));
+        dispatch(apiResponseTxt("The product has been added to database!"));
+        // dispatch(postDataSuccess(true));
       })
-      .then((res) => dispatch(fetchData(url)))
+      // .then(() => dispatch(apiResponseTxt("The product has been added to database!")))
+      .then(() => {
+        setTimeout(() => {
+          dispatch(fetchData(initApiState.baseURLtoDB));
+        }, 1000);
+      })
       .catch((error) => {
         console.log("Error");
         console.log(error.message);
@@ -194,7 +203,12 @@ export const deleteData = (url) => {
             console.log("Post")
             // dispatch(deleteDataSuccess());
     })
-    .then((res) => dispatch(fetchData(initApiState.baseURLtoDB)))
+    .then(() => dispatch(apiResponseTxt("The product has been removed from database!")))
+    .then((res) => { 
+      setTimeout(() => {
+        dispatch(fetchData(initApiState.baseURLtoDB));
+      }, 1000);
+       })
     .catch(error => {
         console.log("Error");
         console.log(error.message);
@@ -222,6 +236,9 @@ export const deleteRows = (idsArray) => {
     // setTimeout(async () => {
       console.log("deleteRows async");
       await deleteSomeRows(dispatch, idsArray);
+      // setTimeout(() => {
+        dispatch(apiResponseTxt("The products have been deleted!"));
+      // }, 1000)
       console.log("After deleteSomeRows");
     //   await dispatch(apiRequestComplete());
       console.log("After apiRequestComplete");

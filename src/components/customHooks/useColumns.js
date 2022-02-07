@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { GridActionsCellItem } from "@mui/x-data-grid";
 import { createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
@@ -90,6 +90,7 @@ const useColumns = (handleOpen) => {
       sortable: false,
       renderCell: (params) => {
         const rowModeInEdit = params.api.getRowMode(params.id) === "edit";
+
         if (rowModeInEdit) {
           return (
             <>

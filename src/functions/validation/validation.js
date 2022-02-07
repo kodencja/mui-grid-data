@@ -38,24 +38,30 @@ export const validateFromAddForm = (values) => {
 };
 
 export const validate = (values, errors = {}) => {
+// console.log("values in validate");
+// console.log(values);
+
   // ALL FIELDS CURRENTLY USED / ARE BEING TYPED both from ADD and EDIT FROM
   for (let eachProp in values) {
     // value without spaces if not of date type
     const valNoSpaces = getValueToBeChecked(values, eachProp);
 
-    if (!errors[eachProp]) {
-      errors[eachProp] = chooseValidationForStringsOrNumbers(
-        valNoSpaces,
-        eachProp
-      );
+    if(valNoSpaces !== undefined){
+      if (!errors[eachProp]) {
+        errors[eachProp] = chooseValidationForStringsOrNumbers(
+          valNoSpaces,
+          eachProp
+        );
+      }
+      // CHECK TYPE OF THE VALUES (if no errors pointed to them so far)
+      if (!errors[eachProp]) {
+        errors[eachProp] = checkType(valNoSpaces, eachProp);
+      }
     }
-    // CHECK TYPE OF THE VALUES (if no errors pointed to them so far)
-    if (!errors[eachProp]) {
-      errors[eachProp] = checkType(valNoSpaces, eachProp);
-    }
+
   }
-  console.log("errors");
-  console.log(errors);
+  // console.log("errors");
+  // console.log(errors);
 
   return errors;
 };

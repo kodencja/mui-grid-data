@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import { Form, Field } from "react-final-form";
 import { makeStyles } from "@mui/styles";
-import { Container, Box, Button, Stack } from "@mui/material";
+import { Container, Box, Button, Stack, Typography } from "@mui/material";
 import { ConstsContext } from "../../App";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TextFieldComp from "../smallComponents/forForm/TextFieldComp";
 import SelectComp from "../smallComponents/forForm/SelectComp";
-
+import { useSearchParams } from "react-router-dom";
 import DateComp from "../smallComponents/forForm/DateComp";
 import { format } from "date-fns";
 import { validateFromAddForm } from "../../functions/validation/validation";
@@ -18,6 +18,7 @@ import {
 } from "../../functions/formatParse/formatParse";
 
 const AddRecord = ({ apiPropsPost }) => {
+  // const AddRecord = (props) => {
   const constsContext = useContext(ConstsContext);
 
   const { list_of_countries, currencies, units, vat, qualities } =
@@ -55,20 +56,30 @@ const AddRecord = ({ apiPropsPost }) => {
 
   const classes = useStyles();
 
-  const { api_post, baseURLtoDB, loading } = apiPropsPost;
+  const { api_post, baseURLtoDB, loading, responseTxt, apiResponseTxt, error } =
+    apiPropsPost;
+
+  useEffect(() => {
+    apiResponseTxt("");
+  }, []);
 
   let formData = {
     discount: 0,
     vat: 0,
     unit: "kg",
-    // use_by_date: format(new Date().setDate(new Date().getDate()), "Y-MM-dd"),
     use_by_date: format(new Date(), "Y-MM-dd"),
-    // use_by_date: format(new Date(), "dd.MM.Y"),
   };
 
-  // const onSubmit = ( values ) => {
-  //   nSubmit(values, api_post, baseURLtoDB);
-  // }
+  const resetAll = (restart) => {
+    console.log("restart");
+    if (!error) {
+      console.log("restart since no error");
+      restart();
+      // setTimeout(() => {
+      //   apiResponseTxt("");
+      // }, 3000);
+    }
+  };
 
   return (
     <Container>
@@ -81,17 +92,28 @@ const AddRecord = ({ apiPropsPost }) => {
         validate={validateFromAddForm}
         render={({
           handleSubmit,
-          form: { reset, restart },
+          form: { reset, restart, getState },
           submitting,
           pristine,
-          values,
-          resetFieldState,
-          // restart,
+          submitFailed,
+          submitSucceeded,
+          errors,
+          hasValidationErrors,
+          hasSubmitErrors,
+          dirty,
+          dirtyFields,
+          dirtySinceLastSubmit,
+          dirtyFieldsSinceLastSubmit,
         }) => (
           <Box
             component="form"
-            onSubmit={(event) => {
-              handleSubmit(event).then(restart);
+            onSubmit={async (event) => {
+              await handleSubmit(event);
+              console.log("submitSucceeded");
+              console.log(submitSucceeded);
+              !hasSubmitErrors
+                ? resetAll(restart)
+                : console.log("Submit failed!");
             }}
           >
             <div>
@@ -221,6 +243,39 @@ const AddRecord = ({ apiPropsPost }) => {
                 </Button>
               </Stack>
               {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
+              <Typography
+                variant="subtitle2"
+                component="div"
+                sx={{
+                  my: 2,
+                  color: responseTxt ? "success.dark" : "text.primary",
+                }}
+              >
+                {submitSucceeded && pristine ? responseTxt : "Nic"}
+              </Typography>
+              <pre>
+                submitSucceeded: {JSON.stringify(submitSucceeded, 0, 2)}
+              </pre>
+              <pre>submitFailed: {JSON.stringify(submitFailed, 0, 2)}</pre>
+              <pre>pristine: {JSON.stringify(pristine, 0, 2)}</pre>
+              <pre>
+                hasValidationErrors: {JSON.stringify(hasValidationErrors, 0, 2)}
+              </pre>
+              <pre>
+                hasSubmitErrors: {JSON.stringify(hasSubmitErrors, 0, 2)}
+              </pre>
+              <pre>dirty: {JSON.stringify(dirty, 0, 2)}</pre>
+              <pre>
+                dirtySinceLastSubmit:{" "}
+                {JSON.stringify(dirtySinceLastSubmit, 0, 2)}
+              </pre>
+              <pre>
+                dirtyFieldsSinceLastSubmit:{" "}
+                {JSON.stringify(dirtyFieldsSinceLastSubmit, 0, 2)}
+              </pre>
+              <pre>Error: {JSON.stringify(error, 0, 2)}</pre>
+              <pre>dirtyFields: {JSON.stringify(dirtyFields, 0, 2)}</pre>
+              <pre>Errors: {JSON.stringify(errors, 0, 2)}</pre>
             </div>
           </Box>
         )}
@@ -230,3 +285,8 @@ const AddRecord = ({ apiPropsPost }) => {
 };
 
 export default AddRecord;
+
+// onSubmit={async event => {
+//   await handleSubmit(event)
+//   form.reset()
+// }}

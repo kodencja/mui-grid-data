@@ -10,7 +10,7 @@ export const checkType = (valNoSpaces, eachProp) => {
       } 
       
       if (checkIfPropFit(eachProp, forAlpha)) {
-        console.log("isAlpha");
+        // console.log("isAlpha");
         if (!validator.isAlpha(valNoSpaces)) {
           return "Please use only letters";
         }

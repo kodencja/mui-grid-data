@@ -5,7 +5,7 @@ import { min01MaxMld, min0Max023, min0Max100 } from "../../constsNotInStore/data
   export const validateForNumbers = (valNoSpaces, eachProp) => {
     let min, max;
     // check type and min and max for NUMERIC values
-    console.log("Numeric fields");
+    // console.log("Numeric fields");
     if (checkIfPropFit(eachProp, min01MaxMld)) {
       min = 0.1;
       max = 999999999;

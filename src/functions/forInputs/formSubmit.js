@@ -18,5 +18,5 @@ export const onSubmit = async (values, api_post, baseURLtoDB) => {
     console.log("dataNoHTML");
     console.log(dataNoHTML);
     await api_post(baseURLtoDB, dataSubmit);
-    window.alert(JSON.stringify(dataSubmit, 0, 2));
+    // window.alert(JSON.stringify(dataSubmit, 0, 2));
   };

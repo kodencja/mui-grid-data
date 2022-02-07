@@ -23,7 +23,6 @@ import {
 } from "@mui/material/colors";
 import { ActionsContext } from "../App";
 
-// const Buttons = ({ modal_action_name, handleClose, handleDelete }) => {
 const Buttons = () => {
   const actsContext = useContext(ActionsContext);
 

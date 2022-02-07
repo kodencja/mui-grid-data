@@ -57,6 +57,8 @@ const DataTable = ({ rows }) => {
     handleOpen,
     set_selection_row,
     selection_row,
+    apiResponseTxt,
+    responseTxt,
   } = actsContext;
 
   // const { baseURLtoDB, api_put, api_del, rows_del } = apiProps;
@@ -71,23 +73,28 @@ const DataTable = ({ rows }) => {
   // const [del_row, set_modal_action] = useState(true);
 
   useEffect(() => {
-    console.log("selection_row");
-    console.log(selection_row);
-  }, [selection_row]);
+    apiResponseTxt("");
+  }, []);
 
   // useEffect(() => {
 
   //   // }, [to_del_row]);
   // }, [row_params.id]);
 
-  console.log("DataTable Comp.");
-  console.log("row_params:");
-  console.log(row_params);
+  // console.log("DataTable Comp.");
+  // console.log(window.location.search);
+  // console.log("row_params:");
+  // console.log(row_params);
 
   const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
     useEditRow(api_put, baseURLtoDB);
 
   const columnsAll = useColumns(handleOpen);
+
+  useEffect(() => {
+    apiResponseTxt("");
+  }, [editRowsModel]);
+  // }, [handleEditRowsModelChange]);
 
   const columns = useMemo(() => {
     return columnsAll;
@@ -146,10 +153,15 @@ const DataTable = ({ rows }) => {
       className={classes.headersAndCells}
     >
       {/* <ErrorBoundary> */}
-      {/* <Typography>{finalTextResponse}</Typography> */}
+      <Typography
+        variant="subtitle2"
+        component="div"
+        sx={{ my: 2, color: responseTxt ? "success.dark" : "text.primary" }}
+      >
+        {responseTxt}
+        {/* {rowMode.current === "edit" ? "" : responseTxt} */}
+      </Typography>
       <DataGrid
-        // className={classes.cellHeight}
-        // className={classes.headersAndCells}
         rows={rows}
         columns={columns}
         pagination

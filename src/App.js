@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState, useReducer, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import DateData from "./components/pages/DateData";
+// import DateData from "./components/pages/DateData";
 import Layout from "./components/Layout";
 import "./App.css";
 import DataTable from "./components/pages/DataTable";
@@ -32,10 +32,11 @@ export const ConstsContext = React.createContext();
 // function App({api_db, fetchData, api_put, api_post, api_del}) {
 function App(props) {
   const isMountedRef = useRef(true);
+  const [path, setPath] = useState('');
 
   const {
-    api_db: { data, loading, baseURLtoDB, error, responseTxt },
-    grid_actions: { row_params, modal_action_name, selection_row },
+    api_db_state: { data, loading, baseURLtoDB, error, responseTxt },
+    grid_actions_state: { row_params, modal_action_name, selection_row },
     fetchData,
     api_put,
     api_post,
@@ -44,6 +45,7 @@ function App(props) {
     set_row_params,
     set_modal_action,
     set_selection_row,
+    apiResponseTxt,
     constantsReducer: {
       list_of_countries,
       currencies,
@@ -66,10 +68,13 @@ function App(props) {
     baseURLtoDB,
     row_params,
     selection_row,
+    set_selection_row,
     rows_del,
     api_del,
     set_row_params,
     set_modal_action,
+    multi_del,
+    // apiResponseTxt
   };
 
   const { modalOpen, handleClose, handleDelete, handleOpen } =
@@ -77,7 +82,6 @@ function App(props) {
 
   useEffect(() => {
     isMountedRef.current = true;
-    // getData(baseURLtoDB);
     if (isMountedRef.current) {
       console.log("fetchData in App.js");
       fetchData(baseURLtoDB);
@@ -125,7 +129,7 @@ function App(props) {
   // }, [data, isMountedRef]);
   // }, [data, vat1]);
 
-  const apiPropsPost = { baseURLtoDB, api_post, loading };
+  const apiPropsPost = { baseURLtoDB, api_post, loading, error, responseTxt, apiResponseTxt };
 
   return (
     <div className="App">
@@ -147,6 +151,9 @@ function App(props) {
               handleOpen,
               set_selection_row,
               selection_row,
+              apiResponseTxt,
+              responseTxt,
+              error
             }}
           >
             <ConstsContext.Provider
@@ -190,8 +197,8 @@ function App(props) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    api_db: state.api_db,
-    grid_actions: state.grid_actions,
+    api_db_state: state.api_db,
+    grid_actions_state: state.grid_actions,
     constantsReducer: state.constantsReducer,
   };
 };

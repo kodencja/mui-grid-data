@@ -31,7 +31,7 @@ function ProductDetails({ row_to_del_or_view }) {
 
   const rowDetails = useMemo(() => {
     // detailsAboutRow(modal_action_name, row_to_del_or_view, selection_row);
-    detailsAboutRow(propsForRowDetails);
+    return detailsAboutRow(propsForRowDetails);
   }, [row_to_del_or_view, selection_row]);
 
   return (
@@ -47,7 +47,7 @@ function ProductDetails({ row_to_del_or_view }) {
           fontWeight: "bold",
         }}
       >
-        {modal_action_name !== "view" ? warning : product_details}
+        {modal_action_name !== view ? warning : product_details}
       </Typography>
       <Typography
         variant="caption"
@@ -81,12 +81,8 @@ function ProductDetails({ row_to_del_or_view }) {
           ""
         )}
       </Typography>
-      {/* <Stack spacing={2} direction="row" alignContent="center" justifyContent="center"> */}
-      <Buttons
-      // modal_action_name={modal_action_name}
-      // handleClose={handleClose}
-      // handleDelete={handleDelete}
-      />
+
+      <Buttons />
     </>
   );
 }
