@@ -47,7 +47,6 @@ function App(props) {
     set_selection_row,
     apiResponseTxt,
     constantsReducer: {
-      list_of_countries,
       currencies,
       units,
       qualities,
@@ -158,7 +157,6 @@ function App(props) {
           >
             <ConstsContext.Provider
               value={{
-                list_of_countries,
                 currencies,
                 units,
                 qualities,

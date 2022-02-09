@@ -11,12 +11,13 @@ import { ConstsContext } from "../../App";
 import { format } from "date-fns";
 import { getBruttoPrice, getDiscountNettoPrice } from "../../functions/forColumns.js/valuesGetters";
 import { handleCancelClick, handleEditClick, handleSaveClick } from "../../functions/forColumns.js/actionsGrid";
+import { list_of_countries } from "../../constsNotInStore/countries";
 
 // const useColumns = (handleOpen, classes) => {
 const useColumns = (handleOpen) => {
   const constsContext = useContext(ConstsContext);
 
-  const { list_of_countries, currencies, units, discounts, vat, qualities } =
+  const { currencies, units, discounts, vat, qualities } =
     constsContext;
 
   const defaultTheme = createTheme();
@@ -167,7 +168,8 @@ const useColumns = (handleOpen) => {
       type: "singleSelect",
       valueOptions: discounts,
       valueFormatter: (params) => {
-        return `${params.value} %`;
+        return params.value && `${params.value} %`;
+        // return `${params.value} %`;
       },
     },
     {
@@ -189,7 +191,7 @@ const useColumns = (handleOpen) => {
       type: "singleSelect",
       valueOptions: vat,
       valueFormatter: (params) => {
-        return `${params.value * 100} %`;
+        return params.value && `${params.value * 100} %`;
       },
     },
     {
@@ -235,7 +237,7 @@ const useColumns = (handleOpen) => {
       editable: true,
       // valueFormatter for displaying
       valueFormatter: (params) => {
-        return format(new Date(params.value), "Y/MM/dd");
+        return params.value && format(new Date(params.value), "Y/MM/dd");
       },
     },
     {

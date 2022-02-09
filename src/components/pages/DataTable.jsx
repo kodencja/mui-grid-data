@@ -14,7 +14,7 @@ import DeleteIcon from "@mui/icons-material/DeleteOutlined";
 import useColumns from "../customHooks/useColumns";
 import useEditRow from "../customHooks/useEditRow";
 // import { handleDeleteRow } from "../../functions/modalFn";
-import { useStylesData } from "../../styles/useStylesData";
+import useSomeStyles from "../../styles/useSomeStyles";
 // import {
 //   red,
 //   pink,
@@ -64,6 +64,8 @@ const DataTable = ({ rows }) => {
   // const { baseURLtoDB, api_put, api_del, rows_del } = apiProps;
   // const { row_params, set_row_params, to_del_row, set_modal_action } =
   //   gridActionsProps;
+
+  const { useStylesData } = useSomeStyles();
 
   const classes = useStylesData();
 

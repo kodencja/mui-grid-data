@@ -49,8 +49,24 @@ body {
 
 .MuiCalendarPicker-root {
   background-color: grey;
+  color: white;
+}
+.MuiCalendarPicker-root .PrivatePickersSlideTransition-root {
+  min-height: 240px;
+}
+.MuiCalendarPicker-root .PrivatePickersFadeTransitionGroup-root {
+  color: lightgoldenrodyellow;
 }
 
+.MuiCalendarPicker-root .MuiTypography-root {
+  color: lightgoldenrodyellow;
+}
+.MuiCalendarPicker-root .MuiSvgIcon-root {
+  color: floralwhite;
+}
+.MuiCalendarPicker-root .MuiButtonBase-root:hover {
+  background-color: rgb(196, 215, 218);
+}
 /* .data-grid-header {
   font-weight: 900 !important;
 } */

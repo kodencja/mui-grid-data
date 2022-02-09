@@ -21807,59 +21807,173 @@
       "id": 1579
     },
     {
-      "discount": 0,
-      "vat": 0,
-      "unit": "kg",
-      "use_by_date": "2022-05-24",
+      "id": 1580,
       "name": "figi",
-      "price_netto": 47.2,
-      "currency": "EUR",
-      "quality": "M",
-      "id": 1580
-    },
-    {
+      "price_netto": 48.2,
       "discount": 0,
       "vat": 0,
+      "currency": "EUR",
       "unit": "kg",
-      "use_by_date": "2022-04-20",
+      "quality": "M",
+      "use_by_date": "2022-05-24",
+      "origin": "",
+      "producer": false,
+      "email_contact": ""
+    },
+    {
+      "id": 1581,
       "name": "tea",
-      "price_netto": 42,
-      "currency": "EUR",
-      "quality": "M",
-      "id": 1581
-    },
-    {
+      "price_netto": 43,
       "discount": 0,
       "vat": 0,
+      "currency": "EUR",
       "unit": "kg",
-      "use_by_date": "2022-04-21",
+      "quality": "M",
+      "use_by_date": "2022-04-20",
+      "origin": "",
+      "producer": null,
+      "email_contact": false
+    },
+    {
+      "id": 1582,
       "name": "zur",
-      "price_netto": 8,
-      "currency": "EUR",
-      "quality": "M",
-      "id": 1582
-    },
-    {
+      "price_netto": 11,
       "discount": 0,
       "vat": 0,
+      "currency": "EUR",
       "unit": "kg",
-      "use_by_date": "2022-07-18",
-      "name": "kawa",
-      "price_netto": 42,
-      "currency": "PLN",
-      "quality": "T",
-      "id": 1583
+      "quality": "M",
+      "use_by_date": "2022-04-21",
+      "origin": "",
+      "producer": null,
+      "email_contact": ""
     },
     {
+      "id": 1584,
+      "name": "zurek1",
+      "price_netto": 2,
       "discount": 0,
       "vat": 0.08,
+      "currency": "PLN",
       "unit": "kg",
-      "use_by_date": "2022-03-10",
-      "name": "zurek",
-      "price_netto": 23,
+      "quality": "M",
+      "use_by_date": "2022-02-23",
+      "origin": "Armenia",
+      "producer": "false0",
+      "email_contact": ""
+    },
+    {
+      "id": 1585,
+      "name": "kawa",
+      "price_netto": null,
+      "discount": 0,
+      "use_by_date": null,
+      "currency": "EUR",
+      "origin": null,
+      "producer": false
+    },
+    {
+      "id": 1586,
+      "name": "zurek2",
+      "price_netto": 5.9,
+      "discount": 0,
+      "vat": 0,
+      "currency": "PLN",
+      "unit": "kg",
+      "quality": "M",
+      "use_by_date": false
+    },
+    {
+      "discount": 0,
+      "vat": 0,
+      "unit": "kg",
+      "use_by_date": "2022-02-23",
+      "name": "marchewka",
+      "price_netto": 12.5,
       "currency": "PLN",
       "quality": "M",
-      "id": 1584
+      "id": 1587
+    },
+    {
+      "discount": 0,
+      "vat": 0,
+      "unit": "kg",
+      "use_by_date": "2022-02-28",
+      "name": "herbata",
+      "price_netto": 52,
+      "currency": "EUR",
+      "quality": "T",
+      "id": 1588
+    },
+    {
+      "discount": 0,
+      "vat": 0,
+      "unit": "kg",
+      "use_by_date": "2022-04-12",
+      "name": "orzechy",
+      "price_netto": 123,
+      "currency": "PLN",
+      "quality": "T",
+      "id": 1589
+    },
+    {
+      "discount": 0,
+      "vat": 0,
+      "unit": "kg",
+      "use_by_date": "2022-02-22",
+      "name": "Pietruszka",
+      "price_netto": 12.2,
+      "currency": "PLN",
+      "quality": "M",
+      "id": 1590
+    },
+    {
+      "discount": 0,
+      "vat": 0,
+      "unit": "kg",
+      "use_by_date": "2022-02-21",
+      "name": "tomatos",
+      "price_netto": 31,
+      "currency": "EUR",
+      "quality": "M",
+      "id": 1591
+    },
+    {
+      "discount": 0,
+      "vat": 0,
+      "unit": "kg",
+      "use_by_date": "2022-02-21",
+      "name": "melon",
+      "price_netto": 32,
+      "currency": "EUR",
+      "quality": "M",
+      "id": 1592
+    },
+    {
+      "id": 1594,
+      "name": "pomidor",
+      "price_netto": 32.3,
+      "discount": 0,
+      "vat": 0,
+      "currency": "EUR",
+      "unit": "kg",
+      "quality": "T",
+      "use_by_date": "2022-02-22",
+      "origin": "Almania",
+      "producer": "",
+      "email_contact": ""
+    },
+    {
+      "discount": 0,
+      "vat": 0,
+      "unit": "kg",
+      "use_by_date": "2022-04-11",
+      "name": "tea",
+      "price_netto": 41,
+      "origin": false,
+      "currency": "EUR",
+      "quality": "T",
+      "id": 1595
     }
   ]
 }

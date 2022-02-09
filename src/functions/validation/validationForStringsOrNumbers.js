@@ -7,6 +7,13 @@ import {
 } from "../../constsNotInStore/data_types_for_validation";
 
 export const chooseValidationForStringsOrNumbers = (valNoSpaces, eachProp) => {
+
+  // console.log("chooseValidationForStringsOrNumbers");
+  // console.log(valNoSpaces);
+  if(valNoSpaces === false){
+    return 'The value cannot be false';
+  }
+
   if (checkIfPropFit(eachProp, stringTypeFields)) {
     return validateForStrings(valNoSpaces, eachProp);
   }
@@ -15,5 +22,5 @@ export const chooseValidationForStringsOrNumbers = (valNoSpaces, eachProp) => {
     return validateForNumbers(valNoSpaces, eachProp);
   }
 
-  return; // throw error
+  // return `Surely the value is false`; // throw error
 };

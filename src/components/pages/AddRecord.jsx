@@ -5,57 +5,31 @@ import { Container, Box, Button, Stack, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { ConstsContext } from "../../App";
+import useSomeStyles from "../../styles/useSomeStyles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import TextFieldComp from "../smallComponents/forForm/TextFieldComp";
 import SelectComp from "../smallComponents/forForm/SelectComp";
 import DateComp from "../smallComponents/forForm/DateComp";
+import CircularProgress from "@mui/material/CircularProgress";
 import { format } from "date-fns";
-import { validateFromAddForm } from "../../functions/validation/validation";
+import { validate } from "../../functions/validation/validation";
 import { onSubmit } from "../../functions/forInputs/formSubmit";
 import {
   checkFloat,
   checkInt,
   dateFormating,
 } from "../../functions/formatParse/formatParse";
+import { list_of_countries } from "../../constsNotInStore/countries";
 
 const AddRecord = ({ apiPropsPost }) => {
   // const AddRecord = (props) => {
   const constsContext = useContext(ConstsContext);
 
-  const { list_of_countries, currencies, units, vat, qualities } =
-    constsContext;
+  const { currencies, units, vat, qualities } = constsContext;
 
-  const matches = useMediaQuery("(min-width: 750px)");
-  const useStyles = makeStyles({
-    marginV: {
-      marginTop: "10px",
-      marginBottom: "10px",
-    },
-    center: {
-      textAlign: "center",
-      justifyContent: "center",
-    },
-    rowBreak: {
-      flexBasis: "100%",
-      height: "0",
-      display: matches ? "flex" : "none",
-    },
-    break: {
-      flexBasis: "100%",
-      height: "0",
-    },
-    rowFlex: {
-      // display: matches ? "flex" : "block",
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "center",
-    },
-    title: {
-      fontSize: "22px",
-    },
-  });
+  const { useStylesForm } = useSomeStyles("(min-width: 750px)");
 
-  const classes = useStyles();
+  const classes = useStylesForm();
 
   const { api_post, baseURLtoDB, loading, responseTxt, apiResponseTxt, error } =
     apiPropsPost;
@@ -99,7 +73,7 @@ const AddRecord = ({ apiPropsPost }) => {
         initialValues={{
           ...formData,
         }}
-        validate={validateFromAddForm}
+        validate={validate}
         render={({ handleSubmit, form, submitting, pristine }) => {
           formRef.current = form;
           return (
@@ -248,7 +222,27 @@ const AddRecord = ({ apiPropsPost }) => {
                   }}
                 >
                   {/* {error ? error : !error && pristine ? responseTxt : "Nic"} */}
-                  {error ? error : !error && pristine ? responseTxt : ""}
+                  {loading ? (
+                    <CircularProgress />
+                  ) : !loading ? (
+                    error ? (
+                      error
+                    ) : !error && pristine ? (
+                      responseTxt
+                    ) : (
+                      ""
+                    )
+                  ) : (
+                    ""
+                  )}
+                  {/* {loading && !error
+                    ? // <CircularProgress />
+                      "Wait..."
+                    : error
+                    ? error
+                    : !error && pristine
+                    ? responseTxt
+                    : ""} */}
                 </Typography>
               </div>
             </Box>

@@ -8,6 +8,7 @@ export const requiredFieldsNames = [
     "currency",
     "unit",
     "quality",
+    'vat'
   ];
 
   // arrays gathered according to values types
@@ -44,3 +45,4 @@ export const requiredFieldsNames = [
   export const min3Max3 = ["currency"];
   export const min1Max1 = ["quality"];
   export const min1Max10 = ["unit"];
+  export const forCountries = ["origin"];

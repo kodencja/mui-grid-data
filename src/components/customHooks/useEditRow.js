@@ -1,6 +1,4 @@
-import { useState, useContext, useRef } from "react";
-import { format } from "date-fns";
-// import { ActionsContext } from "../../App";
+import { useState, useRef } from "react";
 import { validate } from "../../functions/validation/validation";
 import { escapeHTMLentitiesForNaN } from "../../functions/validation/escapeHTMLent";
 import {
@@ -11,12 +9,7 @@ import {
 import { dateFormating } from "../../functions/formatParse/formatParse";
 
 const useEditRow = (api_put, baseURLtoDB) => {
-// const useEditRow = () => {
   const [editRowsModel, setEditRowsModel] = useState({});
-
-  // const actsContext = useContext(ActionsContext);
-
-  // const { api_put, baseURLtoDB } = actsContext;
 
   // save row data after editing
   const [editRowData, setEditRowData] = useState({});
@@ -25,22 +18,39 @@ const useEditRow = (api_put, baseURLtoDB) => {
   const handleEditRowsModelChange = async (model) => {
     const editingRowId = Object.keys(model); // e.g. 1 or 5
 
+console.log("model");
+console.log(model);
+
     const rowObj = model[editingRowId[0]];
-    for (let prop in model[editingRowId[0]]) {
-      rowObj[prop] = model[editingRowId[0]][prop];
-      if (model[editingRowId[0]][prop].value === undefined || model[editingRowId[0]][prop].value === null) {
-        rowObj[prop].value = '';
-      }
+    for (let prop in model[editingRowId[0]]) {           
+// null, undefined, false, 0, ''
+
+     // najpierw zamienic wszystkie undefined i null  na empty string '', a potem sprawdzić, które z nich są required i do nich przypisać błąd, a pozostałe opuścić
+
+        // get only fields that are not undefined
+          if (model[editingRowId[0]][prop].value === undefined || model[editingRowId[0]][prop].value === null){
+          rowObj[prop].value = '';
+        } else {
+          rowObj[prop] = model[editingRowId[0]][prop];
+        }
     }
 
+    console.log("rowObj-1");
+    console.log(rowObj);
 
     const flatRowObj = await getFlatRowObj(rowObj);
-
+    console.log("flatRowObj-1");
+    console.log(flatRowObj);
 
     // make sure if there is any model being edited
     if (editingRowId.length > 0) {
       error.current = false;
+      // const errors = validate(flatRowObj);
       const errors = validate(flatRowObj);
+      console.log("errors-2");
+      console.log(errors);
+      console.log("rowObj-2");
+      console.log(rowObj);
 
       const rowObjWithError = await markErrorInRowObj(rowObj, errors, error);
 

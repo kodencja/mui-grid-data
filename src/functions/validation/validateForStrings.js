@@ -2,8 +2,9 @@ import validator from "validator";
 import { checkIfPropFit } from "./checkIfPropFit";
 import { checkLength } from "./checkLength";
 import { isDaysAhead } from "./isDaysAhead";
-import { min2Max50, min3Max35, min3Max3, min1Max1, min1Max10, forDate } from "../../constsNotInStore/data_types_for_validation";
+import { min2Max50, min3Max35, min3Max3, min1Max1, min1Max10, forDate, forCountries } from "../../constsNotInStore/data_types_for_validation";
 import { noOfdaysAhead } from '../../constsNotInStore/data_val_for_validation'
+import { list_of_countries } from "../../constsNotInStore/countries";
 
   export const validateForStrings = (valNoSpaces, eachProp) => {
     let min, max;
@@ -35,7 +36,14 @@ import { noOfdaysAhead } from '../../constsNotInStore/data_val_for_validation'
       if (!checkLength(valNoSpaces, min, max)) {
         return `This field must contain between ${min} and ${max} chars`;
       }
-    } 
+
+    }
+    
+    if (checkIfPropFit(eachProp, forCountries)) {
+      if(!list_of_countries.some(country => country === valNoSpaces)){
+        return `Type a valid country name`;
+      }
+    }
     
     if (checkIfPropFit(eachProp, min1Max10)) {
       min = 1;
@@ -63,5 +71,6 @@ import { noOfdaysAhead } from '../../constsNotInStore/data_val_for_validation'
       }
     }
 
-    return;
+    // return;
+    // return `The value is false`;
   };

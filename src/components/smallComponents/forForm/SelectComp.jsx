@@ -65,75 +65,19 @@ const SelectComp = (props) => {
     <FormControl
       sx={{ m: 1, minWidth: 120 }}
       error={meta.error && meta.touched}
-      // helperText={meta.touched ? meta.error : undefined}
     >
-      {/* <InputLabel id="label-favorite-color">Fav Color</InputLabel> */}
       <InputLabel id={rest.label}>{rest.label}</InputLabel>
       <Select
         name={name}
         labelId={rest.label}
-        // id={rest.label}
-
-        // inputProps={rest}
         onChange={onChange}
         onBlur={onBlur}
-        // value={value}
         value={value}
-        // input={<OutlinedInput label={rest.label} />}
         label={rest.label}
         variant="outlined"
         color="primary"
         required={rest.required}
-        // endAdornment={
-        //   // startAdornment={
-        //   rest.sign ? (
-        //     <Button
-        //       position="start"
-        //       disabled
-        //       // sx={{ textAlign: "left" }}
-        //       // sx={{ "&::after": { mr: "25px" } }}
-        //       // sx={{ "& .MuiTypography-root": { mr: "25px" } }}
-        //       // sx={{ position: "absolute", left: "50px", top: 0 }}
-        //     >
-        //       {rest.sign}
-        //     </Button>
-        //   ) : (
-        //     ""
-        //   )
-        // }
-        // endAdornment={
-        //   // startAdornment={
-        //   rest.sign ? (
-        //     <InputAdornment
-        //       position="start"
-        //       disableTypography
-        //       // sx={{ textAlign: "left" }}
-        //       sx={{ "&::after": { mr: "25px" } }}
-        //       // sx={{ "& .MuiTypography-root": { mr: "25px" } }}
-        //       // sx={{ position: "absolute", left: "50px", top: 0 }}
-        //     >
-        //       {rest.sign}
-        //     </InputAdornment>
-        //   ) : (
-        //     ""
-        //   )
-        // }
-
-        // sx={fieldStyling}
-
-        // sx={value ? { pb: 0 } : { pb: "10px" }}
-        // sx={fieldStyle}
-        // sx={{
-        //   // "& .MuiSelect-select": {
-        //   "& .MuiSelect-outlined": {
-        //     padding: "10px",
-        //     paddingBottom: "20px",
-        //   },
-        // }}
-
-        // size="small"
         placeholder={rest.placeholder}
-        // MenuProps={MenuProps}
       >
         {name !== "vat" ? (
           <MenuItem value="">
@@ -145,12 +89,9 @@ const SelectComp = (props) => {
           <MenuItem
             key={opt}
             value={name === "quality" ? opt[0] : rest.sign ? opt / 100 : opt}
-            // defaultValue={name === "vat" ? 0 : undefined}
             defaultValue={rest.defaultValue}
           >
-            {/* {opt} */}
             {opt} {rest.sign ? rest.sign : ""}
-            {/* {`${opt}%`} */}
           </MenuItem>
         ))}
       </Select>
@@ -160,51 +101,3 @@ const SelectComp = (props) => {
 };
 
 export default SelectComp;
-
-/* <MenuItem value="">
-<em>None</em>
-</MenuItem>
-<MenuItem value="red">Red</MenuItem>
-<MenuItem value="yellow">Yellow</MenuItem>
-<MenuItem value="blue">Blue</MenuItem> 
-
-
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
-
-        <MenuItem value="">
-          <em>None</em>
-        </MenuItem>
-        <MenuItem value="red">Red</MenuItem>
-        <MenuItem value="yellow">Yellow</MenuItem>
-        <MenuItem value="blue">Blue</MenuItem>
-
-
-
-          console.log(restInput); // {checked: undefined, type: 'select', onFocus: ƒ}
-  console.log(rest);  // {label: 'Fav Col', placeholder: 'Fav Col', options: ['red', 'green', 'blue', 'yellow'], children: undefined, render: undefined}
-  console.log(meta);  // { active: false
-  data: Object
-  dirty: false
-  dirtySinceLastSubmit: false
-  error: undefined
-  initial: Array(0)
-  invalid: false
-  length: 0
-  modified: false
-  modifiedSinceLastSubmit: false
-  pristine: true
-  submitError: undefined
-  submitFailed: false
-  submitSucceeded: false
-  submitting: false
-  touched: false
-  valid: true
-  validating: false
-  visited: false }
-
-        */
