@@ -56,7 +56,7 @@ function App(props) {
       product_details,
       if_sure_single_del,
       if_sure_multi_del,
-      multi_del, del, view
+      multi_del, del, view, formInitData
     },
   } = props;
 
@@ -165,7 +165,7 @@ function App(props) {
                 warning,
                 product_details,
                 if_sure_single_del,
-                if_sure_multi_del, multi_del, del, view
+                if_sure_multi_del, multi_del, del, view, formInitData
               }}
             >
               <Layout>

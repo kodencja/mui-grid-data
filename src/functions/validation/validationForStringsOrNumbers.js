@@ -24,6 +24,4 @@ export const chooseValidationForStringsOrNumbers = (valNoSpaces, eachProp) => {
   if (checkIfPropFit(eachProp, numberTypeFields)) {
     return validateForNumbers(valNoSpaces, eachProp);
   }
-
-  // return `Surely the value is false`; // throw error
 };

@@ -11,18 +11,6 @@ import {
   Box,
   FormHelperText,
 } from "@mui/material";
-import { Stack } from "@mui/material";
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      width: 250,
-    },
-  },
-};
 
 const SelectComp = (props) => {
   // console.log(props.input); // {name: 'toppings', onBlur: ƒ, onChange: ƒ, …}
@@ -31,35 +19,6 @@ const SelectComp = (props) => {
     meta,
     ...rest
   } = props;
-
-  const fieldStyle = {
-    // marginTop: "20px",
-    // marginBottom: "20px",
-    // minWidth: "100px",
-    // display: "block",
-    pb: "10px",
-    // "& .MuiSelect-outlined .MuiOutlinedInput-input": {
-    // "& .MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input.MuiSelect-select":
-    "& .MuiSelect-outlined": {
-      // pt: "8.5px",
-      // pb: "10px",
-    },
-  };
-
-  const fieldStyling = { position: "relative", pb: "10px", textAlign: "right" };
-  // const fieldStyling = { position: "relative", pb: "10px", textAlign: "right" };
-  // const fieldStyling = () =>
-  //   value
-  //     ? { pb: 0, position: "relative" }
-  //     : { pb: "10px", position: "relative" };
-
-  // if (name === "currency") {
-  //   console.log("SelectComp: ");
-  //   console.log(meta);
-  //   console.log("Select meta.error: ");
-  //   console.log(meta.error);
-  //   console.log(meta.touched);
-  // }
 
   return (
     <FormControl

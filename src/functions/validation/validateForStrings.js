@@ -13,14 +13,6 @@ import { throwErrors } from "./throwErrors";
 
     throwErrors('undefined', valNoSpaces, eachProp);
 
-    // if (valNoSpaces === undefined) {
-    //   throw new Error(`The value - "${valNoSpaces}" - is undefined`);
-    // }
-
-    // if (eachProp === undefined) {
-    //   throw new Error(`The prop - "${eachProp}" - of the values is undefined`);
-    // }
-
     // for date value
     if (checkIfPropFit(eachProp, forDate)) {
      
@@ -82,6 +74,5 @@ import { throwErrors } from "./throwErrors";
       }
     }
 
-    // return;
-    // return `The value is false`;
+    return;
   };

@@ -2,22 +2,12 @@ import React from "react";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
-import { TextField, FormHelperText, FormControl } from "@mui/material";
-import TextFieldComp from "./TextFieldComp";
-import { makeStyles } from "@mui/styles";
-import * as colors from "@mui/material/colors";
-
-const useStyles = makeStyles({
-  root: {
-    marginTop: "10px",
-    marginBottom: "10px",
-    marginRight: "10px",
-    maxWidth: "200px",
-  },
-});
+import { TextField } from "@mui/material";
+import useSomeStyles from "../../../styles/useSomeStyles";
 
 const DateComp = (props) => {
-  const classes = useStyles();
+  const { useStylesDateComp } = useSomeStyles();
+  const classes = useStylesDateComp();
 
   const {
     input: { name, onChange, onBlur, value, ...restInput },

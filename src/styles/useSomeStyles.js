@@ -4,6 +4,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { formStyle } from "./formStyle";
 import { tableStyle } from "./tableStyle";
+import { dateInputStyle, textInputStyle } from "./inputStyles";
 
 const defaultTheme = createTheme();
 
@@ -18,8 +19,12 @@ const useSomeStyles = (value = "(min-width: 750px)") => {
       }, {defaultTheme});
 
       const useStylesForm = makeStyles(formStyle(matches));
+      
+      const useStylesDateComp = makeStyles(dateInputStyle);
 
-return { useStylesData, useStylesForm};
+      const useStylesTextComp = makeStyles(textInputStyle);
+
+return { useStylesData, useStylesForm, useStylesDateComp, useStylesTextComp};
 }
 
 export default useSomeStyles;

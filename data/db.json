@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Puree - Blackcurrant",
-      "price_netto": 13.49,
+      "price_netto": 16.49,
       "discount": 20,
       "vat": 0.05,
       "currency": "EUR",
@@ -17,7 +17,7 @@
     {
       "id": 2,
       "name": "Barramoundi",
-      "price_netto": 467.06,
+      "price_netto": 464.06,
       "discount": 24,
       "vat": 0.08,
       "currency": "EUR",
@@ -21909,31 +21909,6 @@
       "email_contact": ""
     },
     {
-      "discount": 0,
-      "vat": 0,
-      "unit": "kg",
-      "use_by_date": "2022-04-12",
-      "name": "orzechy",
-      "price_netto": 123,
-      "currency": "PLN",
-      "quality": "T",
-      "id": 1589
-    },
-    {
-      "id": 1590,
-      "name": "Pietruszka",
-      "price_netto": 13.2,
-      "discount": 0,
-      "vat": 0,
-      "currency": "PLN",
-      "unit": "kg",
-      "quality": "M",
-      "use_by_date": "2022-02-22",
-      "origin": "",
-      "producer": "",
-      "email_contact": ""
-    },
-    {
       "id": 1594,
       "name": "pomidor",
       "price_netto": 32.3,
@@ -21958,17 +21933,6 @@
       "currency": "EUR",
       "quality": "T",
       "id": 1595
-    },
-    {
-      "discount": -40,
-      "vat": 0.23,
-      "unit": "kg",
-      "use_by_date": "2022-02-25",
-      "name": "groch",
-      "price_netto": 10,
-      "currency": "PLN",
-      "quality": "M",
-      "id": 1596
     }
   ]
 }

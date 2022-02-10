@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { isValidDate } from "../validation/isDaysAhead";
-import { throwErrDefined, throwErrUndefined } from "../validation/throwErrors";
+import { throwErrUndefined } from "../validation/throwErrors";
 
 export const checkInt = (val) => {
   try {

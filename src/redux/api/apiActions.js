@@ -11,10 +11,6 @@ import {
   SET_RESPONSE_TEXT,
 } from "./apiTypes";
 import { initApiState } from "./apiReducer";
-import {
-  throwErrDefined,
-  throwErrUndefined,
-} from "../../functions/validation/throwErrors";
 
 export const apiRequest = () => {
   return {
@@ -29,60 +25,31 @@ export const apiDataRequest = () => {
 };
 
 export const apiResponseTxt = (txt) => {
-  try {
-    throwErrUndefined(txt);
-    throwErrDefined("string", txt);
-    return {
-      type: SET_RESPONSE_TEXT,
-      payload: txt,
-    };
-  } catch (err) {
-    console.log(
-      `Error in apiResponseTxt(): Error name: ${err.name}. Error message: ${err.message}`
-    );
-  }
+  return {
+    type: SET_RESPONSE_TEXT,
+    payload: txt,
+  };
 };
 
 export const apiDataSuccess = (data) => {
-  try {
-    throwErrUndefined(data);
-    return {
-      type: FETCH_DATA_SUCCESS,
-      payload: data,
-    };
-  } catch (err) {
-    console.log(
-      `Error in apiDataSuccess(): Error name: ${err.name}. Error message: ${err.message}`
-    );
-  }
+  return {
+    type: FETCH_DATA_SUCCESS,
+    payload: data,
+  };
 };
 
 export const putDataSuccess = (data) => {
-  try {
-    throwErrUndefined(data);
-    return {
-      type: PUT_DATA_SUCCESS,
-      payload: data,
-    };
-  } catch (err) {
-    console.log(
-      `Error in putDataSuccess(): Error name: ${err.name}. Error message: ${err.message}`
-    );
-  }
+  return {
+    type: PUT_DATA_SUCCESS,
+    payload: data,
+  };
 };
 
 export const deleteRowsSuccess = (idsArray) => {
-  try {
-    throwErrUndefined(idsArray);
-    return {
-      type: DEL_ROWS_SUCCESS,
-      payload: idsArray,
-    };
-  } catch (err) {
-    console.log(
-      `Error in deleteRowsSuccess(): Error name: ${err.name}. Error message: ${err.message}`
-    );
-  }
+  return {
+    type: DEL_ROWS_SUCCESS,
+    payload: idsArray,
+  };
 };
 
 export const apiDataFailure = (error) => {
@@ -290,29 +257,34 @@ const deleteSomeRows = (dispatch, idsArray) => {
 };
 
 export const deleteRows = (idsArray) => {
-  try {
-    if (idsArray.length <= 0) {
-      throw new Error("There is no selected data to delete");
-    }
 
-    return async (dispatch) => {
+  return async (dispatch) => {
+
+    try {
+      if (idsArray.length <= 0) {
+        throw new Error("There is no selected data to delete");
+      }
       dispatch(apiDataRequest());
 
-      // rows are deleted only in aplication memory ('data' array), not in database so as not to loose all records in the database. Here we simulate api latency ????
-      // setTimeout(async () => {
-      console.log("deleteRows async");
-      await deleteSomeRows(dispatch, idsArray);
-      // setTimeout(() => {
-      dispatch(apiResponseTxt("The products have been deleted!"));
-      // }, 1000)
-      console.log("After deleteSomeRows");
-      //   await dispatch(apiRequestComplete());
-      console.log("After apiRequestComplete");
-      // }, 500);
-    };
-  } catch (err) {
-    console.log(
-      `Error in deleteRows(): Error name: ${err.name}. Error message: ${err.message}`
-    );
-  }
+    // rows are deleted only in aplication memory ('data' array), not in database so as not to loose all records in the database. Here we simulate api latency ????
+    // setTimeout(async () => {
+    console.log("deleteRows async");
+    await deleteSomeRows(dispatch, idsArray);
+    // setTimeout(() => {
+    dispatch(apiResponseTxt("The products have been deleted!"));
+    // }, 1000)
+    console.log("After deleteSomeRows");
+    //   await dispatch(apiRequestComplete());
+    console.log("After apiRequestComplete");
+    // }, 500);
+  
+    } catch (err) {
+      console.log(
+        `Error in deleteRows(): Error name: ${err.name}. Error message: ${err.message}`
+      );
+    }
+
+  };
+
+
 };

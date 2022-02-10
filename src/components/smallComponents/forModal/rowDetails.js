@@ -1,18 +1,28 @@
 import { Typography } from "@mui/material";
+import { throwErrUndefined } from "../../../functions/validation/throwErrors";
 
 // export  const detailsAboutRow = (modal_action_name, row_to_del_or_view, selection_row) => {
 export const detailsAboutRow = (propsForRowDetails) => {
-  const {
-    modal_action_name,
-    selection_row,
-    row_to_del_or_view,
-    multi_del,
-  } = propsForRowDetails;
 
-  if (modal_action_name !== multi_del) {
-    return single_row_details(row_to_del_or_view);
+  try {
+    const {
+      modal_action_name,
+      selection_row,
+      row_to_del_or_view,
+      multi_del,
+    } = propsForRowDetails;
+    
+    throwErrUndefined(modal_action_name);
+    throwErrUndefined(selection_row);
+    throwErrUndefined(row_to_del_or_view);
+  
+    if (modal_action_name !== multi_del) {
+      return single_row_details(row_to_del_or_view);
+    }
+    return multi_rows_details(selection_row);
+  } catch (error) {
+      console.log("Error in detailsAboutRow(): Error name: " + error.name + ". Error message: " + error.message);
   }
-  return multi_rows_details(selection_row);
 };
 
 const single_row_details = (row_to_del_or_view) => {

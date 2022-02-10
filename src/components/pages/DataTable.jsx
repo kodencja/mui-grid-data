@@ -1,19 +1,10 @@
-import React, { useState, useEffect, useRef, useMemo, useContext } from "react";
-import {
-  DataGrid,
-  GridToolbar,
-  GridToolbarContainer,
-  GridToolbarColumnsButton,
-  GridToolbarFilterButton,
-  GridToolbarExport,
-  GridToolbarDensitySelector,
-} from "@mui/x-data-grid";
+import React, { useState, useEffect, useMemo, useContext } from "react";
+import { DataGrid } from "@mui/x-data-grid";
+import CustomToolbar from "../smallComponents/forForm/CustomToolbar";
 import ModalComp from "../../components/ModalComp";
-import { Typography, IconButton } from "@mui/material";
-import DeleteIcon from "@mui/icons-material/DeleteOutlined";
+import { Typography } from "@mui/material";
 import useColumns from "../customHooks/useColumns";
 import useEditRow from "../customHooks/useEditRow";
-// import { handleDeleteRow } from "../../functions/modalFn";
 import useSomeStyles from "../../styles/useSomeStyles";
 // import {
 //   red,
@@ -102,45 +93,6 @@ const DataTable = ({ rows }) => {
     return columnsAll;
   }, []);
 
-  function CustomToolbar() {
-    return (
-      <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarDensitySelector />
-        <GridToolbarExport />
-        <IconButton
-          size="large"
-          edge="start"
-          aria-label="menu"
-          id="basic-button"
-          aria-controls="basic-menu"
-          aria-haspopup="true"
-          // aria-expanded={open ? "true" : undefined}
-          // onClick={(e) => handleDelete(e, true)}
-          onClick={(e) => handleOpen(e, "multi_del")}
-          variant="contained"
-          disabled={selection_row.length > 0 ? false : true}
-          sx={{ color: "warning.main" }}
-          // sx={{ color: selection_row.length > 0 ? "warning" : grey[500] }}
-          // sx={{ color: blue[700] }}
-          // sx={styles.iconMenu}>
-        >
-          <DeleteIcon />
-        </IconButton>
-      </GridToolbarContainer>
-    );
-  }
-
-  const styles = {
-    customHeaderCell: {
-      "& div": {
-        whiteSpace: "normal",
-        wordWrap: "break-word",
-      },
-    },
-  };
-
   return (
     <div
       style={{
@@ -185,6 +137,9 @@ const DataTable = ({ rows }) => {
         components={{
           Toolbar: CustomToolbar,
           // Toolbar: GridToolbar,
+        }}
+        componentsProps={{
+          toolbar: [handleOpen, selection_row],
         }}
         getCellClassName={(params) =>
           params.field === "discount_netto"

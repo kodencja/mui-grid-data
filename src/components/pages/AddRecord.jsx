@@ -9,9 +9,9 @@ import TextFieldComp from "../smallComponents/forForm/TextFieldComp";
 import SelectComp from "../smallComponents/forForm/SelectComp";
 import DateComp from "../smallComponents/forForm/DateComp";
 import CircularProgress from "@mui/material/CircularProgress";
-import { format } from "date-fns";
 import { validate } from "../../functions/validation/validation";
 import { onSubmit } from "../../functions/forInputs/formSubmit";
+import { clearResponsetxt } from "../../functions/forInputs/forResponseTxt";
 import {
   checkFloat,
   checkInt,
@@ -23,7 +23,7 @@ const AddRecord = ({ apiPropsPost }) => {
   // const AddRecord = (props) => {
   const constsContext = useContext(ConstsContext);
 
-  const { currencies, units, vat, qualities } = constsContext;
+  const { currencies, units, vat, qualities, formInitData } = constsContext;
 
   const { useStylesForm } = useSomeStyles("(min-width: 750px)");
 
@@ -46,22 +46,10 @@ const AddRecord = ({ apiPropsPost }) => {
       console.log("RESTART");
       formRef.current.restart();
       setTimeout(() => {
-        clearResponsetxt();
+        clearResponsetxt(apiResponseTxt);
       }, 5000);
     }
   }, [error, responseTxt]);
-
-  const clearResponsetxt = () => {
-    console.log("CLEAR TXT");
-    apiResponseTxt("");
-  };
-
-  let formData = {
-    discount: 0,
-    vat: 0,
-    unit: "kg",
-    use_by_date: format(new Date(), "Y-MM-dd"),
-  };
 
   return (
     <Container>
@@ -69,7 +57,7 @@ const AddRecord = ({ apiPropsPost }) => {
       <Form
         onSubmit={(values) => onSubmit(values, api_post, baseURLtoDB)}
         initialValues={{
-          ...formData,
+          ...formInitData,
         }}
         validate={validate}
         render={({ handleSubmit, form, submitting, pristine, values }) => {
@@ -105,7 +93,7 @@ const AddRecord = ({ apiPropsPost }) => {
                     name="discount"
                     type="number"
                     label="Discount"
-                    defaultValue={formData.discount}
+                    defaultValue={formInitData.discount}
                     sign="%"
                     component={TextFieldComp}
                     parse={checkInt}
@@ -139,7 +127,7 @@ const AddRecord = ({ apiPropsPost }) => {
                   name="use_by_date"
                   type="date"
                   label="Use by date"
-                  initialValue={formData.use_by_date}
+                  initialValue={formInitData.use_by_date}
                   required
                   component={DateComp}
                   min={new Date()}
@@ -154,7 +142,7 @@ const AddRecord = ({ apiPropsPost }) => {
                   component={SelectComp}
                   // options={[0, 5, 8, 23]}
                   options={vat.map((n) => parseInt(n * 100))}
-                  defaultValue={formData.vat}
+                  defaultValue={formInitData.vat}
                   parse={checkFloat}
                 />
                 <Field
@@ -173,7 +161,7 @@ const AddRecord = ({ apiPropsPost }) => {
                   placeholder="Unit"
                   component={SelectComp}
                   options={units}
-                  defaultValue={formData.unit}
+                  defaultValue={formInitData.unit}
                   required
                 />
                 <Field

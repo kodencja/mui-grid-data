@@ -1,5 +1,5 @@
-import { useState, useContext } from "react";
-import { checkIfMultiDel } from "../../functions/actionFns/delFns";
+import { useState } from "react";
+import { throwErrDefined, throwErrUndefined } from "../../functions/validation/throwErrors";
 
 
 export const useModalCommands = (props) => {
@@ -8,35 +8,56 @@ export const useModalCommands = (props) => {
 
     const [modalOpen, setModalOpen] = useState(false);
 
-// przy rows_del nie ma 'params'
   const handleOpen = (params = {}, name) => {
-    set_row_params(params);
-    set_modal_action(name);
-    setModalOpen(true);
+
+    try {
+      console.log("handleOpen");
+      console.log(params);
+      console.log(name);
+      throwErrUndefined(params);
+      throwErrDefined('string', name);
+
+      set_row_params(params);
+      set_modal_action(name);
+      setModalOpen(true);
+    } catch (err) {
+      console.log(
+        "Error in handleOpen(): Error name: " + err.name + ". Error message: " + err.message
+      );
+    }
   };
 
   
  const handleClose = () => setModalOpen(false);
 
-   const handleDelete = async (e) => {
-     e.stopPropagation();
+ const handleDelete = async (e) => {
+  try {
+    e.stopPropagation();
     //  console.log("modal_action_name");
     //  console.log(modal_action_name);
     //  if (!checkIfMultiDel(modal_action_name)) {
-     if (modal_action_name !== multi_del) {
+    if (modal_action_name !== multi_del) {
       set_selection_row([]);
-       await api_del(`${baseURLtoDB}/${row_params.id}`);
+      await api_del(`${baseURLtoDB}/${row_params.id}`);
       //  apiResponseTxt("The product has been removed from database!");
-       handleClose();
-       console.log("handleDelete1");
+      handleClose();
+      console.log("handleDelete1");
 
-       return;
-     }
-     await rows_del(selection_row);
+      return;
+    }
+    await rows_del(selection_row);
     //  apiResponseTxt("The products have been deleted!");
-     handleClose();
-     console.log("handleDelete2");
-   };
+    handleClose();
+    console.log("handleDelete2");
+  } catch (err) {
+    console.log(
+      "Error in handleOpen(): Error name: " +
+        err.name +
+        ". Error message: " +
+        err.message
+    );
+  }
+};
 
     return {modalOpen, handleClose, handleDelete, handleOpen};
 }

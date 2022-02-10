@@ -1,6 +1,10 @@
 import { checkPropOfRequiredFields } from "../validation/validation";
 
 export const getUpdatedRowObj = (rowObj = {}) => {
+// try {
+  // if(Object.keys(rowObj).length){
+  //   throw new Error('The rowObj object has no props');
+  // };
   const rowUpdated = {};
   for (const [key, val] of Object.entries(rowObj)) {
     rowUpdated[key] = val.value;
@@ -8,6 +12,9 @@ export const getUpdatedRowObj = (rowObj = {}) => {
   console.log("rowUpdated");
   console.log(rowUpdated);
   return rowUpdated;
+// } catch (err) {
+//   console.log("Error in getUpdatedRowObj(): Error name: " + err.name + ". Error message: " + err.message);
+// }
 };
 
 // const copyPropWithRequiredFieldsPropChecking = (prop, rowObj) => {
@@ -24,25 +31,30 @@ export const getUpdatedRowObj = (rowObj = {}) => {
 // }
 
 export const getFlatRowObj = (rowObj = {}) => {
-  const rowObjCopy = {};
-  return new Promise((res, rej) => {
-    for (let prop in rowObj) {
-      // console.log("rowObj[prop] " + prop);
-      // console.log(rowObj[prop].value);
-
-      // for required fields pass all fields (except undefined and null what was specified while creating rowObj)
-      if (checkPropOfRequiredFields(prop)) {
-        rowObjCopy[prop] = rowObj[prop].value;
-      } else {
-          // pass all fields except empty strings '', so also false and 0 , empty strings are considered as no value
-        if (rowObj[prop].value !== "") {
+  const rowObjLength = Object.keys(rowObj).length;
+  return new Promise((resolve, reject) => {
+    if (!rowObj || (rowObj && rowObjLength === 0)) {
+      reject(new Error("No values to check!"));
+    } else {
+      const rowObjCopy = {};
+      for (let prop in rowObj) {
+        // console.log("rowObj[prop] " + prop);
+        // console.log(rowObj[prop].value);
+  
+        // for required fields pass all fields (except undefined and null what was specified while creating rowObj)
+        if (checkPropOfRequiredFields(prop)) {
           rowObjCopy[prop] = rowObj[prop].value;
-        } 
-
+        } else {
+            // pass all fields except empty strings '', so also false and 0 , empty strings are considered as no value
+          if (rowObj[prop].value !== "") {
+            rowObjCopy[prop] = rowObj[prop].value;
+          } 
+  
+        }
+  
       }
-
-    }
-    res(rowObjCopy);
+      resolve(rowObjCopy);
+        }
   });
 };
 

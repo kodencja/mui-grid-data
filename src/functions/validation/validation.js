@@ -70,6 +70,7 @@ export const validate = (values) => {
       valNoSpaces[eachProp] = getFormatOfValueToBeChecked(values, eachProp);
 
       // console.log("valNoSpaces[eachProp]");
+      // console.log(eachProp);
       // console.log(valNoSpaces[eachProp]);
 
       if (checkPropOfRequiredFields(eachProp)) {
@@ -80,6 +81,8 @@ export const validate = (values) => {
 
       // if no error in the 'errors[eachProp]' so far, let's proceed further validation
       if (!errors[eachProp]) {
+        // console.log("errors[eachProp] in validate");
+        // console.log(errors[eachProp]);
         errors[eachProp] = validateSingleValue(
           valNoSpaces[eachProp],
           eachProp,
@@ -87,10 +90,6 @@ export const validate = (values) => {
         );
       }
     }
-
-    // console.log("valNoSpaces");
-    // console.log(valNoSpaces);
-
     console.log("errors-1");
     console.log(errors);
 
@@ -107,18 +106,19 @@ export const validate = (values) => {
 const validateSingleValue = (value, eachProp, errors = {}) => {
   // console.log("value in validateSingleValue");
   // console.log(value);
+  // console.log(eachProp);
+  // console.log(errors[eachProp]);
 
   throwErrors('undefined', value, eachProp);
 
   // ALL FIELDS CURRENTLY USED / ARE BEING TYPED both from ADD and EDIT FROM
-
-  if (value !== undefined) {
     if (!errors[eachProp]) {
-      return chooseValidationForStringsOrNumbers(value, eachProp);
-    }
-    // CHECK TYPE OF THE VALUES (if no errors pointed to them so far)
-    if (!errors[eachProp]) {
+      // console.log("chooseValidationForStringsOrNumbers");
+      const err =  chooseValidationForStringsOrNumbers(value, eachProp);
+      if(err){
+        return err;
+      }
+      // console.log("In checkType");
       return checkType(value, eachProp);
     }
-  }
 };
