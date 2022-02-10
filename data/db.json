@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Puree - Blackcurrant",
-      "price_netto": 8.49,
+      "price_netto": 9.49,
       "discount": 20,
       "vat": 0.05,
       "currency": "EUR",
@@ -21939,17 +21939,6 @@
       "id": 1591
     },
     {
-      "discount": 0,
-      "vat": 0,
-      "unit": "kg",
-      "use_by_date": "2022-02-21",
-      "name": "melon",
-      "price_netto": 32,
-      "currency": "EUR",
-      "quality": "M",
-      "id": 1592
-    },
-    {
       "id": 1594,
       "name": "pomidor",
       "price_netto": 32.3,
@@ -21974,6 +21963,17 @@
       "currency": "EUR",
       "quality": "T",
       "id": 1595
+    },
+    {
+      "discount": 0,
+      "vat": 0,
+      "unit": "kg",
+      "use_by_date": "2022-02-25",
+      "name": "groch",
+      "price_netto": 31,
+      "currency": "PLN",
+      "quality": "M",
+      "id": 1596
     }
   ]
 }

@@ -5,8 +5,11 @@ import {
   stringTypeFields,
   numberTypeFields,
 } from "../../constsNotInStore/data_types_for_validation";
+import { throwErrors } from "./throwErrors";
 
 export const chooseValidationForStringsOrNumbers = (valNoSpaces, eachProp) => {
+
+  throwErrors('undefined', valNoSpaces, eachProp);
 
   // console.log("chooseValidationForStringsOrNumbers");
   // console.log(valNoSpaces);

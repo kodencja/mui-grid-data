@@ -5,10 +5,21 @@ import { isDaysAhead } from "./isDaysAhead";
 import { min2Max50, min3Max35, min3Max3, min1Max1, min1Max10, forDate, forCountries } from "../../constsNotInStore/data_types_for_validation";
 import { noOfdaysAhead } from '../../constsNotInStore/data_val_for_validation'
 import { list_of_countries } from "../../constsNotInStore/countries";
+import { throwErrors } from "./throwErrors";
 
   export const validateForStrings = (valNoSpaces, eachProp) => {
     let min, max;
     // check length for STRING values (except date)
+
+    throwErrors('undefined', valNoSpaces, eachProp);
+
+    // if (valNoSpaces === undefined) {
+    //   throw new Error(`The value - "${valNoSpaces}" - is undefined`);
+    // }
+
+    // if (eachProp === undefined) {
+    //   throw new Error(`The prop - "${eachProp}" - of the values is undefined`);
+    // }
 
     // for date value
     if (checkIfPropFit(eachProp, forDate)) {

@@ -1,4 +1,5 @@
 import validator from "validator";
+import { throwErrUndefined } from "./throwErrors";
 
 const escapeHTMLentities = (value) => {
 
@@ -11,6 +12,9 @@ const escapeHTMLentities = (value) => {
 };
 
 export const escapeHTMLentitiesForNaN = (values) => {
+
+throwErrUndefined(values);
+
   let dataWithoutHTMLchars = {},
     n = 0;
   const valObjLength = Object.keys(values).length;
@@ -23,7 +27,7 @@ export const escapeHTMLentitiesForNaN = (values) => {
         n++;
         dataWithoutHTMLchars[eachProp] = escapeHTMLentities(values[eachProp]);
 
-        // preserve promise fn to resolve dataWithoutHTMLchars only after the loop finishes
+        // preserve promise fn from resolving dataWithoutHTMLchars before the loop finishes
         if (n >= valObjLength) {
           resolve(dataWithoutHTMLchars);
         }

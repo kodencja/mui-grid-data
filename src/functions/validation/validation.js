@@ -5,9 +5,11 @@ import {
 } from "../../constsNotInStore/data_types_for_validation";
 import { chooseValidationForStringsOrNumbers } from "./validationForStringsOrNumbers";
 import { checkIfPropFit } from "./checkIfPropFit";
+import { throwErrors, throwErrUndefined } from "./throwErrors";
 
 
 const getValuesWithoutSpaces = (val) => {
+  throwErrUndefined(val);
   return val.toString().split(" ").join("");
 };
 
@@ -16,6 +18,8 @@ const getFormatOfValueToBeChecked = (values, eachProp) => {
   // console.log(values[eachProp]);
   // console.log(eachProp);
 
+  throwErrUndefined(eachProp);
+
   if (values[eachProp] !== false && !checkIfPropFit(eachProp, forDate)) {
     return getValuesWithoutSpaces(values[eachProp]);
   }
@@ -23,13 +27,20 @@ const getFormatOfValueToBeChecked = (values, eachProp) => {
 };
 
 export const checkPropOfRequiredFields = (prop) => {
+
+  throwErrUndefined(prop);
+        // REQUIRED FIELDS
+        if (requiredFieldsNames.length === 0) {
+          throw new Error("No defined required fields");
+        }
   return requiredFieldsNames.some((el) => el === prop);
 };
 
-const checkValueOfRequiredFields = (value, eachProp) => {
+const checkValueOfRequiredFields = (value) => {
   // some values might be equal '0' e.g. from discount or vat fields
   // console.log("value in checkValueOfRequiredFields");
   // console.log(value !== false);
+  throwErrUndefined(value);
   if (
     value !== 0 &&
     value !== false &&
@@ -39,7 +50,6 @@ const checkValueOfRequiredFields = (value, eachProp) => {
   }
 };
 
-
 export const validate = (values) => {
   try {
     // console.log("validate values");
@@ -47,17 +57,14 @@ export const validate = (values) => {
     // console.log("requiredFieldsNames.length");
     // console.log(requiredFieldsNames.length);
 
+    throwErrUndefined(values);
+
     if (Object.keys(values).length <= 0) {
       throw new Error("No values to validate");
     }
     let errors = {},
       valNoSpaces = {};
     
-      // REQUIRED FIELDS
-    if (requiredFieldsNames.length === 0) {
-      throw new Error("No defined required fields");
-    }
-
     for (let eachProp in values) {
       // value without spaces if not of date type
       valNoSpaces[eachProp] = getFormatOfValueToBeChecked(values, eachProp);
@@ -67,8 +74,7 @@ export const validate = (values) => {
 
       if (checkPropOfRequiredFields(eachProp)) {
         errors[eachProp] = checkValueOfRequiredFields(
-          valNoSpaces[eachProp],
-          eachProp
+          valNoSpaces[eachProp]
         );
       }
 
@@ -97,6 +103,8 @@ export const validate = (values) => {
 const validateSingleValue = (value, eachProp, errors = {}) => {
   // console.log("value in validateSingleValue");
   // console.log(value);
+
+  throwErrors('undefined', value, eachProp);
 
   // ALL FIELDS CURRENTLY USED / ARE BEING TYPED both from ADD and EDIT FROM
 

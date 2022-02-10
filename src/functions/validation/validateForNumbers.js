@@ -1,9 +1,13 @@
 import { checkIfPropFit } from "./checkIfPropFit";
 import validator from "validator";
 import { min01MaxMld, min0Max023, min0Max100 } from "../../constsNotInStore/data_types_for_validation";
+import { throwErrors } from "./throwErrors";
 
   export const validateForNumbers = (valNoSpaces, eachProp) => {
     let min, max;
+    
+    throwErrors('undefined', valNoSpaces, eachProp);
+
     // check type and min and max for NUMERIC values
     // console.log("Numeric fields");
     if (checkIfPropFit(eachProp, min01MaxMld)) {

@@ -1,6 +1,6 @@
 import { checkPropOfRequiredFields } from "../validation/validation";
 
-export const getUpdatedRowObj = (rowObj) => {
+export const getUpdatedRowObj = (rowObj = {}) => {
   const rowUpdated = {};
   for (const [key, val] of Object.entries(rowObj)) {
     rowUpdated[key] = val.value;
@@ -23,7 +23,7 @@ export const getUpdatedRowObj = (rowObj) => {
 //   }
 // }
 
-export const getFlatRowObj = (rowObj) => {
+export const getFlatRowObj = (rowObj = {}) => {
   const rowObjCopy = {};
   return new Promise((res, rej) => {
     for (let prop in rowObj) {
@@ -47,23 +47,31 @@ export const getFlatRowObj = (rowObj) => {
 };
 
 // export const markErrorInRowObj = (rowObj, errorsObj, setError) => {
-export const markErrorInRowObj = (rowObj, errorsObj, error) => {
+export const markErrorInRowObj = (rowObj = {}, errorsObj = {}, error) => {
   // console.log("rowObj-2");
   // console.log(rowObj);
   // console.log("errorsObj");
   // console.log(errorsObj);
   const errorsObjLength = Object.keys(errorsObj).length;
+  const rowObjLength = Object.keys(rowObj).length;
   let n = 0;
   return new Promise((resolve, reject) => {
-    for (let prop in errorsObj) {
-      if (errorsObj[prop] !== undefined) {
-        error.current = true;
-        rowObj[prop] = { ...rowObj[prop], error: true };
-      }
-      n++;
-      if (n >= errorsObjLength) {
-        resolve(rowObj);
-      }
-    }
+    if (!rowObj || (rowObj && rowObjLength === 0)) {
+      reject(new Error("No values to check!"));
+    }   
+    else {
+      if(errorsObjLength) {
+        for (let prop in errorsObj) {
+          if (errorsObj[prop] !== undefined) {
+            error.current = true;
+            rowObj[prop] = { ...rowObj[prop], error: true };
+          }
+          n++;
+          if (n >= errorsObjLength) {
+            resolve(rowObj);
+          }
+        }
+      } 
+  }
   });
 };
