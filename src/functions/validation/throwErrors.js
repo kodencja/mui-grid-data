@@ -1,13 +1,19 @@
 
+export const throwErrMax = (arg, max) => {
+  if(arg > max) throw new Error (`The parameter ${arg} is too high`);
+};
+
+export const throwErrMin = (arg, min) => {
+  if(arg < min) throw new Error (`The parameter ${arg} is too low`);
+};
+
 export const throwErrDefined = (typeToCheck, arg) => {
-  if (typeof arg !== typeToCheck) {
-    throw new Error(`The following parameter is not of ${typeToCheck} type: ${arg}`);
-  }
+  if (typeof arg !== typeToCheck) throw new TypeError(`The following parameter is not of ${typeToCheck} type: ${arg}`);
 };
 
 export const throwErrUndefined = (arg) => {
   if(typeof arg === 'undefined'){
-    throw new Error(`The parameter is undefined`);
+    throw new ReferenceError(`The parameter is undefined`);
   }
 };
 

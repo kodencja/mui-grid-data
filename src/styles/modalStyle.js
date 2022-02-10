@@ -1,7 +1,7 @@
 import  * as colors from "@mui/material/colors";
 
 export const modalStyle = (matches) => {
- const style = {
+  return {
     color: colors.yellow["50"],
     position: "absolute",
     top: "50%",
@@ -21,5 +21,4 @@ export const modalStyle = (matches) => {
     textAlign: "center",
     overflow: matches ? "scroll" : "auto",
   };
-  return style;
 }

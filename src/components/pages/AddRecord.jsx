@@ -1,12 +1,10 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { Form, Field } from "react-final-form";
-import { makeStyles } from "@mui/styles";
 import { Container, Box, Button, Stack, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { ConstsContext } from "../../App";
 import useSomeStyles from "../../styles/useSomeStyles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import TextFieldComp from "../smallComponents/forForm/TextFieldComp";
 import SelectComp from "../smallComponents/forForm/SelectComp";
 import DateComp from "../smallComponents/forForm/DateComp";
@@ -74,7 +72,7 @@ const AddRecord = ({ apiPropsPost }) => {
           ...formData,
         }}
         validate={validate}
-        render={({ handleSubmit, form, submitting, pristine }) => {
+        render={({ handleSubmit, form, submitting, pristine, values }) => {
           formRef.current = form;
           return (
             <Box
@@ -235,14 +233,7 @@ const AddRecord = ({ apiPropsPost }) => {
                   ) : (
                     ""
                   )}
-                  {/* {loading && !error
-                    ? // <CircularProgress />
-                      "Wait..."
-                    : error
-                    ? error
-                    : !error && pristine
-                    ? responseTxt
-                    : ""} */}
+                  <pre>{JSON.stringify(values, 0, 2)}</pre>
                 </Typography>
               </div>
             </Box>

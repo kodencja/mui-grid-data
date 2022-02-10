@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Puree - Blackcurrant",
-      "price_netto": 9.49,
+      "price_netto": 13.49,
       "discount": 20,
       "vat": 0.05,
       "currency": "EUR",
@@ -21887,7 +21887,7 @@
       "discount": 0,
       "vat": 0,
       "unit": "kg",
-      "use_by_date": "2022-02-23",
+      "use_by_date": "jakas data",
       "name": "marchewka",
       "price_netto": 12.5,
       "currency": "PLN",
@@ -21895,15 +21895,18 @@
       "id": 1587
     },
     {
+      "id": 1588,
+      "name": "herbata",
+      "price_netto": 50,
       "discount": 0,
       "vat": 0,
-      "unit": "kg",
-      "use_by_date": "2022-02-28",
-      "name": "herbata",
-      "price_netto": 52,
       "currency": "EUR",
+      "unit": "kg",
       "quality": "T",
-      "id": 1588
+      "use_by_date": "2022-02-28",
+      "origin": "",
+      "producer": "",
+      "email_contact": ""
     },
     {
       "discount": 0,
@@ -21917,33 +21920,25 @@
       "id": 1589
     },
     {
-      "discount": 0,
-      "vat": 0,
-      "unit": "kg",
-      "use_by_date": "2022-02-22",
+      "id": 1590,
       "name": "Pietruszka",
-      "price_netto": 12.2,
-      "currency": "PLN",
-      "quality": "M",
-      "id": 1590
-    },
-    {
+      "price_netto": 13.2,
       "discount": 0,
       "vat": 0,
+      "currency": "PLN",
       "unit": "kg",
-      "use_by_date": "2022-02-21",
-      "name": "tomatos",
-      "price_netto": 31,
-      "currency": "EUR",
       "quality": "M",
-      "id": 1591
+      "use_by_date": "2022-02-22",
+      "origin": "",
+      "producer": "",
+      "email_contact": ""
     },
     {
       "id": 1594,
       "name": "pomidor",
       "price_netto": 32.3,
       "discount": 0,
-      "vat": 0,
+      "vat": 10,
       "currency": "EUR",
       "unit": "kg",
       "quality": "T",
@@ -21958,19 +21953,19 @@
       "unit": "kg",
       "use_by_date": "2022-04-11",
       "name": "tea",
-      "price_netto": 41,
+      "price_netto": 0,
       "origin": false,
       "currency": "EUR",
       "quality": "T",
       "id": 1595
     },
     {
-      "discount": 0,
-      "vat": 0,
+      "discount": -40,
+      "vat": 0.23,
       "unit": "kg",
       "use_by_date": "2022-02-25",
       "name": "groch",
-      "price_netto": 31,
+      "price_netto": 10,
       "currency": "PLN",
       "quality": "M",
       "id": 1596

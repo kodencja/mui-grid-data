@@ -96,7 +96,11 @@ export const validate = (values) => {
 
     return errors;
   } catch (error) {
-    console.log("Some error1:" + error.message);
+    if(error && error.message){
+      console.log("Error name: " + error.name + ". Error message: " + error.message);
+    } else {
+      console.log("Some error-2:" + error);
+    }
   }
 };
 
