@@ -8,40 +8,10 @@ import {
   ListItemText,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import {
-  red,
-  pink,
-  purple,
-  deepPurple,
-  indigo,
-  blue,
-  lightBlue,
-  cyan,
-  teal,
-  green,
-  lightGreen,
-  lime,
-  amber,
-  orange,
-  deepOrange,
-  brown,
-  grey,
-  blueGrey,
-  yellow,
-} from "@mui/material/colors";
+import { lime } from "@mui/material/colors";
+import { menuStyle } from "../styles/menuStyle";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const styles = {
-  iconMenu: {
-    // color: yellow["A100"],
-    color: lime[100],
-    // color: purple[200],
-  },
-  textMenu: {
-    // color: yellow[50],
-    color: lime[50],
-  },
-};
+import useSomeStyles from "../styles/useSomeStyles";
 
 const MenuComp = ({ menuItems }) => {
   const navigate = useNavigate();
@@ -63,6 +33,13 @@ const MenuComp = ({ menuItems }) => {
     handleClose();
   };
 
+  const { useStylesMenu } = useSomeStyles();
+  const classes = useStylesMenu();
+
+  // console.log("classes.colorPaper");
+  // console.log(classes.colorPaper);
+  // console.log(classes.iconMenu);
+
   return (
     // <div style={{ backgroundColor: green[500] }}>
     <div
@@ -83,13 +60,14 @@ const MenuComp = ({ menuItems }) => {
         onClick={handleClick}
         variant="contained"
         // sx={{ color: "white" }}
-        sx={styles.iconMenu}
+        className={classes.iconMenu}
       >
         <MenuIcon />
       </IconButton>
 
       <Menu
         id="basic-menu"
+        // className={classes.colorPaper}
         sx={(theme) => ({
           "& .MuiMenu-paper": {
             bgcolor: theme.palette.primary.main,
@@ -118,8 +96,16 @@ const MenuComp = ({ menuItems }) => {
             // sx={{ color: "white" }}
           >
             {/* <ListItemIcon sx={{ color: yellow["A200"] }}> */}
-            <ListItemIcon sx={styles.iconMenu}>{item.icon}</ListItemIcon>
-            <ListItemText sx={styles.textMenu}>{item.text}</ListItemText>
+            {/* <ListItemIcon className={classes.iconMenu}>
+              {item.icon}
+            </ListItemIcon>
+            <ListItemText className={classes.textMenu}>
+              {item.text}
+            </ListItemText> */}
+            <ListItemIcon sx={{ color: lime[100] }}>{item.icon}</ListItemIcon>
+            <ListItemText sx={{ color: lime[50] }}>{item.text}</ListItemText>
+            {/* <ListItemIcon sx={menuStyle.iconMenu}>{item.icon}</ListItemIcon>
+            <ListItemText sx={menuStyle.textMenu}>{item.text}</ListItemText> */}
           </MenuItem>
         ))}
       </Menu>

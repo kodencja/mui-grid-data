@@ -1,6 +1,9 @@
 import  * as colors from "@mui/material/colors";
 
-export const tableStyle = { 
+// export const tableStyle = { 
+export const tableStyle = (theme) => {
+  
+  return {
     
     headersAndCells: {
     "& .MuiDataGrid-columnHeaderTitle": {
@@ -47,4 +50,5 @@ export const tableStyle = {
       backgroundColor: colors.grey[100],
     },
   }
+}
 }

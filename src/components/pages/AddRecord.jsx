@@ -3,7 +3,7 @@ import { Form, Field } from "react-final-form";
 import { Container, Box, Button, Stack, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
-import { ConstsContext } from "../../App";
+import { ConstsContext, ActionsContext } from "../../App";
 import useSomeStyles from "../../styles/useSomeStyles";
 import TextFieldComp from "../smallComponents/forForm/TextFieldComp";
 import SelectComp from "../smallComponents/forForm/SelectComp";
@@ -18,10 +18,14 @@ import {
   dateFormating,
 } from "../../functions/formatParse/formatParse";
 import { list_of_countries } from "../../constsNotInStore/countries";
+import { addProduct } from "../../constsNotInStore/titles";
 
 const AddRecord = ({ apiPropsPost }) => {
   // const AddRecord = (props) => {
   const constsContext = useContext(ConstsContext);
+  const actsContext = useContext(ActionsContext);
+
+  const { setMainTitle } = actsContext;
 
   const { currencies, units, vat, qualities, formInitData } = constsContext;
 
@@ -36,6 +40,7 @@ const AddRecord = ({ apiPropsPost }) => {
 
   useEffect(() => {
     apiResponseTxt("");
+    setMainTitle(addProduct);
   }, []);
 
   useEffect(() => {
@@ -53,7 +58,7 @@ const AddRecord = ({ apiPropsPost }) => {
 
   return (
     <Container>
-      <div className={classes.title}>Add product to database</div>
+      {/* <div className={classes.title}>Add product to database</div> */}
       <Form
         onSubmit={(values) => onSubmit(values, api_post, baseURLtoDB)}
         initialValues={{

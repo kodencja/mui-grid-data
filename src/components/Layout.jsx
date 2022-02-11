@@ -34,7 +34,7 @@ const menuItems = [
   },
 ];
 
-const Layout = ({ children }) => {
+const Layout = ({ mainTitle, children }) => {
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -42,7 +42,7 @@ const Layout = ({ children }) => {
           <Toolbar>
             <MenuComp menuItems={menuItems} />
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Data from database
+              {mainTitle}
             </Typography>
             <Button color="inherit">Login</Button>
           </Toolbar>

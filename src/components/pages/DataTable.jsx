@@ -28,6 +28,7 @@ import useSomeStyles from "../../styles/useSomeStyles";
 //   yellow,
 // } from "@mui/material/colors";
 import { ActionsContext } from "../../App";
+import { database } from "../../constsNotInStore/titles";
 
 // const defaultTheme = createTheme();
 
@@ -50,6 +51,7 @@ const DataTable = ({ rows }) => {
     selection_row,
     apiResponseTxt,
     responseTxt,
+    setMainTitle,
   } = actsContext;
 
   // const { baseURLtoDB, api_put, api_del, rows_del } = apiProps;
@@ -67,6 +69,7 @@ const DataTable = ({ rows }) => {
 
   useEffect(() => {
     apiResponseTxt("");
+    setMainTitle(database);
   }, []);
 
   // useEffect(() => {

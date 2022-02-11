@@ -20,6 +20,7 @@ import {
 import CircularProgress from "@mui/material/CircularProgress";
 import AddRecord from "./components/pages/AddRecord";
 import About from "./components/pages/About";
+import { addProduct, database, about } from "./constsNotInStore/titles";
 import { createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -32,7 +33,7 @@ export const ConstsContext = React.createContext();
 // function App({api_db, fetchData, api_put, api_post, api_del}) {
 function App(props) {
   const isMountedRef = useRef(true);
-  const [path, setPath] = useState('');
+  const [mainTitle, setMainTitle] = useState(database);
 
   const {
     api_db_state: { data, loading, baseURLtoDB, error, responseTxt },
@@ -152,7 +153,8 @@ function App(props) {
               selection_row,
               apiResponseTxt,
               responseTxt,
-              error
+              error,
+              setMainTitle
             }}
           >
             <ConstsContext.Provider
@@ -168,7 +170,7 @@ function App(props) {
                 if_sure_multi_del, multi_del, del, view, formInitData
               }}
             >
-              <Layout>
+              <Layout mainTitle={mainTitle}>
                 <Routes>
                   <Route
                     exact

@@ -21884,15 +21884,18 @@
       "use_by_date": false
     },
     {
-      "discount": 0,
-      "vat": 0,
-      "unit": "kg",
-      "use_by_date": "jakas data",
+      "id": 1587,
       "name": "marchewka",
       "price_netto": 12.5,
+      "discount": 0,
+      "vat": 0,
       "currency": "PLN",
+      "unit": "kg",
       "quality": "M",
-      "id": 1587
+      "use_by_date": "2022-02-23",
+      "origin": "",
+      "producer": "",
+      "email_contact": ""
     },
     {
       "id": 1588,
