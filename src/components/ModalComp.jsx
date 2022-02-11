@@ -16,8 +16,8 @@ const ModalComp = () => {
 
   // console.log("modal_action_name");
   // console.log(modal_action_name); // view, del, multi_del
-  // console.log("row_params");
-  // console.log(row_params);
+  console.log("row_params");
+  console.log(row_params);
 
   const matches = useMediaQuery("(max-height:500px)");
   const [row_to_del_or_view, set_row_to_del_or_view] = useState([]);

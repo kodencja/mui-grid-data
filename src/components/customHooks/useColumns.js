@@ -28,7 +28,7 @@ import {
 } from "../../functions/validation/throwErrors";
 
 // const useColumns = (handleOpen, classes) => {
-const useColumns = (handleOpen) => {
+const useColumns = (propForUseColumns) => {
   const styles = {
     customHeaderCell: {
       whiteSpace: "normal",
@@ -92,9 +92,9 @@ const useColumns = (handleOpen) => {
 
   const classes = useStyles();
 
-    const constsContext = useContext(ConstsContext);
+    // const constsContext = useContext(ConstsContext);
 
-    const { currencies, units, discounts, vat, qualities } = constsContext;
+    const { handleOpen, currencies, units, discounts, vat, qualities } = propForUseColumns;
 
     const columnsAll = [
       {

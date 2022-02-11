@@ -19,9 +19,28 @@ const TextFieldComp = (props) => {
     ...rest
   } = props;
 
+  // const useStyles = makeStyles({
+  //   root: {
+  //     marginTop: "15px",
+  //     marginBottom: "15px",
+  //     marginRight: "15px",
+  //     maxWidth: (props) => (props.name === "discount" ? "100px" : "200px"),
+  //     // maxWidth: "200px",
+  //     "& .MuiInputBase-root": {
+  //       paddingLeft: 5,
+  //     },
+  //     "& .MuiInput-underline.Mui-focused": {
+  //       backgroundColor: "#e8f0fe",
+  //       color: "darkslategray",
+  //     },
+  //   },
+  // });
+
   const { useStylesTextComp } = useSomeStyles();
   const classes = useStylesTextComp({ name: name });
   // console.log("TextFieldCompo: ");
+
+  // const classes = useStyles({ name: name });
 
   return (
     <TextField

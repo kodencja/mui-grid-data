@@ -4,7 +4,7 @@ import { throwErrDefined, throwErrUndefined } from "../../functions/validation/t
 
 export const useModalCommands = (props) => {
 
-    const {modal_action_name, baseURLtoDB, row_params, selection_row, set_selection_row, rows_del, api_del, set_row_params, set_modal_action, multi_del, apiResponseTxt } = props;
+    const {modal_action_name, baseURLtoDB, row_params, selection_row, set_selection_row, rows_del, api_del, set_row_params, set_modal_action, multi_del } = props;
 
     const [modalOpen, setModalOpen] = useState(false);
 

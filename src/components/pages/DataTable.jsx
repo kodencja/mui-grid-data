@@ -2,8 +2,9 @@ import React, { useState, useEffect, useMemo, useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import CustomToolbar from "../smallComponents/forForm/CustomToolbar";
 import ModalComp from "../../components/ModalComp";
+import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
-import useColumns from "../customHooks/useColumns";
+// import useColumns from "../customHooks/useColumns";
 import useEditRow from "../customHooks/useEditRow";
 import useSomeStyles from "../../styles/useSomeStyles";
 // import {
@@ -33,7 +34,7 @@ import { database } from "../../constsNotInStore/titles";
 // const defaultTheme = createTheme();
 
 // const DataTable = ({ rows, apiProps, gridActionsProps }) => {
-const DataTable = ({ rows }) => {
+const DataTable = ({ rows, columns }) => {
   // const DataTable = ({ rows, api_db, grid_actions }) => {
   const actsContext = useContext(ActionsContext);
 
@@ -85,16 +86,16 @@ const DataTable = ({ rows }) => {
   const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
     useEditRow(api_put, baseURLtoDB);
 
-  const columnsAll = useColumns(handleOpen);
+  // const columnsAll = useColumns(handleOpen);
 
   useEffect(() => {
     apiResponseTxt("");
   }, [editRowsModel]);
   // }, [handleEditRowsModelChange]);
 
-  const columns = useMemo(() => {
-    return columnsAll;
-  }, []);
+  // const columns = useMemo(() => {
+  //   return columnsAll;
+  // }, []);
 
   return (
     <div
@@ -177,31 +178,6 @@ const DataTable = ({ rows }) => {
   );
 };
 
-export default DataTable;
-// export default connect((state, dispatch) => ({
-//   api_db: state.api_db,
-//   grid_actions: state.grid_actions,
-//   rows_del: (url) => dispatch(deleteRows(url)),
-// }))(DataTable);
+DataTable.propTypes = {};
 
-// import {
-//   red,
-//   pink,
-//   purple,
-//   deepPurple,
-//   indigo,
-//   blue,
-//   lightBlue,
-//   cyan,
-//   teal,
-//   green,
-//   lightGreen,
-//   lime,
-//   amber,
-//   orange,
-//   deepOrange,
-//   brown,
-//   grey,
-//   blueGrey,
-//   yellow,
-// } from "@mui/material/colors";
+export default DataTable;

@@ -1,7 +1,7 @@
 export const dateInputStyle = {
     root: {
-      marginTop: "10px",
-      marginBottom: "10px",
+      marginTop: "20px",
+      marginBottom: "20px",
       marginRight: "10px",
       maxWidth: "200px",
     },

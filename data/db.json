@@ -37,7 +37,7 @@
       "currency": "CNY",
       "unit": "box",
       "quality": "T",
-      "use_by_date": "2022-01-11",
+      "use_by_date": "2022-02-23",
       "origin": "Colombia",
       "producer": "Raynor-Reichert",
       "email_contact": "21@h.net"
@@ -21865,12 +21865,16 @@
     {
       "id": 1585,
       "name": "kawa",
-      "price_netto": null,
+      "price_netto": 38,
       "discount": 0,
-      "use_by_date": null,
+      "vat": 0.05,
       "currency": "EUR",
-      "origin": null,
-      "producer": false
+      "unit": "kg",
+      "quality": "M",
+      "use_by_date": "2022-03-31",
+      "origin": "",
+      "producer": "Oro",
+      "email_contact": ""
     },
     {
       "id": 1586,
@@ -21881,7 +21885,10 @@
       "currency": "PLN",
       "unit": "kg",
       "quality": "M",
-      "use_by_date": false
+      "use_by_date": "2022-03-11",
+      "origin": "",
+      "producer": "",
+      "email_contact": ""
     },
     {
       "id": 1587,

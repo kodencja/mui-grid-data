@@ -59,8 +59,8 @@ const MenuComp = ({ menuItems }) => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         variant="contained"
-        // sx={{ color: "white" }}
-        className={classes.iconMenu}
+        sx={{ color: "white" }}
+        // className={classes.iconMenu}
       >
         <MenuIcon />
       </IconButton>
