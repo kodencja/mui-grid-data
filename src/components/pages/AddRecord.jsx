@@ -6,6 +6,8 @@ import SendIcon from "@mui/icons-material/Send";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { ConstsContext, ActionsContext } from "../../App";
 import useSomeStyles from "../../styles/useSomeStyles";
+import { makeStyles } from "@mui/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import TextFieldComp from "../smallComponents/forForm/TextFieldComp";
 import SelectComp from "../smallComponents/forForm/SelectComp";
 import DateComp from "../smallComponents/forForm/DateComp";
@@ -30,9 +32,41 @@ const AddRecord = ({ apiPropsPost }) => {
 
   const { currencies, units, vat, qualities, formInitData } = constsContext;
 
-  const { useStylesForm } = useSomeStyles("(min-width: 750px)");
+  // const { useStylesForm } = useSomeStyles("(min-width: 750px)");
 
-  const classes = useStylesForm();
+  // const classes = useStylesForm();
+
+  const matches = useMediaQuery("(min-width: 750px)");
+  const useStyles = makeStyles({
+    marginV: {
+      marginTop: "10px",
+      marginBottom: "10px",
+    },
+    center: {
+      textAlign: "center",
+      justifyContent: "center",
+    },
+    rowBreak: {
+      flexBasis: "100%",
+      height: "0",
+      display: matches ? "flex" : "none",
+    },
+    break: {
+      flexBasis: "100%",
+      height: "0",
+    },
+    rowFlex: {
+      // display: matches ? "flex" : "block",
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+    },
+    title: {
+      fontSize: "22px",
+    },
+  });
+
+  const classes = useStyles();
 
   const { api_post, baseURLtoDB, loading, responseTxt, apiResponseTxt, error } =
     apiPropsPost;
