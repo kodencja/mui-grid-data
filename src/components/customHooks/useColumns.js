@@ -26,101 +26,18 @@ import {
   throwErrMin,
   throwErrUndefined,
 } from "../../functions/validation/throwErrors";
+import { stylingCol } from "../../styles/columnStyle";
 import  * as colors from "@mui/material/colors";
 import useSomeStyles from "../../styles/useSomeStyles";
 
 // const useColumns = (handleOpen, classes_c) => {
 const useColumns = (propForUseColumns) => {
-  const styles = {
-    customHeaderCell: {
-      whiteSpace: "normal",
-      wordWrap: "break-word",
-      overflow: "visible",
-      flexWrap: "wrap",
-      // lineHeight: "2rem",
-      alignItems: "flex-start",
-      alignContent: "flex-start",
-      // "& .MuiDataGrid-columnHeaderTitleContainer": {
-      //   whiteSpace: "normal",
-      //   wordWrap: "break-word",
-      //   overflow: "visible",
-      //   lineHeight: "2rem",
-      //   alignItems: "flex-start",
-      //   alignContent: "flex-start",
-      // }
-      // flexWrap: "wrap",
-      // "& div": {
-      //   whiteSpace: "normal",
-      //   wordWrap: "break-word",
-      //   flexWrap: "wrap",
-      // },
-    },
-  };
-
-  // const defaultTheme = createTheme();
-  // const useStyles = makeStyles(
-  //   (theme) => ({
-  //     actions: {
-  //       color: theme.palette.text.secondary,
-  //     },
-  //     textPrimary: {
-  //       color: theme.palette.text.primary,
-  //     },
-  //     headers: {
-  //       whiteSpace: "normal",
-  //       wordWrap: "break-word",
-  //       "& .MuiDataGrid-columnHeaderTitleContainer": {
-  //         whiteSpace: "normal",
-  //         wordWrap: "break-word",
-  //         overflow: "visible",
-  //         lineHeight: "2rem",
-  //         alignItems: "flex-start",
-  //         alignContent: "flex-start",
-  //       },
-  //       "& .MuiDataGrid-columnHeaderTitle": {
-  //         overflow: "visible",
-  //         lineHeight: "1.43rem",
-  //         whiteSpace: "normal",
-  //       },
-  //       // "& div": {
-  //       //   whiteSpace: "normal",
-  //       //   wordWrap: "break-word",
-  //       //   flexWrap: "wrap",
-  //       // },
-  //     },
-  //   }),
-  //   { defaultTheme }
-  // );
-  // const classes = useStyles();
 
   // const { useStylesCol } = useSomeStyles();
 
   // const classes = useStylesCol;
 
     // const constsContext = useContext(ConstsContext);
-
-    const textCol = {
-      textPrimary: {
-        color: colors.blue[500],
-      },
-    } 
-
-    const styling = {
-      iconAction: (theme) => ({
-          // ...theme.typography.body,
-          color: theme.palette.text.primary,
-          // bgcolor: theme.palette.warning.main,
-          "&:hover": {
-            bgcolor: theme.palette.primary.main,
-            color: "snow",
-          },
-        })
-      
-    }
-    
-    // console.log("styling");
-    // console.log(styling.icon);
-    // console.log(styling());
 
     const { handleOpen, currencies, units, discounts, vat, qualities } = propForUseColumns;
 
@@ -141,6 +58,7 @@ const useColumns = (propForUseColumns) => {
                   label="Save"
                   onClick={(e) => handleSaveClick(e, params)}
                   color="inherit"
+                  sx={stylingCol.iconSave}
                 />
                 <GridActionsCellItem
                   icon={<CancelIcon />}
@@ -159,7 +77,7 @@ const useColumns = (propForUseColumns) => {
                   label="Edit"
                   // className={classes.textPrimary}
                   // sx={textCol.textPrimary}
-                  sx={styling.iconAction}
+                  sx={stylingCol.iconEdit}
                   onClick={(e) => handleEditClick(e, params)}
                   color="inherit"
                   // sx={{color: colors.blue[500]}}
@@ -170,12 +88,14 @@ const useColumns = (propForUseColumns) => {
                   // className={classes.textPrimary}
                   onClick={(e) => handleOpen(params, "view")}
                   color="inherit"
+                  sx={stylingCol.iconView}
                 />
                 <GridActionsCellItem
                   icon={<DeleteIcon />}
                   label="Delete"
                   onClick={() => handleOpen(params, "del")}
                   color="inherit"
+                  sx={stylingCol.iconDel}
                 />
               </>
             );

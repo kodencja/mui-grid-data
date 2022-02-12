@@ -33,12 +33,12 @@ const useSomeStyles = (value = "(min-width: 750px)") => {
   }, { defaultTheme });
 
   // const useStylesCol = makeStyles(columnStyle);
-  const useStylesCol = makeStyles(
-    (theme) => {
-    return columnStyle(theme);
-  }, { defaultTheme });
+  // const useStylesCol = makeStyles(
+  //   (theme) => {
+  //   return columnStyle(theme);
+  // }, { defaultTheme });
 
-  return { useStylesData, useStylesForm, useStylesDateComp, useStylesTextComp, useStylesMenu, useStylesCol };
+  return { useStylesData, useStylesForm, useStylesDateComp, useStylesTextComp, useStylesMenu };
 };
 
 export default useSomeStyles;
