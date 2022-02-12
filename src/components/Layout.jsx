@@ -9,7 +9,7 @@ import {
   Container,
 } from "@mui/material";
 import MenuComp from "./MenuComp";
-
+import PropTypes from "prop-types";
 import {
   StorageRounded,
   AddCircleOutlineOutlined,
@@ -35,6 +35,7 @@ const menuItems = [
 ];
 
 const Layout = ({ mainTitle, children }) => {
+  console.log(typeof children);
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -51,6 +52,14 @@ const Layout = ({ mainTitle, children }) => {
       <Container sx={{ my: 2 }}>{children}</Container>
     </>
   );
+};
+
+Layout.propTypes = {
+  mainTitle: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.instanceOf(Object),
+    PropTypes.element,
+  ]),
 };
 
 export default Layout;

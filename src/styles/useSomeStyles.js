@@ -6,6 +6,7 @@ import { formStyle } from "./formStyle";
 import { tableStyle } from "./tableStyle";
 import { menuStyle, colorMenu } from "./menuStyle";
 import { dateInputStyle, textInputStyle } from "./inputStyles";
+import { columnStyle } from "./columnStyle";
 
 const defaultTheme = createTheme();
 
@@ -31,7 +32,13 @@ const useSomeStyles = (value = "(min-width: 750px)") => {
     return menuStyle(theme);
   }, { defaultTheme });
 
-  return { useStylesData, useStylesForm, useStylesDateComp, useStylesTextComp, useStylesMenu };
+  // const useStylesCol = makeStyles(columnStyle);
+  const useStylesCol = makeStyles(
+    (theme) => {
+    return columnStyle(theme);
+  }, { defaultTheme });
+
+  return { useStylesData, useStylesForm, useStylesDateComp, useStylesTextComp, useStylesMenu, useStylesCol };
 };
 
 export default useSomeStyles;

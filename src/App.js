@@ -2,7 +2,9 @@ import React, { useMemo, useRef, useState, useReducer, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import DateData from "./components/pages/DateData";
 import Layout from "./components/Layout";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./App.css";
+import useColumns from "./components/customHooks/useColumns";
 import DataTable from "./components/pages/DataTable";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -20,8 +22,9 @@ import {
 import CircularProgress from "@mui/material/CircularProgress";
 import AddRecord from "./components/pages/AddRecord";
 import About from "./components/pages/About";
+import validator from "validator";
+import { format } from "date-fns";
 import { addProduct, database, about } from "./constsNotInStore/titles";
-import { createTheme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { Button, Typography } from "@mui/material";
@@ -29,6 +32,8 @@ import { useModalCommands } from "./components/customHooks/useModalCommands";
 
 export const ActionsContext = React.createContext();
 export const ConstsContext = React.createContext();
+
+const defaultTheme = createTheme();
 
 // function App({api_db, fetchData, api_put, api_post, api_del}) {
 function App(props) {
@@ -61,8 +66,6 @@ function App(props) {
     },
   } = props;
 
-  // const [modalOpen, setModalOpen] = useState(false);
-
   const propsForModal = {
     modal_action_name,
     baseURLtoDB,
@@ -74,11 +77,19 @@ function App(props) {
     set_row_params,
     set_modal_action,
     multi_del,
-    // apiResponseTxt
   };
 
+  
   const { modalOpen, handleClose, handleDelete, handleOpen } =
-    useModalCommands(propsForModal);
+  useModalCommands(propsForModal);
+
+  const propForUseColumns = { handleOpen, currencies, units, discounts, vat, qualities}
+  
+  const columnsAll = useColumns(propForUseColumns);
+
+  const columns = useMemo(() => {
+    return columnsAll;
+  }, []);
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -134,6 +145,7 @@ function App(props) {
   return (
     <div className="App">
       <ErrorBoundary>
+      <ThemeProvider theme={defaultTheme}>
         <Router>
           <ActionsContext.Provider
             value={{
@@ -177,7 +189,8 @@ function App(props) {
                     path="/"
                     element={
                       // error ? <Typography>{error.message}</Typography> :
-                      loading ? <CircularProgress /> : <DataTable rows={rows} />
+                      // loading ? <CircularProgress /> : <DataTable rows={rows} />
+                      loading ? <CircularProgress /> : <DataTable rows={rows} columns={columns} />
                     }
                   ></Route>
                   <Route
@@ -190,6 +203,7 @@ function App(props) {
             </ConstsContext.Provider>
           </ActionsContext.Provider>
         </Router>
+        </ThemeProvider>
       </ErrorBoundary>
     </div>
   );
@@ -216,5 +230,63 @@ const mapDispatchToProps = (dispatch) => {
     apiResponseTxt: (txt) => dispatch(apiResponseTxt(txt)),
   };
 };
+
+// console.log(format(new Date(), "Y-MM-dd"));
+
+App.propTypes = {
+  api_db_state: PropTypes.shape({
+    data: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
+    loading: PropTypes.bool, 
+    baseURLtoDB: PropTypes.string,
+    error: PropTypes.string, 
+    responseTxt: PropTypes.string,
+  }),
+  grid_actions_state: PropTypes.shape({
+    row_params: PropTypes.instanceOf(Object),
+    modal_action_name:  PropTypes.string,
+    selection_row: PropTypes.arrayOf(PropTypes.number)
+  }),
+  constantsReducer: PropTypes.shape({
+    currencies: PropTypes.arrayOf(PropTypes.string),
+    units: PropTypes.arrayOf(PropTypes.string),
+    qualities: PropTypes.arrayOf(PropTypes.string),
+    vat: PropTypes.arrayOf(PropTypes.number),
+    discounts: PropTypes.arrayOf(PropTypes.number),
+    warning: PropTypes.string,
+    product_details: PropTypes.string,
+    if_sure_single_del: PropTypes.string,
+    if_sure_multi_del: PropTypes.string,
+    multi_del: PropTypes.string,
+    del: PropTypes.string,
+    view: PropTypes.string,
+    formInitData: PropTypes.exact({
+      discount: PropTypes.number,
+    vat: PropTypes.number,
+    unit: PropTypes.string,
+    use_by_date:  PropTypes.string
+    // use_by_date: (props, propName, componentName) => {
+    //   console.log(props);
+    //   // console.log(propName);
+    //   console.log(props[propName]);
+    //   // console.log(componentName);
+    //   // console.log(!validator.isDate(propName, {format: "Y-MM-dd" || "YYYY/MM/DD" || "DD.MM.YYYY" || "DD-MM-YYYY"}));
+    //   // console.log(!validator.isDate(propName));
+    //   // console.log(!validator.isDate("2022-02-24"));
+    //   if (!validator.isDate(props[propName], {format: "Y-MM-dd" || "YYYY/MM/DD" || "DD.MM.YYYY"})) {
+    //     return new Error(`The ${propName}: ${props[propName]} is not a valid date`);
+    //   } 
+    // }
+    })
+  }),
+  fetchData: PropTypes.func,
+  api_put: PropTypes.func,
+  api_post: PropTypes.func,
+  api_del: PropTypes.func,
+  rows_del: PropTypes.func,
+  set_row_params: PropTypes.func,
+  set_modal_action: PropTypes.func,
+  set_selection_row: PropTypes.func,
+  apiResponseTxt: PropTypes.func,
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

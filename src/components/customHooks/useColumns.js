@@ -26,9 +26,11 @@ import {
   throwErrMin,
   throwErrUndefined,
 } from "../../functions/validation/throwErrors";
+import  * as colors from "@mui/material/colors";
+import useSomeStyles from "../../styles/useSomeStyles";
 
-// const useColumns = (handleOpen, classes) => {
-const useColumns = (handleOpen) => {
+// const useColumns = (handleOpen, classes_c) => {
+const useColumns = (propForUseColumns) => {
   const styles = {
     customHeaderCell: {
       whiteSpace: "normal",
@@ -55,46 +57,72 @@ const useColumns = (handleOpen) => {
     },
   };
 
-  const defaultTheme = createTheme();
-  const useStyles = makeStyles(
-    (theme) => ({
-      actions: {
-        color: theme.palette.text.secondary,
-      },
+  // const defaultTheme = createTheme();
+  // const useStyles = makeStyles(
+  //   (theme) => ({
+  //     actions: {
+  //       color: theme.palette.text.secondary,
+  //     },
+  //     textPrimary: {
+  //       color: theme.palette.text.primary,
+  //     },
+  //     headers: {
+  //       whiteSpace: "normal",
+  //       wordWrap: "break-word",
+  //       "& .MuiDataGrid-columnHeaderTitleContainer": {
+  //         whiteSpace: "normal",
+  //         wordWrap: "break-word",
+  //         overflow: "visible",
+  //         lineHeight: "2rem",
+  //         alignItems: "flex-start",
+  //         alignContent: "flex-start",
+  //       },
+  //       "& .MuiDataGrid-columnHeaderTitle": {
+  //         overflow: "visible",
+  //         lineHeight: "1.43rem",
+  //         whiteSpace: "normal",
+  //       },
+  //       // "& div": {
+  //       //   whiteSpace: "normal",
+  //       //   wordWrap: "break-word",
+  //       //   flexWrap: "wrap",
+  //       // },
+  //     },
+  //   }),
+  //   { defaultTheme }
+  // );
+  // const classes = useStyles();
+
+  // const { useStylesCol } = useSomeStyles();
+
+  // const classes = useStylesCol;
+
+    // const constsContext = useContext(ConstsContext);
+
+    const textCol = {
       textPrimary: {
-        color: theme.palette.text.primary,
+        color: colors.blue[500],
       },
-      headers: {
-        whiteSpace: "normal",
-        wordWrap: "break-word",
-        "& .MuiDataGrid-columnHeaderTitleContainer": {
-          whiteSpace: "normal",
-          wordWrap: "break-word",
-          overflow: "visible",
-          lineHeight: "2rem",
-          alignItems: "flex-start",
-          alignContent: "flex-start",
-        },
-        "& .MuiDataGrid-columnHeaderTitle": {
-          overflow: "visible",
-          lineHeight: "1.43rem",
-          whiteSpace: "normal",
-        },
-        // "& div": {
-        //   whiteSpace: "normal",
-        //   wordWrap: "break-word",
-        //   flexWrap: "wrap",
-        // },
-      },
-    }),
-    { defaultTheme }
-  );
+    } 
 
-  const classes = useStyles();
+    const styling = {
+      iconAction: (theme) => ({
+          // ...theme.typography.body,
+          color: theme.palette.text.primary,
+          // bgcolor: theme.palette.warning.main,
+          "&:hover": {
+            bgcolor: theme.palette.primary.main,
+            color: "snow",
+          },
+        })
+      
+    }
+    
+    // console.log("styling");
+    // console.log(styling.icon);
+    // console.log(styling());
 
-    const constsContext = useContext(ConstsContext);
-
-    const { currencies, units, discounts, vat, qualities } = constsContext;
+    const { handleOpen, currencies, units, discounts, vat, qualities } = propForUseColumns;
 
     const columnsAll = [
       {
@@ -117,7 +145,7 @@ const useColumns = (handleOpen) => {
                 <GridActionsCellItem
                   icon={<CancelIcon />}
                   label="Cancel"
-                  className={classes.textPrimary}
+                  // className={classes.textPrimary}
                   onClick={(e) => handleCancelClick(e, params)}
                   color="inherit"
                 />
@@ -129,14 +157,17 @@ const useColumns = (handleOpen) => {
                 <GridActionsCellItem
                   icon={<EditIcon />}
                   label="Edit"
-                  className={classes.textPrimary}
+                  // className={classes.textPrimary}
+                  // sx={textCol.textPrimary}
+                  sx={styling.iconAction}
                   onClick={(e) => handleEditClick(e, params)}
                   color="inherit"
+                  // sx={{color: colors.blue[500]}}
                 />
                 <GridActionsCellItem
                   icon={<PreviewIcon />}
                   label="View"
-                  className={classes.textPrimary}
+                  // className={classes.textPrimary}
                   onClick={(e) => handleOpen(params, "view")}
                   color="inherit"
                 />

@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
 import { Form, Field } from "react-final-form";
+import PropTypes from "prop-types";
 import { Container, Box, Button, Stack, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { ConstsContext, ActionsContext } from "../../App";
 import useSomeStyles from "../../styles/useSomeStyles";
+import { makeStyles } from "@mui/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import TextFieldComp from "../smallComponents/forForm/TextFieldComp";
 import SelectComp from "../smallComponents/forForm/SelectComp";
 import DateComp from "../smallComponents/forForm/DateComp";
@@ -237,9 +240,28 @@ const AddRecord = ({ apiPropsPost }) => {
   );
 };
 
-export default AddRecord;
+AddRecord.propTypes = {
+  apiPropsPost: PropTypes.shape({
+    api_post: PropTypes.func.isRequired,
+    baseURLtoDB: PropTypes.string.isRequired,
+    loading: PropTypes.bool,
+    responseTxt: PropTypes.string,
+    apiResponseTxt: PropTypes.func,
+    error: PropTypes.string,
+  }),
+  constsContext: PropTypes.shape({
+    currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
+    units: PropTypes.arrayOf(PropTypes.string).isRequired,
+    qualities: PropTypes.arrayOf(PropTypes.string).isRequired,
+    vat: PropTypes.arrayOf(PropTypes.number).isRequired,
+    formInitData: PropTypes.exact({
+      discount: PropTypes.number.isRequired,
+      vat: PropTypes.number.isRequired,
+      unit: PropTypes.string.isRequired,
+      use_by_date: PropTypes.string.isRequired,
+    }).isRequired,
+  }),
+  setMainTitle: PropTypes.func,
+};
 
-// onSubmit={async event => {
-//   await handleSubmit(event)
-//   form.reset()
-// }}
+export default AddRecord;
