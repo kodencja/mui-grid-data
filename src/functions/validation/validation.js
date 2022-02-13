@@ -30,6 +30,8 @@ const checkRequiredFields = (values, eachProp) => {
 
 export const validateFromAddForm = (values) => {
   let errors = {};
+  console.log("values in validateFromAddForm");
+console.log(values);
   // REQUIRED FIELDS from Add Form
   for (let eachProp of requiredFieldsNames) {
     errors[eachProp] = checkRequiredFields(values, eachProp);
@@ -38,8 +40,8 @@ export const validateFromAddForm = (values) => {
 };
 
 export const validate = (values, errors = {}) => {
-// console.log("values in validate");
-// console.log(values);
+console.log("values in validate");
+console.log(values);
 
   // ALL FIELDS CURRENTLY USED / ARE BEING TYPED both from ADD and EDIT FROM
   for (let eachProp in values) {
@@ -60,8 +62,8 @@ export const validate = (values, errors = {}) => {
     }
 
   }
-  // console.log("errors");
-  // console.log(errors);
+  console.log("errors");
+  console.log(errors);
 
   return errors;
 };
