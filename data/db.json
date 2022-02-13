@@ -21817,7 +21817,6 @@
       "quality": "M",
       "use_by_date": "2022-05-24",
       "origin": "",
-      "producer": false,
       "email_contact": ""
     },
     {
@@ -21860,17 +21859,16 @@
       "use_by_date": "2022-02-23",
       "origin": "Armenia",
       "producer": "false0",
-      "email_contact": ""
+      "email_contact": null
     },
     {
       "id": 1585,
       "name": "kawa",
       "price_netto": null,
       "discount": 0,
-      "use_by_date": null,
+      "use_by_date": "2022-07-23",
       "currency": "EUR",
-      "origin": null,
-      "producer": false
+      "origin": null
     },
     {
       "id": 1586,
@@ -21881,7 +21879,7 @@
       "currency": "PLN",
       "unit": "kg",
       "quality": "M",
-      "use_by_date": false
+      "use_by_date": "2022-04-26"
     },
     {
       "id": 1587,

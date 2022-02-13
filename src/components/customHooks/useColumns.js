@@ -253,7 +253,10 @@ const useColumns = (propForUseColumns) => {
             // console.log("Date check:");
             // console.log((!validator.isDate(params.value, {format: "YYYY/MM/DD" || "DD.MM.YYYY"})));
             throwErrUndefined(params.value);
-            if (!validator.isDate(params.value, {format: "YYYY/MM/DD" || "DD.MM.YYYY"})) {
+            // if (!validator.isDate(params.value, {format: "YYYY/MM/DD" || "DD.MM.YYYY"})) {
+            //   throw new Error("It's not a date object");
+            // } 
+            if (!validator.isDate(params.value)) {
               throw new Error("It's not a date object");
             } 
             return params.value && format(new Date(params.value), "Y/MM/dd");

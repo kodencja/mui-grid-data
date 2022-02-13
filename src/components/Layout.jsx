@@ -35,7 +35,7 @@ const menuItems = [
 ];
 
 const Layout = ({ mainTitle, children }) => {
-  console.log(typeof children);
+  // console.log(typeof children);
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>

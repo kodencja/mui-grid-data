@@ -38,9 +38,10 @@ export const checkPropOfRequiredFields = (prop) => {
 
 const checkValueOfRequiredFields = (value) => {
   // some values might be equal '0' e.g. from discount or vat fields
-  // console.log("value in checkValueOfRequiredFields");
+  console.log("value in checkValueOfRequiredFields");
+  console.log(value);
   // console.log(value !== false);
-  throwErrUndefined(value);
+  // throwErrUndefined(value);
   if (
     value !== 0 &&
     value !== false &&
@@ -52,8 +53,8 @@ const checkValueOfRequiredFields = (value) => {
 
 export const validate = (values) => {
   try {
-    // console.log("validate values");
-    // console.log(values);
+    console.log("validate values");
+    console.log(values);
     // console.log("requiredFieldsNames.length");
     // console.log(requiredFieldsNames.length);
 
@@ -69,9 +70,11 @@ export const validate = (values) => {
       // value without spaces if not of date type
       valNoSpaces[eachProp] = getFormatOfValueToBeChecked(values, eachProp);
 
-      // console.log("valNoSpaces[eachProp]");
-      // console.log(eachProp);
-      // console.log(valNoSpaces[eachProp]);
+      console.log("valNoSpaces[eachProp]");
+      console.log(eachProp);
+      console.log(valNoSpaces[eachProp]);
+      console.log("checkPropOfRequiredFields(eachProp)");
+      console.log(checkPropOfRequiredFields(eachProp));
 
       if (checkPropOfRequiredFields(eachProp)) {
         errors[eachProp] = checkValueOfRequiredFields(
@@ -96,9 +99,9 @@ export const validate = (values) => {
     return errors;
   } catch (error) {
     if(error && error.message){
-      console.log("Error name: " + error.name + ". Error message: " + error.message);
+      console.error("Error name: " + error.name + ". Error message: " + error.message);
     } else {
-      console.log("Some error-2:" + error);
+      console.error("Some error-2:" + error);
     }
   }
 };

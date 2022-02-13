@@ -79,7 +79,6 @@ function App(props) {
     multi_del,
   };
 
-  
   const { modalOpen, handleClose, handleDelete, handleOpen } =
   useModalCommands(propsForModal);
 

@@ -4,6 +4,7 @@ import CustomToolbar from "../smallComponents/forForm/CustomToolbar";
 import ModalComp from "../../components/ModalComp";
 import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
+import validator from "validator";
 // import useColumns from "../customHooks/useColumns";
 import useEditRow from "../customHooks/useEditRow";
 import useSomeStyles from "../../styles/useSomeStyles";
@@ -30,6 +31,11 @@ import useSomeStyles from "../../styles/useSomeStyles";
 // } from "@mui/material/colors";
 import { ActionsContext } from "../../App";
 import { database } from "../../constsNotInStore/titles";
+import {
+  checkIfNullOrEmptyStrOrUndefined,
+  checkPropType,
+  returnErrorIfPropTypeInvalid,
+} from "../../functions/validation/checkPropTypes";
 
 // const defaultTheme = createTheme();
 
@@ -178,6 +184,67 @@ const DataTable = ({ rows, columns }) => {
   );
 };
 
-DataTable.propTypes = {};
+// console.log(new Error("Error"));
+// console.log(new Error("Error") == false);
+// console.log(typeof undefined === "undefined");
+// console.log(typeof "" === "undefined");
+// console.log(typeof "" === "string");
+// console.log(typeof null === "undefined");
+// console.log(checkIfNullOrEmptyStr(false));
+// console.log(validator.isEmail("false"));
+
+DataTable.propTypes = {
+  rows: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      // name: PropTypes.string.isRequired,
+      // price_netto: PropTypes.number.isRequired,
+      // discount: PropTypes.number,
+      // vat: PropTypes.number.isRequired,
+      // currency: PropTypes.string.isRequired,
+      // unit: PropTypes.string.isRequired,
+      // quality: PropTypes.string.isRequired,
+      // use_by_date: (props, propName) => {
+      //   if (!validator.isDate(props[propName])) {
+      //     return new Error(
+      //       `The ${propName} of record of ID no ${props.id}: ${props[propName]} is not a valid date`
+      //     );
+      //   }
+      // },
+      // origin: (props, propName) => {
+      //   if (!checkIfNullOrEmptyStrOrUndefined(props[propName])) {
+      //     if (!checkPropType(props, propName, "string")) {
+      //       console.log(props[propName]);
+      //       return returnErrorIfPropTypeInvalid(props, propName);
+      //     }
+      //   }
+      // },
+      // producer: (props, propName) => {
+      //   if (!checkIfNullOrEmptyStrOrUndefined(props[propName])) {
+      //     if (!checkPropType(props, propName, "string")) {
+      //       console.log(props[propName]);
+      //       return returnErrorIfPropTypeInvalid(props, propName);
+      //     }
+      //   }
+      // },
+      // email_contact: (props, propName) => {
+      //   // if (checkPropType(props, propName, "undefined")) {
+      //   // console.log(props[propName]);
+
+      //   // null and empty string values are allowed since it's not required prop
+      //   if (!checkIfNullOrEmptyStrOrUndefined(props[propName])) {
+      //     // console.log(props[propName]);
+      //     // return true;
+      //     if (!validator.isEmail(props[propName].toString())) {
+      //       console.log(props[propName]);
+      //       return returnErrorIfPropTypeInvalid(props, propName);
+      //     }
+      //   }
+
+      //   // }
+      // },
+    })
+  ),
+};
 
 export default DataTable;

@@ -11,6 +11,7 @@ import {
   Box,
   FormHelperText,
 } from "@mui/material";
+import PropTypes from "prop-types";
 
 const SelectComp = (props) => {
   // console.log(props.input); // {name: 'toppings', onBlur: ƒ, onChange: ƒ, …}

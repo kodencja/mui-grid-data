@@ -9,8 +9,14 @@ import {
   Box,
   InputAdornment,
 } from "@mui/material";
+import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import useSomeStyles from "../../../styles/useSomeStyles";
+import {
+  checkPropType,
+  returnErrorIfPropTypeInvalid,
+} from "../../../functions/validation/checkPropTypes";
+
 
 const TextFieldComp = (props) => {
   const {
@@ -22,6 +28,13 @@ const TextFieldComp = (props) => {
   const { useStylesTextComp } = useSomeStyles();
   const classes = useStylesTextComp({ name: name });
   // console.log("TextFieldCompo: ");
+
+  //   console.log("meta");
+  // console.log(meta);
+  // console.log("rest");
+  // console.log(rest);
+  // console.log("restInput");
+  // console.log(restInput);
 
   return (
     <TextField
@@ -61,5 +74,28 @@ const TextFieldComp = (props) => {
     />
   );
 };
+
+TextFieldComp.propTypes = {
+  name: PropTypes.string, 
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  value: PropTypes.string, 
+  restInput: PropTypes.shape({
+    type: PropTypes.string,
+    checked: PropTypes.bool,
+    onFocus: PropTypes.func,
+  }),
+  rest: PropTypes.shape({
+    label: PropTypes.string,
+    min: PropTypes.string,
+    required: PropTypes.bool,
+  }),
+  meta: PropTypes.objectOf((props, propName) => {
+          if (!checkPropType(props, propName, "object", "number", "string", "boolean", "undefined")) {
+            // console.log(props[propName]);
+            return returnErrorIfPropTypeInvalid(props, propName);
+          }
+      },)
+}
 
 export default TextFieldComp;

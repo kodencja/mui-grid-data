@@ -3,7 +3,12 @@ import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import { TextField } from "@mui/material";
+import PropTypes from "prop-types";
 import useSomeStyles from "../../../styles/useSomeStyles";
+import {
+  checkPropType,
+  returnErrorIfPropTypeInvalid,
+} from "../../../functions/validation/checkPropTypes";
 
 const DateComp = (props) => {
   const { useStylesDateComp } = useSomeStyles();
@@ -42,5 +47,34 @@ const DateComp = (props) => {
     </LocalizationProvider>
   );
 };
+
+DateComp.propTypes = {
+  name: PropTypes.string, 
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  value: PropTypes.string, 
+  restInput: PropTypes.shape({
+    type: PropTypes.string,
+    checked: PropTypes.bool,
+    onFocus: PropTypes.func,
+  }),
+  rest: PropTypes.shape({
+    label: PropTypes.string,
+    min: PropTypes.string,
+    sign: PropTypes.string,
+    required: PropTypes.bool,
+  }),
+  meta: PropTypes.objectOf((props, propName) => {
+          if (!checkPropType(props, propName, "object", "string", "boolean", "undefined")) {
+            // console.log(props[propName]);
+            return returnErrorIfPropTypeInvalid(props, propName);
+          }
+      },)
+  // meta: PropTypes.objectOf(PropTypes.oneOfType([
+  //   PropTypes.string,
+  //   PropTypes.object,
+  //   PropTypes.bool,
+  // ]))
+}
 
 export default DateComp;
