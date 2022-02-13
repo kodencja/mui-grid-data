@@ -41,7 +41,7 @@ const checkValueOfRequiredFields = (value) => {
   console.log("value in checkValueOfRequiredFields");
   console.log(value);
   // console.log(value !== false);
-  // throwErrUndefined(value);
+  throwErrUndefined(value);
   if (
     value !== 0 &&
     value !== false &&
@@ -58,11 +58,11 @@ export const validate = (values) => {
     // console.log("requiredFieldsNames.length");
     // console.log(requiredFieldsNames.length);
 
-    throwErrUndefined(values);
+    // throwErrUndefined(values);
 
-    if (Object.keys(values).length <= 0) {
-      throw new Error("No values to validate");
-    }
+    // if (Object.keys(values).length <= 0) {
+    //   throw new Error("No values to validate");
+    // }
     let errors = {},
       valNoSpaces = {};
     
@@ -82,6 +82,9 @@ export const validate = (values) => {
         );
       }
 
+      console.log("errors-1");
+      console.log(errors);
+
       // if no error in the 'errors[eachProp]' so far, let's proceed further validation
       if (!errors[eachProp]) {
         // console.log("errors[eachProp] in validate");
@@ -93,7 +96,7 @@ export const validate = (values) => {
         );
       }
     }
-    console.log("errors-1");
+    console.log("errors-2");
     console.log(errors);
 
     return errors;
