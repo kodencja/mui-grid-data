@@ -34,7 +34,7 @@ export const getFlatRowObj = (rowObj = {}) => {
   const rowObjLength = Object.keys(rowObj).length;
   return new Promise((resolve, reject) => {
     if (!rowObj || (rowObj && rowObjLength === 0)) {
-      reject(new Error("No values to check!"));
+      reject(new Error("No values object to check!"));
     } else {
       const rowObjCopy = {};
       for (let prop in rowObj) {
@@ -69,7 +69,7 @@ export const markErrorInRowObj = (rowObj = {}, errorsObj = {}, error) => {
   let n = 0;
   return new Promise((resolve, reject) => {
     if (!rowObj || (rowObj && rowObjLength === 0)) {
-      reject(new Error("No values to check!"));
+      reject(new Error("No object values to check!"));
     }   
     else {
       if(errorsObjLength) {

@@ -17,7 +17,7 @@
     {
       "id": 2,
       "name": "Barramoundi",
-      "price_netto": 464.06,
+      "price_netto": 468.06,
       "discount": 24,
       "vat": 0.08,
       "currency": "EUR",
@@ -45,7 +45,7 @@
     {
       "id": 4,
       "name": "Crab - Meat",
-      "price_netto": 362.34,
+      "price_netto": 367.34,
       "discount": 10,
       "vat": 0.05,
       "currency": "GBP",
@@ -59,7 +59,7 @@
     {
       "id": 5,
       "name": "Beer - Corona",
-      "price_netto": 937.83,
+      "price_netto": 938.83,
       "discount": 1,
       "vat": 0,
       "currency": "CNY",
@@ -73,7 +73,7 @@
     {
       "id": 6,
       "name": "Aspic - Clear",
-      "price_netto": 410.74,
+      "price_netto": 411.74,
       "discount": 10,
       "vat": 0.08,
       "currency": "CNY",
@@ -21884,7 +21884,7 @@
     {
       "id": 1587,
       "name": "marchewka",
-      "price_netto": 12.5,
+      "price_netto": 13.5,
       "discount": 0,
       "vat": 0,
       "currency": "PLN",
@@ -21914,26 +21914,42 @@
       "name": "pomidor",
       "price_netto": 32.3,
       "discount": 0,
-      "vat": 10,
+      "vat": 0,
       "currency": "EUR",
       "unit": "kg",
       "quality": "T",
       "use_by_date": "2022-02-22",
-      "origin": "Almania",
+      "origin": "Azerbaijan",
       "producer": "",
       "email_contact": ""
     },
     {
+      "id": 1595,
+      "name": "marchewka",
+      "price_netto": 14.5,
       "discount": 0,
       "vat": 0,
+      "currency": "PLN",
       "unit": "kg",
-      "use_by_date": "2022-04-11",
-      "name": "tea",
-      "price_netto": 0,
-      "origin": false,
+      "quality": "M",
+      "use_by_date": "2022-02-23",
+      "origin": "",
+      "producer": "",
+      "email_contact": ""
+    },
+    {
+      "id": 1596,
+      "name": "pomidor",
+      "price_netto": 32.3,
+      "discount": 0,
+      "vat": 0,
       "currency": "EUR",
+      "unit": "kg",
       "quality": "T",
-      "id": 1595
+      "use_by_date": "2022-02-22",
+      "origin": "Azerbaijan",
+      "producer": "",
+      "email_contact": ""
     }
   ]
 }

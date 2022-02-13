@@ -10,8 +10,8 @@ import { throwErrors } from "./throwErrors";
 export const checkType = (valNoSpaces, eachProp) => {
   throwErrors("undefined", valNoSpaces, eachProp);
 
-  console.log("eachProp checkType");
-  console.log(eachProp);
+  // console.log("eachProp checkType");
+  // console.log(eachProp);
 
   if (checkIfPropFit(eachProp, forAscii)) {
     if (!validator.isAscii(valNoSpaces)) {

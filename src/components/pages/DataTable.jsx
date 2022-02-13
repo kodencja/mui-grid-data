@@ -248,3 +248,18 @@ DataTable.propTypes = {
 };
 
 export default DataTable;
+
+/*
+
+    {
+      "discount": 10,
+      "vat": 0,
+      "use_by_date": null,
+      "name": "",
+      "price_netto": false,
+      "unit": 0,
+      "currency": "EUR",
+      "quality": "M",
+      "id": 1596
+    }
+*/
