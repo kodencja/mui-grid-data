@@ -18,37 +18,30 @@ const useEditRow = (api_put, baseURLtoDB) => {
   // save row data after editing
   const [editRowData, setEditRowData] = useState({});
   const error = useRef(false);
+  const editingRowIdPrev = useRef([]);
 
-  const handleEditRowsModelChange = useCallback( async (model) => {
+  // const handleEditRowsModelChange = useCallback( async (model) => {
+  const handleEditRowsModelChange = async (model) => {
       try {
         throwErrDefined("object", model);
-        // console.log("model-0");
-        // console.log(model);
-        // setEditRowsModel(model);
-        // const editingRowId = [];
-        // if(Object.keys(model).length > 0){
-        //   editingRowId.unshift(Object.keys(model)[0]); // e.g. 1 or 5
-        // }
+
+        console.log("model-0");
+        console.log(model);
+
+        console.log("editingRowIdPrev.current-0");
+        console.log(editingRowIdPrev.current);
+
         const editingRowId = Object.keys(model);
-        console.log("model-1");
-        console.log(model);
-        console.log("editingRowId-1");
-        console.log(editingRowId);
-        // console.log(typeof editingRowId);
-        // throwErrDefined('number', editingRowId);
-  
-      // shorten editingRowId array and model object to prevent user from editing more than one row at the same time
-        // if(editingRowId.length > 1){
-        // if(Object.keys(model).length > 1){
-        //   // editingRowId.shift();
-        //   model = { [editingRowId[0]]: {...model[editingRowId[0]]} };
-        // }
-  
-        console.log("editingRowId-2");
-        console.log(editingRowId);
-  
-        console.log("model-2");
-        console.log(model);
+
+    // shorten editingRowId array and model object to prevent user from editing more than one row at the same time
+        if(Object.keys(model).length < 2) {
+          editingRowIdPrev.current = editingRowId[0];
+        } else {
+          // console.log(editingRowId.indexOf(editingRowIdPrev.current));
+          editingRowId.splice(editingRowId.indexOf(editingRowIdPrev.current), 1);
+          model = { [editingRowId[0]]: {...model[editingRowId[0]] } };
+          editingRowIdPrev.current = editingRowId[0];
+        }
   
         const rowObj = model[editingRowId[0]];
         for (let prop in model[editingRowId[0]]) {
@@ -72,19 +65,19 @@ const useEditRow = (api_put, baseURLtoDB) => {
   
         // make sure if there is any model being edited
         if (editingRowId.length > 0) {
-          console.log("editingRowId.length");
-          console.log(editingRowId.length);
+          // console.log("editingRowId.length");
+          // console.log(editingRowId.length);
           const flatRowObj = await getFlatRowObj(rowObj);
-          console.log("flatRowObj-1");
-          console.log(flatRowObj);
+          // console.log("flatRowObj-1");
+          // console.log(flatRowObj);
   
           error.current = false;
           // const errors = validate(flatRowObj);
           const errors = await validate(flatRowObj);
           console.log("errors-4");
           console.log(errors);
-          console.log("rowObj-2");
-          console.log(rowObj);
+          // console.log("rowObj-2");
+          // console.log(rowObj);
   
           const rowObjWithError = await markErrorInRowObj(rowObj, errors, error);
   
@@ -95,18 +88,21 @@ const useEditRow = (api_put, baseURLtoDB) => {
             console.log("OKAY");
             setEditRowData({
               id: Number(editingRowId[0]),
-              ...getUpdatedRowObj(rowObj),
-              // ...getUpdatedRowObj(rowObjWithError),
+              // ...getUpdatedRowObj(rowObj),
+              ...getUpdatedRowObj(rowObjWithError),
             });
           }
         }
   
-        console.log("model[editingRowId[0]]");
-        console.log(model[editingRowId[0]]);
+        // console.log("model[editingRowId[0]]");
+        // console.log(model[editingRowId[0]]);
+
+        console.log("model-3");
+        console.log(model);
   
         // setEditRowsModel(rowObj);
-        setEditRowsModel(model);
-        // setEditRowsModel({ ...model });
+        // setEditRowsModel(model);
+        setEditRowsModel({ ...model });
         // setEditRowsModel(model[editingRowId[0]]);
         // setEditRowsModel({ ...model[editingRowId[0]] });
       } catch (err) {
@@ -118,7 +114,8 @@ const useEditRow = (api_put, baseURLtoDB) => {
           console.log("Error in handleEditRowsModelChange(): " + err);
         }
       }
-  }, []);
+  };
+  // }, []);
 
 
   const editRowCommit = async (id) => {

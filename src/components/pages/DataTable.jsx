@@ -65,6 +65,9 @@ const DataTable = ({ rows, columns }) => {
   // const { row_params, set_row_params, to_del_row, set_modal_action } =
   //   gridActionsProps;
 
+  console.log("row_params");
+  console.log(row_params);
+
   const { useStylesData } = useSomeStyles();
 
   const classes = useStylesData();
@@ -169,6 +172,9 @@ const DataTable = ({ rows, columns }) => {
         }}
         rowHeight={35}
         headerHeight={70}
+        // initialState={{
+        //   pinnedColumns: { left: ["action"], right: ["email_contact"] },
+        // }}
         // sx={styles.customHeaderCell}
         // sx={{ "& .MuiDataGrid-root": { padding: "15px" } }}
       />
