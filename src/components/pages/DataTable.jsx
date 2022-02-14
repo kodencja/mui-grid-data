@@ -65,8 +65,8 @@ const DataTable = ({ rows, columns }) => {
   // const { row_params, set_row_params, to_del_row, set_modal_action } =
   //   gridActionsProps;
 
-  console.log("row_params");
-  console.log(row_params);
+  // console.log("row_params");
+  // console.log(row_params);
 
   const { useStylesData } = useSomeStyles();
 

@@ -18,6 +18,7 @@ import {
   set_row_params,
   set_selection_row,
   apiResponseTxt,
+  set_row_edit_error
 } from "./redux";
 import CircularProgress from "@mui/material/CircularProgress";
 import AddRecord from "./components/pages/AddRecord";
@@ -42,7 +43,7 @@ function App(props) {
 
   const {
     api_db_state: { data, loading, baseURLtoDB, error, responseTxt },
-    grid_actions_state: { row_params, modal_action_name, selection_row },
+    grid_actions_state: { row_params, modal_action_name, selection_row, row_edit_error },
     fetchData,
     api_put,
     api_post,
@@ -52,6 +53,7 @@ function App(props) {
     set_modal_action,
     set_selection_row,
     apiResponseTxt,
+    setEditRowError,
     constantsReducer: {
       currencies,
       units,
@@ -82,13 +84,13 @@ function App(props) {
   const { modalOpen, handleClose, handleDelete, handleOpen } =
   useModalCommands(propsForModal);
 
-  const propForUseColumns = { handleOpen, currencies, units, discounts, vat, qualities}
+  const propForUseColumns = { handleOpen, currencies, units, discounts, vat, qualities, row_edit_error}
   
   const columnsAll = useColumns(propForUseColumns);
 
   const columns = useMemo(() => {
     return columnsAll;
-  }, []);
+  }, [row_edit_error]);
 
   useEffect(() => {
     isMountedRef.current = true;
@@ -165,7 +167,8 @@ function App(props) {
               apiResponseTxt,
               responseTxt,
               error,
-              setMainTitle
+              setMainTitle,
+              setEditRowError
             }}
           >
             <ConstsContext.Provider
@@ -227,6 +230,7 @@ const mapDispatchToProps = (dispatch) => {
     set_row_params: (params) => dispatch(set_row_params(params)),
     set_selection_row: (row_id) => dispatch(set_selection_row(row_id)),
     apiResponseTxt: (txt) => dispatch(apiResponseTxt(txt)),
+    setEditRowError: (bool) => dispatch(set_row_edit_error(bool)),
   };
 };
 

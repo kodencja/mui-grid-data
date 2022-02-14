@@ -1,4 +1,4 @@
-import { MODAL_ACTION, ROW_PARAMS, SELECTION_ROW } from "./gridTypes";
+import { MODAL_ACTION, ROW_PARAMS, SELECTION_ROW, ROW_EDIT_ERROR } from "./gridTypes";
 
 export const set_row_params = (params) => {
   return {
@@ -18,5 +18,12 @@ export const set_selection_row = (row_ids_arr) => {
   return {
     type: SELECTION_ROW,
     payload: row_ids_arr,
+  };
+};
+
+export const set_row_edit_error = (bool) => {
+  return {
+    type: ROW_EDIT_ERROR,
+    payload: bool,
   };
 };

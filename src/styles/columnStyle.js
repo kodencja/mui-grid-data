@@ -3,20 +3,10 @@ import  * as colors from "@mui/material/colors";
 
 export const stylingCol = {
     iconEdit: (theme) => ({
-        // ...theme.typography.body,
-        // color: 'text.primary',
-        // color: theme.palette.text.primary,
-        // color: theme.palette.info.main,
         color: theme.palette.primary.dark,
-        // color: theme.palette.success.light,
-        // bgcolor: 'text.primary',
-        // color: 'background.paper',
-        // bgcolor: theme.palette.warning.main,
         "&:hover": {
           bgcolor: theme.palette.primary.dark,
-          // bgcolor: theme.palette.success.light,
           color: theme.palette.primary.contrastText,
-          // color: "snow",
         },
       }),
       iconSave: (theme) => ({
@@ -41,6 +31,19 @@ export const stylingCol = {
           bgcolor: theme.palette.warning.main,
           color: theme.palette.warning.contrastText,
         },
+      }),
+      iconCancel: (theme) => ({
+        color: theme.palette.text.primary,
+        "&:hover": {
+          bgcolor: theme.palette.text.disabled,
+          color: theme.palette.error.contrastText,
+        },
+      }),
+      iconOK: (theme) => ({
+        color: theme.palette.success.light,
+      }),
+      iconError: (theme) => ({
+        color: theme.palette.error.main,
       })
     
   }

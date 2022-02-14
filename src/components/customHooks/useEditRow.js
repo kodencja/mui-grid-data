@@ -1,4 +1,5 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useContext } from "react";
+import { ActionsContext } from "../../App";
 import { validate } from "../../functions/validation/validation";
 import { escapeHTMLentitiesForNaN } from "../../functions/validation/escapeHTMLent";
 import {
@@ -15,6 +16,10 @@ import {
 const useEditRow = (api_put, baseURLtoDB) => {
   const [editRowsModel, setEditRowsModel] = useState({});
 
+const actsContext = useContext(ActionsContext);
+
+const { setEditRowError } = actsContext;
+
   // save row data after editing
   const [editRowData, setEditRowData] = useState({});
   const error = useRef(false);
@@ -25,11 +30,11 @@ const useEditRow = (api_put, baseURLtoDB) => {
       try {
         throwErrDefined("object", model);
 
-        console.log("model-0");
-        console.log(model);
+        // console.log("model-0");
+        // console.log(model);
 
-        console.log("editingRowIdPrev.current-0");
-        console.log(editingRowIdPrev.current);
+        // console.log("editingRowIdPrev.current-0");
+        // console.log(editingRowIdPrev.current);
 
         const editingRowId = Object.keys(model);
 
@@ -60,8 +65,8 @@ const useEditRow = (api_put, baseURLtoDB) => {
           }
         }
   
-        console.log("rowObj-1");
-        console.log(rowObj);
+        // console.log("rowObj-1");
+        // console.log(rowObj);
   
         // make sure if there is any model being edited
         if (editingRowId.length > 0) {
@@ -86,19 +91,22 @@ const useEditRow = (api_put, baseURLtoDB) => {
   
           if (!error.current) {
             console.log("OKAY");
+            setEditRowError(false);
             setEditRowData({
               id: Number(editingRowId[0]),
               // ...getUpdatedRowObj(rowObj),
               ...getUpdatedRowObj(rowObjWithError),
             });
+          } else {
+            setEditRowError(true);
           }
         }
   
         // console.log("model[editingRowId[0]]");
         // console.log(model[editingRowId[0]]);
 
-        console.log("model-3");
-        console.log(model);
+        // console.log("model-3");
+        // console.log(model);
   
         // setEditRowsModel(rowObj);
         // setEditRowsModel(model);
