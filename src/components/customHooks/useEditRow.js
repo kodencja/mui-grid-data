@@ -18,7 +18,7 @@ const useEditRow = (api_put, baseURLtoDB) => {
   // save row data after editing
   const [editRowData, setEditRowData] = useState({});
   const error = useRef(false);
-  const editingRowIdPrev = useRef([]);
+  const editingRowIdPrev = useRef('');
 
   // const handleEditRowsModelChange = useCallback( async (model) => {
   const handleEditRowsModelChange = async (model) => {
@@ -122,7 +122,7 @@ const useEditRow = (api_put, baseURLtoDB) => {
     try {
       throwErrUndefined(id);
       throwErrDefined("number", id);
-
+      editingRowIdPrev.current = '';
       if (!error.current) {
         console.log("EDIT_ROW_COMMIT: ");
         console.log("editRowData");
