@@ -1,54 +1,162 @@
-import  * as colors from "@mui/material/colors";
+import * as colors from "@mui/material/colors";
+import {
+  getBackgroundColor,
+  getHoverBackgroundColor,
+  getColor,
+  getColorContrast,
+} from "./styleFn";
 
-// export const tableStyle = { 
 export const tableStyle = (theme) => {
-  
   return {
-    
     headersAndCells: {
-    "& .MuiDataGrid-columnHeaderTitle": {
-      // "& .data-grid-header": {
-      fontWeight: 700,
-      color: colors.green[900],
-      // headerHeight: 300,
-      // headerHeight: "300px",
-      // autoHeight: "true",
-      // height: 400,
-      lineHeight: "1rem",
-      whiteSpace: "normal",
-      wordWrap: "break-word",
-      // overflow: "scroll",
-      overflow: "visible",
-      // flexWrap: "wrap",
+      "& .MuiDataGrid-columnHeaderTitle": {
+        fontWeight: 700,
+        color: colors.blueGrey[900],
+        lineHeight: "1rem",
+        whiteSpace: "normal",
+        wordWrap: "break-word",
+        overflow: "visible",
+      },
+      "& .MuiDataGrid-cell": {
+        fontWeight: 500,
+      },
+      "& .Mui-error": {
+        backgroundColor: colors.pink[500],
+        color: theme.palette.error.contrastText,
+      },
+      "& .id": {
+        backgroundColor: getBackgroundColor(
+          colors.blueGrey[50],
+          theme.palette.mode
+        ),
+      },
+      "& .name": {
+        color: getColorContrast(
+          colors.grey[100],
+          theme.palette.mode === "dark" ? "light" : "dark"
+        ),
+        fontWeight: "500",
+        fontFamily: "Ubuntu",
+      },
+      "& .price_netto": {
+        color: getColor(colors.indigo[800], theme.palette.mode),
+        fontWeight: "bold",
+      },
+      "& .brutto": {
+        fontWeight: "bold",
+        color: getColor(colors.indigo[900], theme.palette.mode),
+      },
+      "& .netto": {
+        color: getColor(colors.indigo[700], theme.palette.mode),
+        fontWeight: "bold",
+      },
+      "& .discount": {
+        color: getColor(colors.purple[900], theme.palette.mode),
+      },
+      "& .currency": {
+        color: colors.blueGrey[800],
+      },
+      "& .quality": {
+        fontWeight: '700',
+      },
+      "& .useByDate": {
+        color: colors.deepPurple[800],
+      },
+      "& .producer": {
+        color: colors.brown[800],
+      },
+      "& .gray": {
+        backgroundColor: colors.grey[100],
+      },
+      "& .action": {
+        backgroundColor: getBackgroundColor(
+          colors.grey[50],
+          theme.palette.mode
+        ),
+      },
+      "& .even": {
+        backgroundColor: getBackgroundColor(
+          colors.blueGrey[100],
+          theme.palette.mode
+        ),
+      },
     },
-    "& .MuiDataGrid-cell": {
-      // "& .MuiDataGrid-root .MuiDataGrid-cell": {
-      fontWeight: 500,
-      // display: "flex",
-      // lineHeight: "1rem",
-      // whiteSpace: "normal !important",
-      // wordWrap: "break-word !important",
-      // overflowX: "visible !important",
+
+    rowStyling: {
+      height: 400,
+      width: 1,
+      "& .sell-priority-high": {
+        backgroundColor: getBackgroundColor(
+          colors.orange["A200"],
+          theme.palette.mode
+        ),
+        "&:hover": {
+          backgroundColor: getHoverBackgroundColor(
+            colors.orange["A200"],
+            theme.palette.mode
+          ),
+        },
+      },
+      "& .sell-priority-medium": {
+        backgroundColor: getBackgroundColor(
+          colors.orange["A100"],
+          theme.palette.mode
+        ),
+        "&:hover": {
+          backgroundColor: getHoverBackgroundColor(
+            colors.orange["A100"],
+            theme.palette.mode
+          ),
+        },
+      },
+      "& .out-of-date": {
+        backgroundColor: getBackgroundColor(
+          colors.deepOrange[200],
+          theme.palette.mode
+        ),
+        "&:hover": {
+          backgroundColor: getHoverBackgroundColor(
+            colors.deepOrange[200],
+            theme.palette.mode
+          ),
+        },
+      },
+      "& .discount-top": {
+        backgroundColor: getBackgroundColor(
+          colors.lime["A400"],
+          theme.palette.mode
+        ),
+        "&:hover": {
+          backgroundColor: getHoverBackgroundColor(
+            colors.lime["A400"],
+            theme.palette.mode
+          ),
+        },
+      },
+      "& .discount-high": {
+        backgroundColor: getBackgroundColor(
+          colors.lime["A200"],
+          theme.palette.mode
+        ),
+        "&:hover": {
+          backgroundColor: getHoverBackgroundColor(
+            colors.lime["A200"],
+            theme.palette.mode
+          ),
+        },
+      },
+      "& .discount-medium": {
+        backgroundColor: getBackgroundColor(
+          colors.yellow["A100"],
+          theme.palette.mode
+        ),
+        "&:hover": {
+          backgroundColor: getHoverBackgroundColor(
+            colors.yellow["A100"],
+            theme.palette.mode
+          ),
+        },
+      },
     },
-    '& .Mui-error': {
-      // backgroundColor: `rgba(12, 12, 12, 0.7)`,
-      color: '#ff4343',
-    },
-    "& .id": {
-      backgroundColor: colors.lightBlue[100],
-    },
-    "& .brutto": {
-      backgroundColor: colors.teal[50],
-    },
-    "& .netto": {
-      backgroundColor: colors.lime[100],
-    },
-    "& .useByDate": {
-      backgroundColor: colors.lightGreen[100],
-    },
-    "& .gray": {
-      backgroundColor: colors.grey[100],
-    },
-  }
-}
-}
+  };
+};

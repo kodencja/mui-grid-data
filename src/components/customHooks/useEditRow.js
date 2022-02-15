@@ -12,6 +12,7 @@ import {
   throwErrDefined,
   throwErrUndefined,
 } from "../../functions/validation/throwErrors";
+import PropTypes from "prop-types";
 
 const useEditRow = (api_put, baseURLtoDB) => {
   const [editRowsModel, setEditRowsModel] = useState({});

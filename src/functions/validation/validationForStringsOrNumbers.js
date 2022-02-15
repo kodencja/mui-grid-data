@@ -11,8 +11,6 @@ export const chooseValidationForStringsOrNumbers = (valNoSpaces, eachProp) => {
 
   throwErrors('undefined', valNoSpaces, eachProp);
 
-  // console.log("chooseValidationForStringsOrNumbers");
-  // console.log(valNoSpaces);
   if(valNoSpaces === false){
     return 'The value cannot be false';
   }

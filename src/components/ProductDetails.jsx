@@ -1,12 +1,16 @@
 import React, { useMemo, useContext } from "react";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { ActionsContext, ConstsContext } from "../App";
 import Buttons from "./Buttons";
 import { detailsAboutRow } from "./smallComponents/forModal/rowDetails";
+import PropTypes from "prop-types";
 
 function ProductDetails({ row_to_del_or_view }) {
   const actsContext = useContext(ActionsContext);
   const constsContext = useContext(ConstsContext);
+
+  // console.log("row_to_del_or_view");
+  // console.log(row_to_del_or_view);
 
   const { modal_action_name, selection_row, row_params } = actsContext;
   const {
@@ -26,11 +30,10 @@ function ProductDetails({ row_to_del_or_view }) {
     multi_del,
   };
 
-  console.log("selection_row in ProductDetails");
-  console.log(selection_row);
+  // console.log("selection_row in ProductDetails");
+  // console.log(selection_row);
 
   const rowDetails = useMemo(() => {
-    // detailsAboutRow(modal_action_name, row_to_del_or_view, selection_row);
     return detailsAboutRow(propsForRowDetails);
   }, [row_to_del_or_view, selection_row]);
 
@@ -42,7 +45,6 @@ function ProductDetails({ row_to_del_or_view }) {
         component="h2"
         sx={{
           color: modal_action_name !== view ? "warning.light" : "lightpink",
-          // color: modal_action_name ? "warning.light" : "burlywood",
           letterSpacing: 2,
           fontWeight: "bold",
         }}
@@ -59,7 +61,6 @@ function ProductDetails({ row_to_del_or_view }) {
           lineHeight: "120%",
           color: "peachpuff",
         }}
-        // sx={{ mt: 2, color: "text.primary" }}
       >
         {modal_action_name === del
           ? if_sure_single_del
@@ -71,7 +72,6 @@ function ProductDetails({ row_to_del_or_view }) {
             sx={{
               textAlign: "left",
               color: "palegoldenrod",
-              // color: "lemonchiffon",
               mt: 1,
             }}
           >
@@ -86,6 +86,12 @@ function ProductDetails({ row_to_del_or_view }) {
     </>
   );
 }
+
+ProductDetails.propTypes = {
+  row_to_del_or_view: PropTypes.arrayOf(
+    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))
+  ),
+};
 
 export default ProductDetails;
 

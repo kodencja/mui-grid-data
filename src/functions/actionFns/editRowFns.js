@@ -1,34 +1,13 @@
-import { checkPropOfRequiredFields } from "../validation/validation";
+import { checkPropOfRequiredFields } from "../validation/checkFieldsRequired";
 
 export const getUpdatedRowObj = (rowObj = {}) => {
-// try {
-  // if(Object.keys(rowObj).length){
-  //   throw new Error('The rowObj object has no props');
-  // };
   const rowUpdated = {};
   for (const [key, val] of Object.entries(rowObj)) {
     rowUpdated[key] = val.value;
   }
-  console.log("rowUpdated");
-  console.log(rowUpdated);
   return rowUpdated;
-// } catch (err) {
-//   console.log("Error in getUpdatedRowObj(): Error name: " + err.name + ". Error message: " + err.message);
-// }
-};
 
-// const copyPropWithRequiredFieldsPropChecking = (prop, rowObj) => {
-//   if (checkPropOfRequiredFields(prop)) {
-//    return rowObj[prop].value;
-//   } else {
-//     if (rowObj[prop].value !== null && rowObj[prop].value !== "") {
-//      return rowObj[prop].value;
-//     } 
-//     // else {
-//     //   rowObjCopy[prop] = rowObj[prop].value;
-//     // }
-//   }
-// }
+};
 
 export const getFlatRowObj = (rowObj = {}) => {
   const rowObjLength = Object.keys(rowObj).length;
@@ -37,10 +16,7 @@ export const getFlatRowObj = (rowObj = {}) => {
       reject(new Error("No values object to check!"));
     } else {
       const rowObjCopy = {};
-      for (let prop in rowObj) {
-        // console.log("rowObj[prop] " + prop);
-        // console.log(rowObj[prop].value);
-  
+      for (let prop in rowObj) {  
         // for required fields pass all fields (except undefined and null what was specified while creating rowObj)
         if (checkPropOfRequiredFields(prop)) {
           rowObjCopy[prop] = rowObj[prop].value;
@@ -58,12 +34,8 @@ export const getFlatRowObj = (rowObj = {}) => {
   });
 };
 
-// export const markErrorInRowObj = (rowObj, errorsObj, setError) => {
+
 export const markErrorInRowObj = (rowObj = {}, errorsObj = {}, error) => {
-  // console.log("rowObj-2");
-  // console.log(rowObj);
-  // console.log("errorsObj");
-  // console.log(errorsObj);
   const errorsObjLength = Object.keys(errorsObj).length;
   const rowObjLength = Object.keys(rowObj).length;
   let n = 0;

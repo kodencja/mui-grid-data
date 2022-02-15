@@ -17,9 +17,7 @@ export const dateInputStyle = {
       },
       textInputPadding: {
         paddingLeft: "10px",
-        // "& .MuiInputBase-input-MuiInput-input": {
         "&:after": {
-          // backgroundColor: "lightyellow",
           border: "1px solid green",
           paddingLeft: "15px",
         },
@@ -29,7 +27,6 @@ export const dateInputStyle = {
         marginBottom: "15px",
         marginRight: "15px",
         maxWidth: (props) => (props.name === "discount" ? "100px" : "200px"),
-        // maxWidth: "200px",
         "& .MuiInputBase-root": {
           paddingLeft: 5,
         },

@@ -21,19 +21,12 @@ export const onSubmit = async (values, api_post, baseURLtoDB) => {
     if (!dataSubmit.price_netto || dataSubmit.price_netto === "0") {
       dataSubmit.price_netto = 0;
     }
-    console.log("dataSubmit");
-    console.log(dataSubmit);
 
     const dataNoHTML = await escapeHTMLentitiesForNaN(dataSubmit);
-    console.log("dataNoHTML");
+    console.log("Data with no HTML entities submitted");
     console.log(dataNoHTML);
     await api_post(baseURLtoDB, dataSubmit);
-    // window.alert(JSON.stringify(dataSubmit, 0, 2));
   } catch (err) {
-    if (err && err.message) {
       console.log(`Error name: ${err.name}. Error message: ${err.message}`);
-    } else {
-      console.log("Some error-4:" + err);
-    }
   }
 };

@@ -116,7 +116,7 @@ const useColumns = (propForUseColumns) => {
       type: "number",
       width: 90,
       editable: true,
-      headerClassName: "data-grid-header",
+      headerClassName: "data-grid-header", 
       valueFormatter: (params) => {
         try {
           // console.log(params);
@@ -126,13 +126,9 @@ const useColumns = (propForUseColumns) => {
           throwErrMin(params.value, 0.1);
           return params.value && params.value;
         } catch (err) {
-          if (err && err.message) {
             console.log(
               `Error name: ${err.name}. Error message for item of ID no: ${params.id} for field ${params.field}: ${err.message}`
             );
-          } else {
-            console.log("Some error-2:" + err);
-          }
         }
       },
     },
@@ -153,13 +149,9 @@ const useColumns = (propForUseColumns) => {
           throwErrMin(params.value, 0);
           return params.value && `${params.value} %`;
         } catch (err) {
-          if (err && err.message) {
             console.log(
               `Error name: ${err.name}. Error message for item of ID no: ${params.id} for field ${params.field}: ${err.message}`
             );
-          } else {
-            console.log("Some error-2:" + err);
-          }
         }
       },
     },
@@ -189,13 +181,9 @@ const useColumns = (propForUseColumns) => {
           throwErrMin(params.value, 0);
           return params.value && `${params.value * 100} %`;
         } catch (err) {
-          if (err && err.message) {
             console.log(
               `Error name: ${err.name}. Error message for item of ID no: ${params.id} for field ${params.field}: ${err.message}`
             );
-          } else {
-            console.log("Some error-3:" + err);
-          }
         }
       },
     },
@@ -249,13 +237,9 @@ const useColumns = (propForUseColumns) => {
           }
           return params.value && format(new Date(params.value), "Y/MM/dd");
         } catch (err) {
-          if (err && err.message) {
             console.log(
               `Error name: ${err.name}. Error message for item of ID no: ${params.id} for field ${params.field}: ${err.message}`
             );
-          } else {
-            console.log("Some error-3:" + err);
-          }
         }
       },
     },

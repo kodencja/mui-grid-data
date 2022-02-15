@@ -7,6 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
+import PropTypes from "prop-types";
 import MenuIcon from "@mui/icons-material/Menu";
 import { lime } from "@mui/material/colors";
 import { menuStyle } from "../styles/menuStyle";
@@ -36,17 +37,10 @@ const MenuComp = ({ menuItems }) => {
   const { useStylesMenu } = useSomeStyles();
   const classes = useStylesMenu();
 
-  // console.log("classes.colorPaper");
-  // console.log(classes.colorPaper);
-  // console.log(classes.iconMenu);
-
   return (
-    // <div style={{ backgroundColor: green[500] }}>
     <div
       style={{
-        // backgroundColor: green[500],
         textAlign: "center",
-        // marginLeft: "-12px",
       }}
     >
       <IconButton
@@ -59,7 +53,6 @@ const MenuComp = ({ menuItems }) => {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         variant="contained"
-        // sx={{ color: "white" }}
         className={classes.iconMenu}
       >
         <MenuIcon />
@@ -67,20 +60,12 @@ const MenuComp = ({ menuItems }) => {
 
       <Menu
         id="basic-menu"
-        // className={classes.colorPaper}
         sx={(theme) => ({
           "& .MuiMenu-paper": {
             bgcolor: theme.palette.primary.main,
             color: theme.palette.text.secondary,
           },
         })}
-        // sx={{
-        //   //   bgcolor: indigo[400],
-        //   //   "& .MuiMenu-list": {
-        //   "& .MuiMenu-paper": {
-        //     bgcolor: indigo[600],
-        //   },
-        // }}
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
@@ -89,23 +74,13 @@ const MenuComp = ({ menuItems }) => {
         }}
       >
         {menuItems.map((item) => (
-          <MenuItem
-            key={item.text}
-            // onClick={() => navigate(item.path)}
-            onClick={() => handleMenuClick(item.path)}
-            // sx={{ color: "white" }}
-          >
-            {/* <ListItemIcon sx={{ color: yellow["A200"] }}> */}
-            {/* <ListItemIcon className={classes.iconMenu}>
+          <MenuItem key={item.text} onClick={() => handleMenuClick(item.path)}>
+            <ListItemIcon className={classes.iconMenu}>
               {item.icon}
             </ListItemIcon>
             <ListItemText className={classes.textMenu}>
               {item.text}
-            </ListItemText> */}
-            <ListItemIcon sx={{ color: lime[100] }}>{item.icon}</ListItemIcon>
-            <ListItemText sx={{ color: lime[50] }}>{item.text}</ListItemText>
-            {/* <ListItemIcon sx={menuStyle.iconMenu}>{item.icon}</ListItemIcon>
-            <ListItemText sx={menuStyle.textMenu}>{item.text}</ListItemText> */}
+            </ListItemText>
           </MenuItem>
         ))}
       </Menu>
@@ -113,8 +88,14 @@ const MenuComp = ({ menuItems }) => {
   );
 };
 
-export default MenuComp;
+MenuComp.propTypes = {
+  menuItems: PropTypes.arrayOf(
+    PropTypes.exact({
+      text: PropTypes.string,
+      icon: PropTypes.element,
+      path: PropTypes.string,
+    })
+  ),
+};
 
-/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-<MenuItem onClick={handleClose}>My account</MenuItem>
-<MenuItem onClick={handleClose}>Logout</MenuItem> */
+export default MenuComp;

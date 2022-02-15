@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { isValidDate } from "../validation/isDaysAhead";
+import validator from "validator";
 import { throwErrUndefined } from "../validation/throwErrors";
 
 export const checkInt = (val) => {
@@ -10,11 +10,7 @@ export const checkInt = (val) => {
     }
     return parseInt(val);
   } catch (err) {
-    if (err && err.message) {
       console.log(`Error name: ${err.name}. Error message: ${err.message}`);
-    } else {
-      console.log("Some error-3a" + err);
-    }
   }
 };
 
@@ -26,27 +22,18 @@ export const checkFloat = (val) => {
     }
     return parseFloat(val);
   } catch (err) {
-    if (err && err.message) {
       console.log(`Error name: ${err.name}. Error message: ${err.message}`);
-    } else {
-      console.log("Some error-3b:" + err);
-    }
   }
 };
 
 export const dateFormating = (val) => {
   try {
     throwErrUndefined(val);
-    // console.log(isValidDate(val));
-    if (!isValidDate(val)) {
+    if (!validator.isDate(val)) {
       throw new Error("It's not a date object");
     }
     return format(new Date(val), "Y-MM-dd");
   } catch (err) {
-    if (err && err.message) {
       console.log(`Error name: ${err.name}. Error message: ${err.message}`);
-    } else {
-      console.log("Some error-3c:" + err);
-    }
   }
 };

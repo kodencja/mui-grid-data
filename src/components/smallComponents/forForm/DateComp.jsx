@@ -49,32 +49,37 @@ const DateComp = (props) => {
 };
 
 DateComp.propTypes = {
-  name: PropTypes.string, 
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  value: PropTypes.string, 
-  restInput: PropTypes.shape({
+  input: PropTypes.shape({
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func,
+    value: PropTypes.string,
     type: PropTypes.string,
     checked: PropTypes.bool,
     onFocus: PropTypes.func,
   }),
-  rest: PropTypes.shape({
-    label: PropTypes.string,
-    min: PropTypes.string,
-    sign: PropTypes.string,
-    required: PropTypes.bool,
-  }),
+  label: PropTypes.string,
+  min: PropTypes.instanceOf(Date),
+  max: PropTypes.instanceOf(Date),
+  required: PropTypes.bool,
+  sign: PropTypes.string,
+  placeholder: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   meta: PropTypes.objectOf((props, propName) => {
-          if (!checkPropType(props, propName, "object", "string", "boolean", "undefined")) {
-            // console.log(props[propName]);
-            return returnErrorIfPropTypeInvalid(props, propName);
-          }
-      },)
-  // meta: PropTypes.objectOf(PropTypes.oneOfType([
-  //   PropTypes.string,
-  //   PropTypes.object,
-  //   PropTypes.bool,
-  // ]))
-}
+    if (
+      !checkPropType(
+        props,
+        propName,
+        "object",
+        "string",
+        "boolean",
+        "undefined"
+      )
+    ) {
+      // console.log(props[propName]);
+      return returnErrorIfPropTypeInvalid(props, propName);
+    }
+  }),
+};
 
 export default DateComp;

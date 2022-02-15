@@ -12,6 +12,10 @@ import {
   FormHelperText,
 } from "@mui/material";
 import PropTypes from "prop-types";
+import {
+  checkPropType,
+  returnErrorIfPropTypeInvalid,
+} from "../../../functions/validation/checkPropTypes";
 
 const SelectComp = (props) => {
   // console.log(props.input); // {name: 'toppings', onBlur: ƒ, onChange: ƒ, …}
@@ -58,6 +62,41 @@ const SelectComp = (props) => {
       <FormHelperText>{meta.touched ? meta.error : undefined}</FormHelperText>
     </FormControl>
   );
+};
+
+SelectComp.propTypes = {
+  input: PropTypes.shape({
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    type: PropTypes.string,
+    checked: PropTypes.bool,
+    onFocus: PropTypes.func,
+  }),
+  label: PropTypes.string,
+  min: PropTypes.string,
+  max: PropTypes.string,
+  required: PropTypes.bool,
+  sign: PropTypes.string,
+  placeholder: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  meta: PropTypes.objectOf((props, propName) => {
+    if (
+      !checkPropType(
+        props,
+        propName,
+        "object",
+        "number",
+        "string",
+        "boolean",
+        "undefined"
+      )
+    ) {
+      // console.log(props[propName]);
+      return returnErrorIfPropTypeInvalid(props, propName);
+    }
+  }),
 };
 
 export default SelectComp;

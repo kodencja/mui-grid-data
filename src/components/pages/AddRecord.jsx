@@ -215,7 +215,6 @@ const AddRecord = ({ apiPropsPost }) => {
                     color: responseTxt ? "success.dark" : "text.primary",
                   }}
                 >
-                  {/* {error ? error : !error && pristine ? responseTxt : "Nic"} */}
                   {loading ? (
                     <CircularProgress />
                   ) : !loading ? (
@@ -249,19 +248,6 @@ AddRecord.propTypes = {
     apiResponseTxt: PropTypes.func,
     error: PropTypes.string,
   }),
-  constsContext: PropTypes.shape({
-    currencies: PropTypes.arrayOf(PropTypes.string).isRequired,
-    units: PropTypes.arrayOf(PropTypes.string).isRequired,
-    qualities: PropTypes.arrayOf(PropTypes.string).isRequired,
-    vat: PropTypes.arrayOf(PropTypes.number).isRequired,
-    formInitData: PropTypes.exact({
-      discount: PropTypes.number.isRequired,
-      vat: PropTypes.number.isRequired,
-      unit: PropTypes.string.isRequired,
-      use_by_date: PropTypes.string.isRequired,
-    }).isRequired,
-  }),
-  setMainTitle: PropTypes.func,
 };
 
 export default AddRecord;

@@ -2,8 +2,6 @@ import validator from "validator";
 import { throwErrUndefined } from "./throwErrors";
 
 const escapeHTMLentities = (value) => {
-
-  // if (isNaN(value) && value !== undefined) {
   if (typeof value === 'string') {
     return validator.escape(value);
   }

@@ -9,7 +9,6 @@ import { throwErrors } from "./throwErrors";
     throwErrors('undefined', valNoSpaces, eachProp);
 
     // check type and min and max for NUMERIC values
-    // console.log("Numeric fields");
     if (checkIfPropFit(eachProp, min01MaxMld)) {
       min = 0.1;
       max = 999999999;

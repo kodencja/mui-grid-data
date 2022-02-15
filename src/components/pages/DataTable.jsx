@@ -7,28 +7,8 @@ import { Typography } from "@mui/material";
 import validator from "validator";
 // import useColumns from "../customHooks/useColumns";
 import useEditRow from "../customHooks/useEditRow";
+import { isDaysAhead } from "../../functions/validation/isDaysAhead";
 import useSomeStyles from "../../styles/useSomeStyles";
-// import {
-//   red,
-//   pink,
-//   purple,
-//   deepPurple,
-//   indigo,
-//   blue,
-//   lightBlue,
-//   cyan,
-//   teal,
-//   green,
-//   lightGreen,
-//   lime,
-//   amber,
-//   orange,
-//   deepOrange,
-//   brown,
-//   grey,
-//   blueGrey,
-//   yellow,
-// } from "@mui/material/colors";
 import { ActionsContext } from "../../App";
 import { database } from "../../constsNotInStore/titles";
 import {
@@ -37,22 +17,12 @@ import {
   returnErrorIfPropTypeInvalid,
 } from "../../functions/validation/checkPropTypes";
 
-// const defaultTheme = createTheme();
-
-// const DataTable = ({ rows, apiProps, gridActionsProps }) => {
 const DataTable = ({ rows, columns }) => {
-  // const DataTable = ({ rows, api_db, grid_actions }) => {
   const actsContext = useContext(ActionsContext);
-
-  // console.log("api_db.baseURLtoDB");
-  // console.log(api_db.baseURLtoDB);
-  // console.log("grid_actions.rows_del");
-  // console.log(grid_actions.rows_del);
 
   const {
     baseURLtoDB,
     api_put,
-    row_params,
     handleOpen,
     set_selection_row,
     selection_row,
@@ -61,50 +31,23 @@ const DataTable = ({ rows, columns }) => {
     setMainTitle,
   } = actsContext;
 
-  // const { baseURLtoDB, api_put, api_del, rows_del } = apiProps;
-  // const { row_params, set_row_params, to_del_row, set_modal_action } =
-  //   gridActionsProps;
-
-  // console.log("row_params");
-  // console.log(row_params);
-
   const { useStylesData } = useSomeStyles();
 
   const classes = useStylesData();
 
   const [pageSize, setPageSize] = useState(10);
 
-  // const [row_params, set_row_params] = useState({});
-  // const [del_row, set_modal_action] = useState(true);
-
   useEffect(() => {
     apiResponseTxt("");
     setMainTitle(database);
   }, []);
 
-  // useEffect(() => {
-
-  //   // }, [to_del_row]);
-  // }, [row_params.id]);
-
-  // console.log("DataTable Comp.");
-  // console.log(window.location.search);
-  // console.log("row_params:");
-  // console.log(row_params);
-
   const { editRowsModel, editRowCommit, handleEditRowsModelChange } =
     useEditRow(api_put, baseURLtoDB);
-
-  // const columnsAll = useColumns(handleOpen);
 
   useEffect(() => {
     apiResponseTxt("");
   }, [editRowsModel]);
-  // }, [handleEditRowsModelChange]);
-
-  // const columns = useMemo(() => {
-  //   return columnsAll;
-  // }, []);
 
   return (
     <div
@@ -112,23 +55,22 @@ const DataTable = ({ rows, columns }) => {
         height: "calc(80vh - 5vmin)",
         maxHeight: "85vh",
         width: "100%",
-        // padding: "5px",
-
-        // backgroundColor: "oldlace",
-        // backgroundColor: "lightyellow",
       }}
-      className={classes.headersAndCells}
+      className={`${classes.rowStyling} ${classes.headersAndCells}`}
     >
-      {/* <ErrorBoundary> */}
       <Typography
-        variant="subtitle2"
+        variant="subtitle1"
         component="div"
         sx={{ my: 2, color: responseTxt ? "success.dark" : "text.primary" }}
       >
         {responseTxt}
-        {/* {rowMode.current === "edit" ? "" : responseTxt} */}
       </Typography>
       <DataGrid
+        style={{
+          padding: "10px",
+          backgroundColor: "#FAFEFA",
+          marginTop: "10px",
+        }}
         rows={rows}
         columns={columns}
         pagination
@@ -149,123 +91,123 @@ const DataTable = ({ rows, columns }) => {
         selectionModel={selection_row}
         components={{
           Toolbar: CustomToolbar,
-          // Toolbar: GridToolbar,
         }}
         componentsProps={{
           toolbar: [handleOpen, selection_row],
         }}
-        getCellClassName={(params) =>
-          params.field === "discount_netto"
+        getCellClassName={(params) => {
+          return params.field === "name"
+            ? "name"
+            : params.field === "discount_netto"
             ? "netto"
             : params.field === "brutto"
             ? "brutto"
+            : params.field === "price_netto"
+            ? "price_netto"
+            : params.field === "currency"
+            ? "currency"
+            : params.field === "quality"
+            ? "quality"
+            : params.field === "discount"
+            ? params.value >= 75
+              ? "discount-top"
+              : params.value >= 50
+              ? "discount-high"
+              : params.value >= 30
+              ? "discount-medium"
+              : "discount"
+            : params.field === "producer"
+            ? "producer"
             : params.field === "id"
             ? "id"
+            : params.field === "action"
+            ? "action"
             : params.field === "use_by_date"
             ? "useByDate"
-            : ""
-        }
-        style={{
-          padding: "10px",
-          backgroundColor: "#eef5ee",
-          marginTop: "10px",
+            : "";
+        }}
+        getRowClassName={(params) => {
+          return !isDaysAhead(params.row.use_by_date, 0)
+            ? "out-of-date"
+            : !isDaysAhead(params.row.use_by_date, 10)
+            ? "sell-priority-high"
+            : !isDaysAhead(params.row.use_by_date, 20)
+            ? "sell-priority-medium"
+            : "";
         }}
         rowHeight={35}
         headerHeight={70}
-        // initialState={{
-        //   pinnedColumns: { left: ["action"], right: ["email_contact"] },
-        // }}
-        // sx={styles.customHeaderCell}
-        // sx={{ "& .MuiDataGrid-root": { padding: "15px" } }}
       />
-      <ModalComp
-      // to_del_row={to_del_row}
-      // handleDelete={handleDelete}
-      // handleClose={handleClose}
-      // modalOpen={modalOpen}
-      // params={row_params}
-      />
-      {/* </ErrorBoundary> */}
+      <ModalComp />
     </div>
   );
 };
 
-// console.log(new Error("Error"));
-// console.log(new Error("Error") == false);
-// console.log(typeof undefined === "undefined");
-// console.log(typeof "" === "undefined");
-// console.log(typeof "" === "string");
-// console.log(typeof null === "undefined");
-// console.log(checkIfNullOrEmptyStr(false));
-// console.log(validator.isEmail("false"));
-
 DataTable.propTypes = {
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      field: PropTypes.string,
+      headerName: PropTypes.string,
+      headerClassName: PropTypes.string,
+      headerAlign: PropTypes.string,
+      type: PropTypes.string,
+      sortable: PropTypes.bool,
+      editable: PropTypes.bool,
+      renderCell: PropTypes.func,
+      valueFormatter: PropTypes.func,
+      valueGetter: PropTypes.func,
+      width: PropTypes.number,
+      align: PropTypes.string,
+      valueOptions: PropTypes.arrayOf(
+        PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      ),
+    })
+  ),
   rows: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      // name: PropTypes.string.isRequired,
-      // price_netto: PropTypes.number.isRequired,
-      // discount: PropTypes.number,
-      // vat: PropTypes.number.isRequired,
-      // currency: PropTypes.string.isRequired,
-      // unit: PropTypes.string.isRequired,
-      // quality: PropTypes.string.isRequired,
-      // use_by_date: (props, propName) => {
-      //   if (!validator.isDate(props[propName])) {
-      //     return new Error(
-      //       `The ${propName} of record of ID no ${props.id}: ${props[propName]} is not a valid date`
-      //     );
-      //   }
-      // },
-      // origin: (props, propName) => {
-      //   if (!checkIfNullOrEmptyStrOrUndefined(props[propName])) {
-      //     if (!checkPropType(props, propName, "string")) {
-      //       console.log(props[propName]);
-      //       return returnErrorIfPropTypeInvalid(props, propName);
-      //     }
-      //   }
-      // },
-      // producer: (props, propName) => {
-      //   if (!checkIfNullOrEmptyStrOrUndefined(props[propName])) {
-      //     if (!checkPropType(props, propName, "string")) {
-      //       console.log(props[propName]);
-      //       return returnErrorIfPropTypeInvalid(props, propName);
-      //     }
-      //   }
-      // },
-      // email_contact: (props, propName) => {
-      //   // if (checkPropType(props, propName, "undefined")) {
-      //   // console.log(props[propName]);
+      name: PropTypes.string.isRequired,
+      price_netto: PropTypes.number.isRequired,
+      discount: PropTypes.number,
+      vat: PropTypes.number.isRequired,
+      currency: PropTypes.string.isRequired,
+      unit: PropTypes.string.isRequired,
+      quality: PropTypes.string.isRequired,
 
-      //   // null and empty string values are allowed since it's not required prop
-      //   if (!checkIfNullOrEmptyStrOrUndefined(props[propName])) {
-      //     // console.log(props[propName]);
-      //     // return true;
-      //     if (!validator.isEmail(props[propName].toString())) {
-      //       console.log(props[propName]);
-      //       return returnErrorIfPropTypeInvalid(props, propName);
-      //     }
-      //   }
+      use_by_date: (props, propName) => {
+        if (!validator.isDate(props[propName])) {
+          return new Error(
+            `The ${propName} of record of ID no ${props.id}: ${props[propName]} is not a valid date`
+          );
+        }
+      },
 
-      //   // }
-      // },
+      origin: (props, propName) => {
+        if (!checkIfNullOrEmptyStrOrUndefined(props[propName])) {
+          if (!checkPropType(props, propName, "string")) {
+            return returnErrorIfPropTypeInvalid(props, propName);
+          }
+        }
+      },
+
+      producer: (props, propName) => {
+        if (!checkIfNullOrEmptyStrOrUndefined(props[propName])) {
+          if (!checkPropType(props, propName, "string")) {
+            return returnErrorIfPropTypeInvalid(props, propName);
+          }
+        }
+      },
+
+      email_contact: (props, propName) => {
+        // null and empty string values are allowed since it's not required prop
+        if (!checkIfNullOrEmptyStrOrUndefined(props[propName])) {
+          if (!validator.isEmail(props[propName].toString())) {
+            return returnErrorIfPropTypeInvalid(props, propName);
+          }
+        }
+      },
     })
   ),
 };
 
 export default DataTable;
-
-/*
-
-    {
-      "discount": 10,
-      "vat": 0,
-      "use_by_date": null,
-      "name": "",
-      "price_netto": false,
-      "unit": 0,
-      "currency": "EUR",
-      "quality": "M",
-      "id": 1596
-    }
-*/

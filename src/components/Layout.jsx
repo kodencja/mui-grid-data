@@ -15,6 +15,8 @@ import {
   AddCircleOutlineOutlined,
   PeopleAltRounded,
 } from "@mui/icons-material";
+import CottageRoundedIcon from "@mui/icons-material/CottageRounded";
+import { Link } from "@mui/material";
 
 const menuItems = [
   {
@@ -35,7 +37,7 @@ const menuItems = [
 ];
 
 const Layout = ({ mainTitle, children }) => {
-  // console.log(typeof children);
+  // console.log("Layout Comp.");
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -45,7 +47,16 @@ const Layout = ({ mainTitle, children }) => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               {mainTitle}
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button
+              variant="text"
+              size="small"
+              sx={{ color: "lightgoldenrodyellow" }}
+              target="_blank"
+              rel="noreferrer"
+              href="https://codencja.herokuapp.com/"
+            >
+              <CottageRoundedIcon />
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>

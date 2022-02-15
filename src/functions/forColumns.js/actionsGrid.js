@@ -9,18 +9,12 @@ export const handleEditClick = (event, params) => {
     // don't select this row after clicking
     event.stopPropagation();
 
-    // console.log("params");
-    // console.log(params);
-
     const api = params.api;
+    // change row mode to edit
     api.setRowMode(params.id, "edit");
-    // console.log(api.getCellElement(params.id, 'name' ));
+
+    // set focus on first field 'name'
     api.setCellFocus(params.id, 'name');
-    // api.commitRowChange(params.id);
-    // const nameCell = api.getCellElement(params.id, 'name' );
-    // nameCell.focus();
-    // console.log(api.getAllColumns(params.id));
-    // console.log(api.setCellFocus(params.id));
   } catch (err) {
     console.log(
       `Error for field of ID ${params.id}: Error name: ${err.name}. Error message: ${err.message}`

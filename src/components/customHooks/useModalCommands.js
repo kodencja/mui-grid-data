@@ -11,9 +11,6 @@ export const useModalCommands = (props) => {
   const handleOpen = (params = {}, name) => {
 
     try {
-      console.log("handleOpen");
-      console.log(params);
-      console.log(name);
       throwErrUndefined(params);
       throwErrDefined('string', name);
 
@@ -33,20 +30,16 @@ export const useModalCommands = (props) => {
  const handleDelete = async (e) => {
   try {
     e.stopPropagation();
-    //  console.log("modal_action_name");
-    //  console.log(modal_action_name);
-    //  if (!checkIfMultiDel(modal_action_name)) {
     if (modal_action_name !== multi_del) {
       set_selection_row([]);
+
       await api_del(`${baseURLtoDB}/${row_params.id}`);
-      //  apiResponseTxt("The product has been removed from database!");
       handleClose();
-      console.log("handleDelete1");
 
       return;
     }
     await rows_del(selection_row);
-    //  apiResponseTxt("The products have been deleted!");
+
     handleClose();
     console.log("handleDelete2");
   } catch (err) {

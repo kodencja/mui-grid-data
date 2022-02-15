@@ -95,12 +95,12 @@ function App(props) {
   useEffect(() => {
     isMountedRef.current = true;
     if (isMountedRef.current) {
-      console.log("fetchData in App.js");
+      // console.log("fetchData in App.js");
       fetchData(baseURLtoDB);
     }
 
     return () => {
-      console.log("App.js return: " + isMountedRef.current);
+      // console.log("App.js return: " + isMountedRef.current);
       isMountedRef.current = false;
     };
   }, []);
@@ -110,36 +110,20 @@ function App(props) {
     console.log(modal_action_name);
   }, [modal_action_name]);
 
-  // useEffect(() => {
-  //   console.log("isLoading in App.js");
-  //   console.log(loading);
-  //   console.log("error: ");
-  //   console.log(error);
-  //   console.log("data.length: ");
-  //   console.log(data.length);
-  // })
 
   useEffect(() => {
     if (!modalOpen) {
       set_row_params({});
-      console.log("Change row params in useEffect");
     }
   }, [modalOpen]);
 
-  // const handleClose = () => {
-  //   handleCloseFn(setModalOpen);
-  // };
 
   const rows = useMemo(() => {
-    console.log("rows in App.js");
-    // console.log(data);
     if (isMountedRef.current) {
       if (data && data.length > 0) return data;
       else return [];
     }
   }, [data]);
-  // }, [data, isMountedRef]);
-  // }, [data, vat1]);
 
   const apiPropsPost = { baseURLtoDB, api_post, loading, error, responseTxt, apiResponseTxt };
 
@@ -190,8 +174,6 @@ function App(props) {
                     exact
                     path="/"
                     element={
-                      // error ? <Typography>{error.message}</Typography> :
-                      // loading ? <CircularProgress /> : <DataTable rows={rows} />
                       loading ? <CircularProgress /> : <DataTable rows={rows} columns={columns} />
                     }
                   ></Route>
@@ -234,8 +216,6 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-// console.log(format(new Date(), "Y-MM-dd"));
-
 App.propTypes = {
   api_db_state: PropTypes.shape({
     data: PropTypes.arrayOf(PropTypes.instanceOf(Object)),
@@ -247,7 +227,8 @@ App.propTypes = {
   grid_actions_state: PropTypes.shape({
     row_params: PropTypes.instanceOf(Object),
     modal_action_name:  PropTypes.string,
-    selection_row: PropTypes.arrayOf(PropTypes.number)
+    selection_row: PropTypes.arrayOf(PropTypes.number),
+    row_edit_error: PropTypes.bool
   }),
   constantsReducer: PropTypes.shape({
     currencies: PropTypes.arrayOf(PropTypes.string),
@@ -266,19 +247,11 @@ App.propTypes = {
       discount: PropTypes.number,
     vat: PropTypes.number,
     unit: PropTypes.string,
-    use_by_date:  PropTypes.string
-    // use_by_date: (props, propName, componentName) => {
-    //   console.log(props);
-    //   // console.log(propName);
-    //   console.log(props[propName]);
-    //   // console.log(componentName);
-    //   // console.log(!validator.isDate(propName, {format: "Y-MM-dd" || "YYYY/MM/DD" || "DD.MM.YYYY" || "DD-MM-YYYY"}));
-    //   // console.log(!validator.isDate(propName));
-    //   // console.log(!validator.isDate("2022-02-24"));
-    //   if (!validator.isDate(props[propName], {format: "Y-MM-dd" || "YYYY/MM/DD" || "DD.MM.YYYY"})) {
-    //     return new Error(`The ${propName}: ${props[propName]} is not a valid date`);
-    //   } 
-    // }
+    use_by_date: (props, propName, componentName) => {
+      if (!validator.isDate(props[propName])) {
+        return new Error(`The ${propName}: ${props[propName]} is not a valid date`);
+      } 
+    }
     })
   }),
   fetchData: PropTypes.func,
@@ -290,6 +263,10 @@ App.propTypes = {
   set_modal_action: PropTypes.func,
   set_selection_row: PropTypes.func,
   apiResponseTxt: PropTypes.func,
+  handleOpen: PropTypes.func,
+  handleDelete: PropTypes.func,
+  handleClose: PropTypes.func,
+  modalOpen: PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

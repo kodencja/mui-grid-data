@@ -17,7 +17,6 @@ import {
   returnErrorIfPropTypeInvalid,
 } from "../../../functions/validation/checkPropTypes";
 
-
 const TextFieldComp = (props) => {
   const {
     input: { name, onChange, onBlur, value, ...restInput },
@@ -76,26 +75,38 @@ const TextFieldComp = (props) => {
 };
 
 TextFieldComp.propTypes = {
-  name: PropTypes.string, 
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  value: PropTypes.string, 
-  restInput: PropTypes.shape({
+  input: PropTypes.shape({
+    name: PropTypes.string,
+    onChange: PropTypes.func,
+    onBlur: PropTypes.func,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     type: PropTypes.string,
     checked: PropTypes.bool,
     onFocus: PropTypes.func,
   }),
-  rest: PropTypes.shape({
-    label: PropTypes.string,
-    min: PropTypes.string,
-    required: PropTypes.bool,
-  }),
+  label: PropTypes.string,
+  min: PropTypes.string,
+  max: PropTypes.string,
+  required: PropTypes.bool,
+  sign: PropTypes.string,
+  placeholder: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   meta: PropTypes.objectOf((props, propName) => {
-          if (!checkPropType(props, propName, "object", "number", "string", "boolean", "undefined")) {
-            // console.log(props[propName]);
-            return returnErrorIfPropTypeInvalid(props, propName);
-          }
-      },)
-}
+    if (
+      !checkPropType(
+        props,
+        propName,
+        "object",
+        "number",
+        "string",
+        "boolean",
+        "undefined"
+      )
+    ) {
+      // console.log(props[propName]);
+      return returnErrorIfPropTypeInvalid(props, propName);
+    }
+  }),
+};
 
 export default TextFieldComp;

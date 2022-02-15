@@ -1,8 +1,6 @@
 import { throwErrUndefined } from "./throwErrors";
 
 export const checkIfPropFit = (prop, arrayToCheck) => {
-  // console.log(prop);
-  // console.log(arrayToCheck);
   throwErrUndefined(prop);
 
 if(arrayToCheck.length <= 0){

@@ -9,9 +9,10 @@ import { throwErrors } from "./throwErrors";
 
   export const validateForStrings = (valNoSpaces, eachProp) => {
     let min, max;
-    // check length for STRING values (except date)
 
     throwErrors('undefined', valNoSpaces, eachProp);
+    
+    // check length for STRING values (except date)
 
     // for date value
     if (checkIfPropFit(eachProp, forDate)) {
@@ -20,7 +21,7 @@ import { throwErrors } from "./throwErrors";
         return `Incorrect date format`;
       } 
       
-      if (isDaysAhead(valNoSpaces, noOfdaysAhead)) {
+      if (!isDaysAhead(valNoSpaces, noOfdaysAhead)) {
           return `At least ${noOfdaysAhead} days ahead`;
         }
     } 
