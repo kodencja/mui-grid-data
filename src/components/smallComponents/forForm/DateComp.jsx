@@ -4,7 +4,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import DesktopDatePicker from "@mui/lab/DesktopDatePicker";
 import { TextField } from "@mui/material";
 import PropTypes from "prop-types";
-import useSomeStyles from "../../../styles/useSomeStyles";
+import useSomeStyles from "../../customHooks/useSomeStyles";
 import {
   checkPropType,
   returnErrorIfPropTypeInvalid,

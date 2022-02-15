@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { ActionsContext } from "../../App";
 import { about } from "../../constsNotInStore/titles";
+import AboutInfo from "../smallComponents/forAbout/AboutInfo";
 
 const About = () => {
   const actsContext = useContext(ActionsContext);
@@ -10,7 +11,7 @@ const About = () => {
     setMainTitle(about);
   }, []);
 
-  return <div>Information about the Project</div>;
+  return <AboutInfo />;
 };
 
 export default About;

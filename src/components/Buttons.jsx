@@ -1,26 +1,6 @@
 import React, { useContext } from "react";
-import { Box, Button, Stack, Typography } from "@mui/material";
-import {
-  red,
-  pink,
-  purple,
-  deepPurple,
-  indigo,
-  blue,
-  lightBlue,
-  cyan,
-  teal,
-  green,
-  lightGreen,
-  lime,
-  amber,
-  orange,
-  deepOrange,
-  brown,
-  grey,
-  blueGrey,
-  yellow,
-} from "@mui/material/colors";
+import { Button, Stack } from "@mui/material";
+import { cyan } from "@mui/material/colors";
 import { ActionsContext } from "../App";
 
 const Buttons = () => {

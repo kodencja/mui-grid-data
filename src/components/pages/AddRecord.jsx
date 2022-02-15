@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Form, Field } from "react-final-form";
 import PropTypes from "prop-types";
 import { Container, Box, Button, Stack, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 import { ConstsContext, ActionsContext } from "../../App";
-import useSomeStyles from "../../styles/useSomeStyles";
-import { makeStyles } from "@mui/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import useSomeStyles from "../customHooks/useSomeStyles";
 import TextFieldComp from "../smallComponents/forForm/TextFieldComp";
 import SelectComp from "../smallComponents/forForm/SelectComp";
 import DateComp from "../smallComponents/forForm/DateComp";
@@ -24,7 +22,6 @@ import { list_of_countries } from "../../constsNotInStore/countries";
 import { addProduct } from "../../constsNotInStore/titles";
 
 const AddRecord = ({ apiPropsPost }) => {
-  // const AddRecord = (props) => {
   const constsContext = useContext(ConstsContext);
   const actsContext = useContext(ActionsContext);
 
@@ -47,11 +44,7 @@ const AddRecord = ({ apiPropsPost }) => {
   }, []);
 
   useEffect(() => {
-    // console.log("error-1");
-    // console.log(error);
-
     if (!error && responseTxt) {
-      console.log("RESTART");
       formRef.current.restart();
       setTimeout(() => {
         clearResponsetxt(apiResponseTxt);
@@ -61,7 +54,6 @@ const AddRecord = ({ apiPropsPost }) => {
 
   return (
     <Container>
-      {/* <div className={classes.title}>Add product to database</div> */}
       <Form
         onSubmit={(values) => onSubmit(values, api_post, baseURLtoDB)}
         initialValues={{
@@ -148,7 +140,6 @@ const AddRecord = ({ apiPropsPost }) => {
                   sign="%"
                   placeholder="VAT"
                   component={SelectComp}
-                  // options={[0, 5, 8, 23]}
                   options={vat.map((n) => parseInt(n * 100))}
                   defaultValue={formInitData.vat}
                   parse={checkFloat}
@@ -206,7 +197,6 @@ const AddRecord = ({ apiPropsPost }) => {
                     Reset
                   </Button>
                 </Stack>
-                {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                 <Typography
                   variant="subtitle2"
                   component="div"
@@ -228,7 +218,7 @@ const AddRecord = ({ apiPropsPost }) => {
                   ) : (
                     ""
                   )}
-                  <pre>{JSON.stringify(values, 0, 2)}</pre>
+                  {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                 </Typography>
               </div>
             </Box>

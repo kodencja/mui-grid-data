@@ -1,7 +1,6 @@
 import { Typography } from "@mui/material";
 import { throwErrUndefined } from "../../../functions/validation/throwErrors";
 
-// export  const detailsAboutRow = (modal_action_name, row_to_del_or_view, selection_row) => {
 export const detailsAboutRow = (propsForRowDetails) => {
 
   try {

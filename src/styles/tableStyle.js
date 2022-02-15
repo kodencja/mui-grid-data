@@ -26,16 +26,22 @@ export const tableStyle = (theme) => {
       },
       "& .id": {
         backgroundColor: getBackgroundColor(
-          colors.blueGrey[50],
+          colors.blueGrey[100],
           theme.palette.mode
         ),
+        "&:hover": {
+          backgroundColor: getHoverBackgroundColor(
+            colors.blueGrey[100],
+            theme.palette.mode
+          ),
+        },
       },
       "& .name": {
         color: getColorContrast(
           colors.grey[100],
           theme.palette.mode === "dark" ? "light" : "dark"
         ),
-        fontWeight: "500",
+        fontWeight: "600",
         fontFamily: "Ubuntu",
       },
       "& .price_netto": {
@@ -111,12 +117,12 @@ export const tableStyle = (theme) => {
       },
       "& .out-of-date": {
         backgroundColor: getBackgroundColor(
-          colors.deepOrange[200],
+          colors.deepOrange['A200'],
           theme.palette.mode
         ),
         "&:hover": {
           backgroundColor: getHoverBackgroundColor(
-            colors.deepOrange[200],
+            colors.deepOrange['A200'],
             theme.palette.mode
           ),
         },

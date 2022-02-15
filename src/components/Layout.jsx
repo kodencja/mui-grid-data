@@ -16,7 +16,6 @@ import {
   PeopleAltRounded,
 } from "@mui/icons-material";
 import CottageRoundedIcon from "@mui/icons-material/CottageRounded";
-import { Link } from "@mui/material";
 
 const menuItems = [
   {

@@ -174,7 +174,7 @@ function App(props) {
                     exact
                     path="/"
                     element={
-                      loading ? <CircularProgress /> : <DataTable rows={rows} columns={columns} />
+                      loading ? <CircularProgress /> : error ? error : <DataTable rows={rows} columns={columns} />
                     }
                   ></Route>
                   <Route

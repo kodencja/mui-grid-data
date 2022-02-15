@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import CustomToolbar from "../smallComponents/forForm/CustomToolbar";
 import ModalComp from "../../components/ModalComp";
@@ -8,7 +8,7 @@ import validator from "validator";
 // import useColumns from "../customHooks/useColumns";
 import useEditRow from "../customHooks/useEditRow";
 import { isDaysAhead } from "../../functions/validation/isDaysAhead";
-import useSomeStyles from "../../styles/useSomeStyles";
+import useSomeStyles from "../customHooks/useSomeStyles";
 import { ActionsContext } from "../../App";
 import { database } from "../../constsNotInStore/titles";
 import {
@@ -16,6 +16,10 @@ import {
   checkPropType,
   returnErrorIfPropTypeInvalid,
 } from "../../functions/validation/checkPropTypes";
+import {
+  getCellClasses,
+  getRowClasses,
+} from "../../functions/forColumns.js/getClasses";
 
 const DataTable = ({ rows, columns }) => {
   const actsContext = useContext(ActionsContext);
@@ -95,46 +99,8 @@ const DataTable = ({ rows, columns }) => {
         componentsProps={{
           toolbar: [handleOpen, selection_row],
         }}
-        getCellClassName={(params) => {
-          return params.field === "name"
-            ? "name"
-            : params.field === "discount_netto"
-            ? "netto"
-            : params.field === "brutto"
-            ? "brutto"
-            : params.field === "price_netto"
-            ? "price_netto"
-            : params.field === "currency"
-            ? "currency"
-            : params.field === "quality"
-            ? "quality"
-            : params.field === "discount"
-            ? params.value >= 75
-              ? "discount-top"
-              : params.value >= 50
-              ? "discount-high"
-              : params.value >= 30
-              ? "discount-medium"
-              : "discount"
-            : params.field === "producer"
-            ? "producer"
-            : params.field === "id"
-            ? "id"
-            : params.field === "action"
-            ? "action"
-            : params.field === "use_by_date"
-            ? "useByDate"
-            : "";
-        }}
-        getRowClassName={(params) => {
-          return !isDaysAhead(params.row.use_by_date, 0)
-            ? "out-of-date"
-            : !isDaysAhead(params.row.use_by_date, 10)
-            ? "sell-priority-high"
-            : !isDaysAhead(params.row.use_by_date, 20)
-            ? "sell-priority-medium"
-            : "";
-        }}
+        getCellClassName={(params) => getCellClasses(params)}
+        // getRowClassName={(params) => getRowClasses(params)}
         rowHeight={35}
         headerHeight={70}
       />

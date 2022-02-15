@@ -94,35 +94,3 @@ ProductDetails.propTypes = {
 };
 
 export default ProductDetails;
-
-/* 
-  const detailsAboutRow = useMemo(() => {
-    if (modal_action_name !== "multi_del") {
-      return (
-        row_to_del_or_view &&
-        row_to_del_or_view.map((el, ind) => (
-          <Typography key={el[0]}>
-            {el[0]}:{" "}
-            <Typography variant="p" component="span" sx={{ color: "white" }}>
-              {el[0] === "discount" || el[0] === "vat" ? `${el[1]} %` : el[1]}
-            </Typography>
-          </Typography>
-        ))
-      );
-    }
-    return (
-      selection_row &&
-      selection_row.map((el) => (
-        <Typography
-          variant="body1"
-          component="span"
-          sx={{ color: "white" }}
-          key={el}
-        >
-          {el},{" "}
-        </Typography>
-      ))
-    );
-  }, [row_to_del_or_view, selection_row]);
-
-*/

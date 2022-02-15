@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
-import useSomeStyles from "../../../styles/useSomeStyles";
+import useSomeStyles from "../../customHooks/useSomeStyles";
 import {
   checkPropType,
   returnErrorIfPropTypeInvalid,
@@ -27,13 +27,6 @@ const TextFieldComp = (props) => {
   const { useStylesTextComp } = useSomeStyles();
   const classes = useStylesTextComp({ name: name });
   // console.log("TextFieldCompo: ");
-
-  //   console.log("meta");
-  // console.log(meta);
-  // console.log("rest");
-  // console.log(rest);
-  // console.log("restInput");
-  // console.log(restInput);
 
   return (
     <TextField
@@ -53,14 +46,6 @@ const TextFieldComp = (props) => {
       required={rest.required}
       placeholder={rest.placeholder}
       className={classes.root}
-      // sx={
-      //   name === "discount"
-      //     ? fieldStyle.shorterWidth
-      //     : restInput.type === "date"
-      //     ? fieldStyle.highTopMargin
-      //     : undefined
-      // }
-
       InputProps={{
         endAdornment: rest.sign ? (
           <InputAdornment position="end" sx={{ mr: "5px" }}>
@@ -103,7 +88,6 @@ TextFieldComp.propTypes = {
         "undefined"
       )
     ) {
-      // console.log(props[propName]);
       return returnErrorIfPropTypeInvalid(props, propName);
     }
   }),

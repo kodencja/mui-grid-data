@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo, useContext } from "react";
-import { Modal, Box, Button, Stack, Typography } from "@mui/material";
+import React, { useState, useEffect, useContext } from "react";
+import { Modal, Box } from "@mui/material";
 import { modalStyle } from "../styles/modalStyle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ProductDetails from "./ProductDetails";
@@ -13,7 +13,7 @@ const ModalComp = () => {
   const matches = useMediaQuery("(max-height:500px)");
   const [row_to_del_or_view, set_row_to_del_or_view] = useState([]);
 
-  console.log("ModalComp0");
+  // console.log("ModalComp");
 
   useEffect(() => {
     let isMounted = true;

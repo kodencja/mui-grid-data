@@ -1,10 +1,10 @@
 import { makeStyles } from "@mui/styles";
 import { createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { formStyle } from "./formStyle";
-import { tableStyle } from "./tableStyle";
-import { menuStyle } from "./menuStyle";
-import { dateInputStyle, textInputStyle } from "./inputStyles";
+import { formStyle } from "../../styles/formStyle";
+import { tableStyle } from "../../styles/tableStyle";
+import { menuStyle } from "../../styles/menuStyle";
+import { dateInputStyle, textInputStyle } from "../../styles/inputStyles";
 
 const defaultTheme = createTheme();
 

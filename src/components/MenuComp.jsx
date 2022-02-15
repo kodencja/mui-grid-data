@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {
-  Button,
   Menu,
   MenuItem,
   IconButton,
@@ -9,14 +8,11 @@ import {
 } from "@mui/material";
 import PropTypes from "prop-types";
 import MenuIcon from "@mui/icons-material/Menu";
-import { lime } from "@mui/material/colors";
-import { menuStyle } from "../styles/menuStyle";
-import { useLocation, useNavigate } from "react-router-dom";
-import useSomeStyles from "../styles/useSomeStyles";
+import { useNavigate } from "react-router-dom";
+import useSomeStyles from "./customHooks/useSomeStyles";
 
 const MenuComp = ({ menuItems }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
