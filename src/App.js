@@ -1,6 +1,5 @@
-import React, { useMemo, useRef, useState, useReducer, useEffect } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import DateData from "./components/pages/DateData";
 import Layout from "./components/Layout";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./App.css";
@@ -24,12 +23,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import AddRecord from "./components/pages/AddRecord";
 import About from "./components/pages/About";
 import validator from "validator";
-import { format } from "date-fns";
-import { addProduct, database, about } from "./constsNotInStore/titles";
-import { makeStyles } from "@mui/styles";
+import { database } from "./constsNotInStore/titles";
 import ErrorBoundary from "./components/ErrorBoundary";
-import { Button, Typography } from "@mui/material";
 import { useModalCommands } from "./components/customHooks/useModalCommands";
+import Footer from "./components/smallComponents/footer/Footer";
 
 export const ActionsContext = React.createContext();
 export const ConstsContext = React.createContext();
@@ -184,6 +181,7 @@ function App(props) {
                   <Route path="/about" element={<About />}></Route>
                 </Routes>
               </Layout>
+              <Footer year={(new Date()).getFullYear()} author={"Codencja"} />
             </ConstsContext.Provider>
           </ActionsContext.Provider>
         </Router>

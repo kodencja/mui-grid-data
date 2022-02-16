@@ -1,5 +1,5 @@
 import validator from "validator";
-import { throwErrors, throwErrMin, throwErrMax } from "./throwErrors";
+import { throwErrors } from "./throwErrors";
 
 export const checkLength = (value, min, max) => {
   throwErrors('undefined', value, min, max);

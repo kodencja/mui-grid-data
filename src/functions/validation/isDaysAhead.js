@@ -4,7 +4,7 @@ export const isDaysAhead = (date, noOfdaysAhead) => {
 
   throwErrUndefined(date);
   throwErrDefined('number', noOfdaysAhead);
-  throwErrMax(noOfdaysAhead, 360);
+  throwErrMax(noOfdaysAhead, 365);
   throwErrMin(noOfdaysAhead, 0);
 
   const today = new Date();

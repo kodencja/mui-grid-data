@@ -1,72 +1,10 @@
-Material UI datagrid with data from database through json-server
+This REACT application was built with MATERIAL UI components (5.3.1), mainly dataGrid and Form, both connected with database through JSON-SERVER. The API requests (GET, POST, PUT, DELETE) are sent to and from JSON-SERVER url address, among others using asynchronous action functions in redux (redux-thunk) and AXIOS package. Most of the variables used in the application are stored in REDUX STORE supplied with separate STATES manipulated by three reducers (apiReducer, gridReducer and constantsReducer) as well as ACTIONS passed to App component through mapStateToProps and mapDispatchToProps functions and further by createContext method and useContext hook. Some the variables, which cannot be pass to functions through useContext, are stored in 'constsNotInStore' folder.
 
-# Getting Started with Create React App
+The DATABASE contains originally over 1500 records - grocery products with the following properties: id, name, price netto, discount, vat, currency, unit, quality, use by date, origin, producer and email contact. All records are displayed in dataGrid table with options of sorting, filtering and hiding the columns. The addition columns embrace: checkbox selection and Action. The former allowes us to check selected rows and delete more than one of them at once. To prevent users from deleting all records the 'multi_del' api remove records only from the DATA variable, storing records from the database, not directly from the database. The latter, action column, comprises icons tiggerring the following actions: edit the row, save changes, cancel changes, delete the row and two icons, which alternately indicate whether there is any error in the editing row or not. Moreover, the dataGrid is furnished with expanded pagination component. The appilcation uses three CUSTOM HOOKS: useEditRow (to deal with editing row data), useColumns (to get all columns with), useModalCommands (to deal with commands coming from modal component: open and close the modal and delete the row/rows), useSomeStyles (to get style object/classes for some components).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The data from database are validated on the fly, both while editing the current row in dataGrid as well as whereas filling the form (in AddRecord component) using the same validation functions. Some records have on purpose invalid values (e.g. use_by_date is equal 'false' or empty string) just to present validation and appropriate error logs in the console.
 
-## Available Scripts
+The App component is embraced with ErrorBoundary component. The validation and error service is asserted n two levels: by PropTypes methods (for components in development mode) and by custom throwing errors functions (in file throwErrors.js) - for the components and functions in both development and production mode. For managing the form submition and error service (in AddRecord component) FINAL FORM package is used.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+By Codencja, 2022.
+https://codencja.herokuapp.com/

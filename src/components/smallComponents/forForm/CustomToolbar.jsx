@@ -27,7 +27,7 @@ function CustomToolbar(props) {
   }
 
   return (
-    <GridToolbarContainer>
+    <GridToolbarContainer sx={{ flexWrap: "wrap" }}>
       <GridToolbarColumnsButton />
       <GridToolbarFilterButton />
       <GridToolbarDensitySelector />
