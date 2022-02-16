@@ -2,6 +2,7 @@ import { JSON_API } from "../../constsNotInStore/jsonApi";
 import { FETCH_DATA_SUCCESS, FETCH_REQUEST, FETCH_DATA_FAILURE, FETCH_DATA_REQUEST, PUT_DATA_SUCCESS, DEL_ROWS_SUCCESS, SET_RESPONSE_TEXT } from "./apiTypes";
 
 export const initApiState = { baseURLtoDB: `${JSON_API}/grocery`, loading: false, data: [], error: '', responseTxt: ''};
+// export const initApiState = { baseURLtoDB: `${JSON_API}/grocery`, loading: false, data: [], error: '', responseTxt: ''};
 
 const apiReducer = (state = initApiState, action) => {
     switch(action.type){
