@@ -4,7 +4,11 @@ The DATABASE contains originally over 1500 records - grocery products with the f
 
 The data from database are validated on the fly, both while editing the current row in dataGrid as well as whereas filling the form (in AddRecord component) using the same validation functions. Some records have on purpose invalid values (e.g. use_by_date is equal 'false' or empty string) just to present validation and appropriate error logs in the console.
 
-The App component is embraced with ErrorBoundary component. The validation and error service is asserted n two levels: by PropTypes methods (for components in development mode) and by custom throwing errors functions (in file throwErrors.js) - for the components and functions in both development and production mode. For managing the form submition and error service (in AddRecord component) FINAL FORM package is used.
+The App component is embraced with ErrorBoundary component. The validation and error service is asserted n two levels: by PropTypes methods (for components in development mode) and by custom throwing errors functions (in file throwErrors.js) - for the components and functions in both development and production mode.
+
+Moreover, USE BY DATE field values are checked according to days left to today: 0, 10, 20 and right classes are ascribe to cells with such date to style the cell background: shadings of orange. Similary, the field of DISCOUNT is checked according to its value and if it's over 30, 50 and 75 the fields get appropriate classes to style their background: shadings of lime and yellow.
+
+For managing the form submition and error service (in AddRecord component) REACT FINAL FORM package is used. The API REQUESTS are served with AXIOS library.
 
 By Codencja, 2022.
 https://codencja.herokuapp.com/
