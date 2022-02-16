@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Modal, Box } from "@mui/material";
-import { modalStyle } from "../styles/modalStyle";
+import { modalStyle } from "../../../styles/modalStyle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import ProductDetails from "./ProductDetails";
-import { ActionsContext } from "../App";
+import { ActionsContext } from "../../../App";
 
 const ModalComp = () => {
   const actsContext = useContext(ActionsContext);

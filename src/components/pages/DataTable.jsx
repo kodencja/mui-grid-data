@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import CustomToolbar from "../smallComponents/forForm/CustomToolbar";
-import ModalComp from "../../components/ModalComp";
+import CustomToolbar from "../smallComponents/forDataGrid/CustomToolbar";
+import ModalComp from "../smallComponents/forModal/ModalComp";
 import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 import validator from "validator";
-// import useColumns from "../customHooks/useColumns";
 import useEditRow from "../customHooks/useEditRow";
-import { isDaysAhead } from "../../functions/validation/isDaysAhead";
 import useSomeStyles from "../customHooks/useSomeStyles";
 import { ActionsContext } from "../../App";
 import { database } from "../../constsNotInStore/titles";
@@ -16,10 +14,7 @@ import {
   checkPropType,
   returnErrorIfPropTypeInvalid,
 } from "../../functions/validation/checkPropTypes";
-import {
-  getCellClasses,
-  getRowClasses,
-} from "../../functions/forColumns.js/getClasses";
+import { getCellClasses } from "../../functions/forColumns.js/getClasses";
 
 const DataTable = ({ rows, columns }) => {
   const actsContext = useContext(ActionsContext);

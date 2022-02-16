@@ -36,11 +36,11 @@ export const getCellClasses = (params) => params.field === "name"
       : "useByDate"
       : "";
   
-
-  export const getRowClasses = (params) => !isDaysAhead(params.row.use_by_date, 0)
-  ? "out-of-date"
-  : !isDaysAhead(params.row.use_by_date, 10)
-  ? "sell-priority-high"
-  : !isDaysAhead(params.row.use_by_date, 20)
-  ? "sell-priority-medium"
-  : "";
+// not used now
+  // export const getRowClasses = (params) => !isDaysAhead(params.row.use_by_date, 0)
+  // ? "out-of-date"
+  // : !isDaysAhead(params.row.use_by_date, 10)
+  // ? "sell-priority-high"
+  // : !isDaysAhead(params.row.use_by_date, 20)
+  // ? "sell-priority-medium"
+  // : "";

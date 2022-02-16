@@ -56,9 +56,9 @@ export const tableStyle = (theme) => {
         color: getColor(colors.indigo[700], theme.palette.mode),
         fontWeight: "bold",
       },
-      "& .discount": {
-        color: getColor(colors.purple[900], theme.palette.mode),
-      },
+      // "& .discount": {
+      //   color: getColor(colors.purple[900], theme.palette.mode),
+      // },
       "& .currency": {
         color: colors.blueGrey[800],
       },
@@ -66,7 +66,7 @@ export const tableStyle = (theme) => {
         fontWeight: '700',
       },
       "& .useByDate": {
-        color: colors.deepPurple[800],
+        color: colors.grey[900],
       },
       "& .producer": {
         color: colors.brown[800],

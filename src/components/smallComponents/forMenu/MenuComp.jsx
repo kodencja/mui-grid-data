@@ -9,14 +9,14 @@ import {
 import PropTypes from "prop-types";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useNavigate } from "react-router-dom";
-import useSomeStyles from "./customHooks/useSomeStyles";
+import useSomeStyles from "../../customHooks/useSomeStyles";
 
 const MenuComp = ({ menuItems }) => {
   const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
-  console.log("MenuComp0");
+  // console.log("MenuComp0");
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);

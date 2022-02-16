@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Button, Stack } from "@mui/material";
 import { cyan } from "@mui/material/colors";
-import { ActionsContext } from "../App";
+import { ActionsContext } from "../../../App";
 
 const Buttons = () => {
   const actsContext = useContext(ActionsContext);

@@ -59,14 +59,14 @@
     {
       "id": 5,
       "name": "Beer - Corona",
-      "price_netto": 941.83,
+      "price_netto": 41.83,
       "discount": 1,
       "vat": 0,
       "currency": "CNY",
       "unit": "piece",
       "quality": "M",
       "use_by_date": "2022-03-30",
-      "origin": null,
+      "origin": "",
       "producer": "Marquardt-Emard",
       "email_contact": "jmaestro4@mail.ru"
     },

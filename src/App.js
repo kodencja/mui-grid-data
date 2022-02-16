@@ -1,6 +1,6 @@
 import React, { useMemo, useRef, useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Layout from "./components/Layout";
+import Layout from "./components/smallComponents/shared/Layout";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./App.css";
 import useColumns from "./components/customHooks/useColumns";
@@ -24,7 +24,7 @@ import AddRecord from "./components/pages/AddRecord";
 import About from "./components/pages/About";
 import validator from "validator";
 import { database } from "./constsNotInStore/titles";
-import ErrorBoundary from "./components/ErrorBoundary";
+import ErrorBoundary from "./components/smallComponents/errors/ErrorBoundary";
 import { useModalCommands } from "./components/customHooks/useModalCommands";
 import Footer from "./components/smallComponents/footer/Footer";
 
@@ -103,7 +103,7 @@ function App(props) {
   }, []);
 
   useEffect(() => {
-    console.log("modal_action_name in App");
+    // console.log("modal_action_name in App");
     console.log(modal_action_name);
   }, [modal_action_name]);
 

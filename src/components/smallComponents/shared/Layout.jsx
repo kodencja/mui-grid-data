@@ -7,13 +7,14 @@ import {
   Button,
   Container,
 } from "@mui/material";
-import MenuComp from "./MenuComp";
+import MenuComp from "../forMenu/MenuComp";
 import PropTypes from "prop-types";
 import {
   StorageRounded,
   AddCircleOutlineOutlined,
   PeopleAltRounded,
 } from "@mui/icons-material";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import CottageRoundedIcon from "@mui/icons-material/CottageRounded";
 
 const menuItems = [
@@ -36,13 +37,19 @@ const menuItems = [
 
 const Layout = ({ mainTitle, children }) => {
   // console.log("Layout Comp.");
+  const matches = useMediaQuery("(max-width: 700px)");
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
             <MenuComp menuItems={menuItems} />
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, fontSize: matches ? "1rem" : "1.25rem" }}
+            >
               {mainTitle}
             </Typography>
             <Button

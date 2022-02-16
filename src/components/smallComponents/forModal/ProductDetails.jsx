@@ -1,8 +1,8 @@
 import React, { useMemo, useContext } from "react";
 import { Box, Typography } from "@mui/material";
-import { ActionsContext, ConstsContext } from "../App";
+import { ActionsContext, ConstsContext } from "../../../App";
 import Buttons from "./Buttons";
-import { detailsAboutRow } from "./smallComponents/forModal/rowDetails";
+import { detailsAboutRow } from "./rowDetails";
 import PropTypes from "prop-types";
 
 function ProductDetails({ row_to_del_or_view }) {
