@@ -20,11 +20,12 @@ import {
 } from "../../functions/formatParse/formatParse";
 import { list_of_countries } from "../../constsNotInStore/countries";
 import { addProduct } from "../../constsNotInStore/titles";
+import { resetForm } from "../../functions/forInputs/resetForm";
 
 const AddRecord = ({ apiPropsPost }) => {
   const constsContext = useContext(ConstsContext);
   const actsContext = useContext(ActionsContext);
-
+  // console.log("AddRecord compo");
   const { setMainTitle } = actsContext;
 
   const { currencies, units, vat, qualities, formInitData } = constsContext;
@@ -190,7 +191,7 @@ const AddRecord = ({ apiPropsPost }) => {
                     variant="contained"
                     size="small"
                     endIcon={<RestartAltIcon />}
-                    onClick={form.restart}
+                    onClick={(e) => resetForm(e, form.restart)}
                     disabled={submitting || pristine}
                     color="secondary"
                   >

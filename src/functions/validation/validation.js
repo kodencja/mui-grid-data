@@ -7,6 +7,9 @@ import { throwErrUndefined } from "./throwErrors";
 export const validate = async (valuesObj) => {
   try {
 
+    // console.log("validate values");
+    // console.log(valuesObj);
+
     throwErrUndefined(valuesObj);
 
     if (Object.keys(valuesObj).length <= 0) {
@@ -32,6 +35,9 @@ export const validate = async (valuesObj) => {
         );
       }
     }
+
+    // console.log("errors-1");
+    // console.log(errors)
 
     return errors;
   } catch (error) {

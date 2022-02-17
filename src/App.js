@@ -103,12 +103,6 @@ function App(props) {
   }, []);
 
   useEffect(() => {
-    // console.log("modal_action_name in App");
-    console.log(modal_action_name);
-  }, [modal_action_name]);
-
-
-  useEffect(() => {
     if (!modalOpen) {
       set_row_params({});
     }
